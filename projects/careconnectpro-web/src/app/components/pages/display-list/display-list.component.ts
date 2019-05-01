@@ -137,3 +137,5 @@ export class DisplayListComponent implements OnInit {
     this.router.navigate(["/home/patient/detail"]);
   }
 }
+
+// 
