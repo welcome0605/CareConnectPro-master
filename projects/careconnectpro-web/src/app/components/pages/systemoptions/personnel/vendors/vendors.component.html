@@ -1,0 +1,25 @@
+﻿<div class="container">
+        <form class="floating-labels m-t-40">
+            <div class="row">
+                <div class="col-md-4" style="padding-left:0px;">
+                    <div class="form-group m-b-40">
+                        <input name="VendorSearch" id="idVendorSearch" style="width:100%;" placeholder="Enter Search Keyword..." class="form-control" type="text" pInputText size="50" [(ngModel)]="term">
+                        <span class="bar"></span>
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-offset-4" style="text-align:left;padding-left:0px;">
+                    <div class="form-group">
+                        <select name="activeViewType" class="form-control" [(ngModel)]="activeViewType" (change)="getVendorView()">
+                            <option *ngFor="let item of viewType" [value]="item.value">{{item.label}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+    <app-display-list [list] ="vendors |filter:term" [imguser1]="imguser1" [type]="type" ></app-display-list>
+
+    <button class="btn btn-success ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left" (click)="RouteNewVendor()" label="Add Vendor" icon="fa-plus" label="Add Employee" pbutton="" style="float:left" type="button">
+            <span class="ui-button-icon-left ui-clickable fa fa-fw fa-plus"></span>
+            <span class="ui-button-text ui-clickable">Add Vendor</span>
+    </button>
+</div>

@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="row">
+        <div class="col-xlg-12 col-md-12">
+          <div class="card-body">
+            <h3 class="card-title">Compose Message</h3>
+            <form [formGroup]="form" (ngSubmit)="onSendMessage()">
+              <div class="form-group">
+                <p-autoComplete formControlName="emailToNames" placeholder="To:" [suggestions]="availEmployeeNames" (completeMethod)="search($event)" [multiple]="true"></p-autoComplete>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Subject:" formControlName="subject"
+                       [value]="activeMessageDetail !== undefined ? activeMessageDetail.subject : ''"
+                >
+              </div>
+              <div class="form-group">
+                <angular-editor [formControl]="form.controls['content']"
+                                [config]="editorConfig" ></angular-editor>
+              </div>
+              <h4><i class="ti-link"></i> Attachment</h4>
+              <dropzone #drpzone class="mce-dropzone" [config]="config" (error)="onUploadError($event)"
+                        (success)="onUploadSuccess($event)" (canceled)="onRemovedFile($event)"
+                        (removedFile)="onRemovedFile($event)"></dropzone>
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="messagebuttonsfooter">
+                    <button type="submit" class="btn btn-success m-t-20" [disabled]="!form.valid">
+                      <i class="fa fa-envelope-o"></i> Send
+                    </button>
+                  </div>
+                  <div class="messagebuttonsfooter">
+                    <button type="button" class="btn btn-inverse m-t-20"  (click)="resetDropzone()"><i class="fa fa-times"></i> Discard
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

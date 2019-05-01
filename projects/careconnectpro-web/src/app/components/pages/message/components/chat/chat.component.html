@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card m-b-0">
+      <!-- .chat-row -->
+      <div class="chat-main-box">
+        <!-- .chat-left-panel -->
+        <div class="chat-left-aside">
+          <div class="open-panel"><i class="ti-angle-right"></i></div>
+          <div class="chat-left-inner">
+            <div class="row">
+                <div class="col-10 form-material">
+                    <p-multiSelect [options]="usersList" [(ngModel)]="selectedUsers"></p-multiSelect>
+                    </div>
+                    <div class="col=2">
+                        <i class="fa fa-plus-square" (click)="createChatSession()"></i>
+                    </div>
+            </div>
+            <ul class="chatonline style-none ">
+              <li *ngFor="let contact of activeChatSessions" [class]="getActiveChatBgColor(contact?.chatId)">
+                <a  (click)="getChatDiscussions(contact?.chatId)"
+                   [class.active]="contact?.id === currentContact?.chatId">
+                   <div *ngFor="let chatUser of contact.chatUsers">
+                  <img  alt="" class="img-circle" [src]="getContactImg(chatUser.image)">
+                  <span [ngSwitch]="chatUser.status">{{chatUser.fullName}}
+                    <small *ngSwitchCase="'online'" class="text-success">{{chatUser.status}}</small>
+                    <small *ngSwitchCase="'Away'" class="text-warning">{{chatUser.status}}</small>
+                    <small *ngSwitchCase="'Busy'" class="text-danger">{{chatUser.status}}</small>
+                    <small *ngSwitchCase="'offline'" class="text-muted">{{chatUser.status}}</small>
+                  </span>
+                </div>
+                </a>
+              </li>
+              <li class="p-20"></li>
+            </ul>
+          </div>
+        </div>
+        <!-- .chat-left-panel -->
+        <!-- .chat-right-panel -->
+        <div class="chat-right-aside">
+          <div class="chat-main-header">
+            <div class="p-20 b-b">
+              <h3 class="box-title">Chat Message</h3>
+            </div>
+          </div>
+          <div class="chat-rbox">
+            <ul class="chat-list p-20">
+              <li *ngFor="let discussion of discussions" [class.reverse]="discussion.senderInfo">
+                <div *ngIf="!discussion.senderInfo; else revertChat">
+                  <div class="chat-img">
+                    <img [src]="getContactImg(discussion.contactInfo?.image)" alt="user"/></div>
+                  <div class="chat-content">
+                    <h5>{{discussion.contactInfo?.fullName}}</h5>
+                    <div class="box bg-light-info">
+                      {{discussion.message}}
+                    </div>
+                  </div>
+                  <div class="chat-time">{{discussion.date | custumDate}}</div>
+                </div>
+                <ng-template #revertChat>
+                  <div class="chat-time">{{discussion.date | custumDate}}</div>
+                  <div class="chat-content">
+                    <h5 *ngIf="discussion.contact">{{discussion.contactInfo?.fullName}}</h5>
+                    <div class="box bg-light-inverse">{{discussion.message}}</div>
+                  </div>
+                  <div class="chat-img"><img [src]="getContactImg(discussion.contactInfo?.image)" alt="user"/></div>
+                </ng-template>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body b-t">
+            <div class="row">
+              <div class="col-8">
+                                <textarea placeholder="Type your message here" class="form-control b-0"
+                                          [(ngModel)]="message"></textarea>
+              </div>
+              <div class="col-4 text-right">
+                <button type="button" (click)="onSendMessage()" class="btn btn-info btn-circle btn-lg">
+                  <i
+                    class="fa fa-paper-plane-o"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- .chat-right-panel -->
+      </div>
+      <!-- /.chat-row -->
+    </div>
+  </div>
+</div>

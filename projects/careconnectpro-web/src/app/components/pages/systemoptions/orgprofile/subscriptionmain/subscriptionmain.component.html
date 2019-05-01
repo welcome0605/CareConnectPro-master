@@ -1,0 +1,121 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Active Subscription" [titleClassName]="localstore.getThemeBackground()">
+                <ng-template #body>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3 app-ho2-form-label">
+                            </div>
+                            <div class="col-md-9 app-ho2-edit-right" style="text-align: right">
+                                <button class="btn btn-success" (click)="routeToRenewSubscription()">Renew</button>
+                            </div>
+                        </div>   
+                        <div class="row">
+                            <div class="col-md-3 app-ho2-form-label">
+                                <label class="app-ho2-form-label">Subscription ID:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <p class="col-md-12 app-ho2-mt-label">{{ companyService.activeSubscription?.normalizedId }} </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 app-ho2-form-label">
+                                <label class="app-ho2-form-label">Subscription Package:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <p class="col-md-12 app-ho2-mt-label">{{ companyService.activeSubscription?.packageId }} </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 app-ho2-form-label">
+                                <label class="app-ho2-form-label">Total Amount:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <p class="col-md-12 app-ho2-mt-label">{{ companyService.activeSubscription?.totalAmount | currency:'USD': 'symbol' }} </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 app-ho2-form-label">
+                                <label class="app-ho2-form-label">Start Date:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <p class="col-md-12 app-ho2-mt-label">{{ companyService.activeSubscription?.startDate | date }} </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 app-ho2-form-label">
+                                <label class="app-ho2-form-label">End Date:</label>
+                            </div>
+                            <div class="col-md-7">
+                                <p class="col-md-12 app-ho2-mt-label">{{ companyService.activeSubscription?.endDate | date }} </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Subscription History" [titleClassName]="localstore.getThemeBackground()">
+                <ng-template #body>
+                    <div class="container">
+                        <form class="floating-labels m-t-40">
+                            <div class="row">
+                                <div class="col-md-4" style="padding-left:0px;">
+                                    <div class="form-group m-b-40">
+                                        <input name="subscriptionsearch" id="subscriptionsearch" style="width:100%;" placeholder="Enter Search Keyword..." class="form-control" #gb type="text" pInputText size="50">
+                                        <span class="bar"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row">
+                            <div class="col-md">
+                                <p-dataTable #dtSubHistory [value]="companyService.companySubscriptions" [globalFilter]="gb" [rows]="5" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
+                                             [sortField]="sortF" [sortOrder]="sortO" (onSort)="changeSortSubscription($event)" selectionMode="single"
+                                             [(selection)]="selectedSubscription" dataKey="id"
+                                             resizableColumns="true" [responsive]="true" [stacked]="stacked">
+                                    <p-column field="normalizedId" header="Subscription ID" [sortable]="true">
+                                    </p-column>
+                                    <p-column field="packageId" header="Package" [sortable]="true"></p-column>
+                                    <p-column field="totalAmount" header="Amount" [sortable]="true">
+                                        <ng-template let-subhist="rowData" pTemplate="body">
+                                            {{subhist.totalAmount |  currency : 'USD': 'symbol'}}
+                                        </ng-template>
+                                    </p-column>
+                                    <p-column field="isActive" header="Active" [sortable]="true">
+                                        <ng-template let-subhist="rowData" pTemplate="body">
+                                            {{subhist.isActive? 'Yes': 'No'}}
+                                        </ng-template>
+                                    </p-column>
+                                    <p-column field="startDate" header="Start Date" [sortable]="true">
+                                        <ng-template let-subhist="rowData" pTemplate="body">
+                                            {{subhist.startDate |  date : 'MM/dd/yyyy'}}
+                                        </ng-template>
+                                    </p-column>
+                                    <p-column field="endDate" header="End Date" [sortable]="true">
+                                        <ng-template let-subhist="rowData" pTemplate="body">
+                                            {{subhist.endDate |  date : 'MM/dd/yyyy'}}
+                                        </ng-template>
+                                    </p-column>
+                                </p-dataTable>
+                            </div>
+                        </div>
+
+
+                        <!--<div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+            <input style="width:50%;" class="form-control" #gb type="text" pInputText size="50" placeholder="Search">
+        </div>-->
+                    </div>      
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+</div>
+
+
+

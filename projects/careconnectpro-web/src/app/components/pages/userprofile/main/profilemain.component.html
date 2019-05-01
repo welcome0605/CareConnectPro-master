@@ -1,0 +1,360 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="About me" [titleClassName]="localStore.getThemeBackground()">
+                <ng-template #body>
+                    <form novalidate="" #f2="ngForm" (ngSubmit)="f2.form.valid ? saveUpdateEmployee1(): ''" class="tab-wizard wizard-circle wizard clearfix" role="application" id="f2">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <h3 class="card-title">Profile Picture</h3>
+                                </div>
+                                <div class="col-md-8 app-ho2-edit-right">
+                                    <ho2edithelper activeAction="0" (actionSelected)="editAboutMe($event)" [saveStatus]="saveStatus1"></ho2edithelper>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <div *ngIf="!isEditMode1" style="text-align:left">
+                                        <img class="img-circle" [src]="getEmployeeImg()" alt="Profile Picture" width="120" height="100">
+                                    </div>
+                                    <div *ngIf="isEditMode1">
+                                        <p-fileUpload name="profilePics[]" chooseLabel="Upload New Picture" url="{{ mediaurl }}" (onUpload)="onUpload($event)"
+                                                      auto="auto" accept="image/*" maxFileSize="2000000">
+                                            <ng-template pTemplate="content">
+                                                <div *ngIf="tempImgFile !=''" class="col-lg-3 col-md-6" style="width:40%;">
+                                                    <div class="el-card-item">
+                                                        <div class="el-card-avatar el-overlay-1">
+                                                            <img class="img-circle" src="{{ tempImgFile }}" alt="Profile Picture" width="120" height="100">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </p-fileUpload>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md">
+                                    <h3 class="card-title">Biography</h3>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md app-ho2-form-label">
+                                    <div *ngIf="isEditMode1" style="text-align:left" colspan="4">
+                                        <textarea pInputTextarea [(ngModel)]="employee.biography" [rows]="6" [cols]="80" style="font-size:12px;" name="biography"></textarea>
+                                    </div>
+                                    <div *ngIf="!isEditMode1" style="text-align:left" colspan="4">
+                                        <p class="col-md-12 app-ho2-mt-label">{{ employee?.biography }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Personal" [titleClassName]="localStore.getThemeBackground()">
+                <ng-template #body>
+                    <div class="container">
+                        <form novalidate="" #f1="ngForm" (ngSubmit)="f1.form.valid ? saveUpdateEmployee2(): ''" class="tab-wizard wizard-circle wizard clearfix" role="application" id="formprofilemain">
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                </div>
+                                <div class="col-md-8 app-ho2-edit-right">
+                                    <ho2edithelper activeAction="0" (actionSelected)="editPersonalData($event)" [saveStatus]="saveStatus2"></ho2edithelper>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label class="app-ho2-form-label">Employee Id:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <p class="col-md-12 app-ho2-mt-label">{{ employee?.normalizedEmployeeId }} </p>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label for="prefix" class="app-ho2-form-label">Prefix:</label>
+                                </div>
+                                <div class="col-md-7 floating-labels">
+                                    <div *ngIf="isEditMode2">
+                                        <select name="prefix" class="form-control" [(ngModel)]="employee.prefix">
+                                            <option *ngFor="let item of prefixCodesSelect" [value]="item.value">{{item.label}}</option>
+                                        </select>
+                                        <!--<p-dropdown name="prefix" [options]="prefixCodesSelect" [style]="{'width':'250px'}" placeholder="Select prefix" [filter]="true" [(ngModel)]="employee.prefix"></p-dropdown>-->
+                                    </div>
+                                    <div *ngIf="!isEditMode2">
+                                        <p class="col-md-12 app-ho2-mt-label">{{ employee?.prefix}}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label class="app-ho2-form-label">First Name:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <p class="col-md-12 app-ho2-mt-label">{{ employee?.firstName }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label class="app-ho2-form-label">Last Name:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <p class="col-md-12 app-ho2-mt-label">{{ employee?.lastName }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label for="suffix" class="app-ho2-form-label">Suffix:</label>
+                                </div>
+                                <div class="col-md-7 floating-labels">
+                                    <div *ngIf="isEditMode2">
+                                        <select name="suffix" class="form-control" [(ngModel)]="employee.suffix">
+                                            <option *ngFor="let item of suffixCodesSelect" [value]="item.value">{{item.label}}</option>
+                                        </select>
+                                        <!--<p-dropdown name="suffix" [options]="suffixCodesSelect" [style]="{'width':'250px'}" placeholder="Select suffix" [filter]="true" [(ngModel)]="employee.suffix"></p-dropdown>-->
+                                    </div>
+                                    <div *ngIf="!isEditMode2">
+                                        <p class="col-md-12 app-ho2-mt-label">{{ employee?.suffix}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label for="phone" class="app-ho2-form-label">Phone No:</label>
+                                </div>
+                                <div class="col-md-7 floating-labels ">
+                                    <div *ngIf="isEditMode2">
+                                        <input type="text" pInputText class="form-control" name="phone" id="phone" required [(ngModel)]="employee.phoneNumber" #phone="ngModel">
+                                        <span class="bar"></span>
+                                        <span *ngIf="f1.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': phone.valid, 'glyphicon-remove' : !phone.valid}" aria-hidden="true"></span>
+                                        <div *ngIf="(f1.submitted && !phone.valid) || (phone.invalid && (phone.dirty || phone.touched))" class="text-danger">
+                                            <div class="app-form-validation-error">
+                                                Phone is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!isEditMode2">
+                                        <p class="col-md-12 app-ho2-mt-label">{{ employee?.phoneNumber}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label for="email" class="app-ho2-form-label">Email:</label>
+                                </div>
+                                <div class="col-md-7 floating-labels">
+                                    <div *ngIf="isEditMode2">
+                                        <input type="text" class="form-control" name="email" id="email" required [(ngModel)]="employee.email" #email="ngModel">
+                                        <span class="bar"></span>
+                                        <span *ngIf="f1.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': email.valid, 'glyphicon-remove' : !email.valid}" aria-hidden="true"></span>
+                                        <div *ngIf="(f1.submitted && !email.valid) || (email.invalid && (email.dirty || email.touched))" class="text-danger">
+                                            <div class="app-form-validation-error">
+                                                Email is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!isEditMode2">
+                                        <p class="col-md-12 app-ho2-mt-label">{{ employee?.email }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<hr />-->
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label for="address1" class="app-ho2-form-label">Address 1:</label>
+                                </div>
+                                <div class="col-md-7 floating-labels">
+                                    <div *ngIf="isEditMode2">
+                                        <input type="text" class="form-control" name="address1" id="address1" required [(ngModel)]="employee.address1" #address1="ngModel">
+                                        <span class="bar"></span>
+                                        <div *ngIf="(f1.submitted && !address1.valid) || (address1.invalid && (address1.dirty || address1.touched))" class="text-danger">
+                                            <div class="app-form-validation-error">
+                                                Address 1 is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!isEditMode2">
+                                        <p class="col-md-12 app-ho2-mt-label">{{ employee?.address1 }}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label for="address2" class="app-ho2-form-label">Address 2:</label>
+                                </div>
+                                <div class="col-md-7 floating-labels">
+                                    <div *ngIf="isEditMode2">
+                                        <input type="text" class="form-control" name="address2" id="address2" [(ngModel)]="employee.address2" #address2="ngModel">
+                                        <span class="bar"></span>
+                                        <!--<div *ngIf="(f1.submitted && !address2.valid) || (address2.invalid && (address2.dirty || address2.touched))" class="text-danger">
+                                            <div *ngIf="address2.errors.required">
+                                                Address 2 is required
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                    <div *ngIf="!isEditMode2">
+                                        <p class="col-md-12 app-ho2-mt-label">{{ employee?.address2 }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label for="city" class="app-ho2-form-label">City:</label>
+                                </div>
+                                <div class="col-md-7 floating-labels">
+                                    <div *ngIf="isEditMode2">
+                                        <input type="text" class="form-control" name="city" id="city" required [(ngModel)]="employee.city" #city="ngModel">
+                                        <span class="bar"></span>
+                                        <div *ngIf="(f1.submitted && !city.valid) || (city.invalid && (city.dirty || city.touched))" class="text-danger">
+                                            <div class="app-form-validation-error">
+                                                City is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!isEditMode2">
+                                        <p class="col-md-12 app-ho2-mt-label">{{ employee?.city }}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label for="state" class="app-ho2-form-label">State:</label>
+                                </div>
+                                <div class="col-md-7 floating-labels">
+                                    <div *ngIf="isEditMode2">
+                                        <input type="text" class="form-control" name="state" id="state" required [(ngModel)]="employee.state" #state="ngModel">
+                                        <span class="bar"></span>
+                                        <span *ngIf="f1.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': state.valid, 'glyphicon-remove' : !state.valid}" aria-hidden="true"></span>
+                                        <div *ngIf="(f1.submitted && !state.valid) || (state.invalid && (state.dirty || state.touched))" class="text-danger">
+                                            <div class="app-form-validation-error">
+                                                State is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!isEditMode2">
+                                        <p class="col-md-12 app-ho2-mt-label">{{ employee?.state }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label for="zipCode" class="app-ho2-form-label">Zip Code:</label>
+                                </div>
+                                <div class="col-md-7 floating-labels">
+                                    <div *ngIf="isEditMode2">
+                                        <input type="text" class="form-control" name="zipCode" id="zipCode" required [(ngModel)]="employee.zipCode" #zipCode="ngModel">
+                                        <span class="bar"></span>
+                                        <span *ngIf="f1.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': zipCode.valid, 'glyphicon-remove' : !zipCode.valid}" aria-hidden="true"></span>
+                                        <div *ngIf="(f1.submitted && !zipCode.valid) || (zipCode.invalid && (zipCode.dirty || zipCode.touched))" class="text-danger">
+                                            <div class="app-form-validation-error">
+                                                Zip code is required
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="!isEditMode2">
+                                        <p class="col-md-12 app-ho2-mt-label">{{ employee?.zipCode }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+
+                                </div>
+                                <div class="col-md-7">
+                                    <button class="btn btn-success" type="submit" style="width:120px">{{ isEditMode ? 'Save Changes' : 'Edit Contact' }} </button>
+                                    <button class="btn btn-success" type="button" (click)="cancelEditMode()" style="width:120px">Cancel </button>
+                                </div>
+                            </div>-->
+                        </form>
+                    </div>
+
+                </ng-template>
+                
+
+           </ho2-accordion>
+        </div>       
+
+        </div>
+        
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Work" [titleClassName]="localStore.getThemeBackground()">
+                <ng-template #body>
+                    <div class="container">
+                        <form novalidate="" #f2="ngForm" (ngSubmit)="f2.form.valid ? updateEmployee(): ''" class="m-t-40 tab-wizard wizard-circle wizard clearfix" role="application" id="formprofilemain2">
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label class="app-ho2-form-label">Job Title:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <p class="col-md-12 app-ho2-mt-label">{{ employee?.jobTitle }} </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label class="app-ho2-form-label">Department:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <p class="col-md-12 app-ho2-mt-label">{{ getDepartmentNameById(employee?.departmentId) }} </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label class="app-ho2-form-label">Role:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <p class="col-md-12 app-ho2-mt-label">{{ getRoleNameById(employee?.roleId) }} </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label class="app-ho2-form-label">Manager:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <p class="col-md-12 app-ho2-mt-label">{{ managerName }} </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label class="app-ho2-form-label">Date Hired:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <p class="col-md-12 app-ho2-mt-label">{{ employee?.dateHired | date}} </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <label class="app-ho2-form-label">Salary Type:</label>
+                                </div>
+                                <div class="col-md-7">
+                                    <p class="col-md-12 app-ho2-mt-label">{{ employee?.salaryType }} </p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+

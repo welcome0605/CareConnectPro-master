@@ -1,0 +1,163 @@
+﻿<form novalidate="" #f2="ngForm" (ngSubmit)="f2.form.valid? submitForm(): ''" class="m-t-40 tab-wizard wizard-circle wizard clearfix" role="application" id="f1">
+
+    <div class="row" *ngIf="isNewRecord === false">
+        <div class="col-md-3 app-ho2-form-label">
+        </div>
+        <div class="col-md-8 app-ho2-edit-right">
+            <ho2edithelper activeAction="0" showDelete="false" (actionSelected)="editEventSubmit($event)" [saveStatus]="saveStatus"></ho2edithelper>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="relationshiptype" class="app-ho2-form-label">Relationship:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <select name="relationshiptype" class="form-control" [(ngModel)]="patientRelative.relationshipId">
+                    <option *ngFor="let item of relationshipCodesSelect" [value]="item.value">{{item.label}}</option>
+                </select>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ patientRelationship }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="prefix" class="app-ho2-form-label">Prefix:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <select name="prefix" class="form-control" [(ngModel)]="patientRelative.prefix">
+                    <option *ngFor="let item of prefixCodesSelect" [value]="item.value">{{item.label}}</option>
+                </select>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ patientRelative.prefix }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="firstName" class="app-ho2-form-label">First Name:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <input type="text" pInputText class="form-control" placeholder="Enter employee first name" name="firstName" id="firstName" required [(ngModel)]="patientRelative.firstName" #firstName="ngModel">
+                <span class="bar"></span>
+                <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': firstName.valid, 'glyphicon-remove' : !firstName.valid}" aria-hidden="true"></span>
+                <div *ngIf="(f2.submitted && !firstName.valid) || (firstName.invalid && (firstName.dirty || firstName.touched))" class="text-danger">
+                    <div *ngIf="firstName.errors.required" class="app-form-validation-error">
+                        First Name is required
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ patientRelative.firstName }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="lastName" class="app-ho2-form-label">Last Name:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <input type="text" pInputText class="form-control" placeholder="Enter employee last name" name="lastName" id="lastName" required [(ngModel)]="patientRelative.lastName" #lastName="ngModel">
+                <span class="bar"></span>
+                <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': lastName.valid, 'glyphicon-remove' : !lastName.valid}" aria-hidden="true"></span>
+                <div *ngIf="(f2.submitted && !lastName.valid) || (lastName.invalid && (lastName.dirty || lastName.touched))" class="text-danger">
+                    <div *ngIf="lastName.errors.required" class="app-form-validation-error">
+                        First Name is required
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ patientRelative.lastName }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="suffixCodes" class="app-ho2-form-label">Suffix:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <select name="suffixCodes" class="form-control" [(ngModel)]="patientRelative.suffix">
+                    <option *ngFor="let item of suffixCodesSelect" [value]="item.value">{{item.label}}</option>
+                </select>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ patientRelative.suffix }}</p>
+            </div>
+        </div>
+    </div> 
+    <div class="row justify-content-center">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="homephone" class="app-ho2-form-label">Home Phone:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <input type="text" pInputText class="form-control" placeholder="Enter home phone" name="homephone" id="homephone" required [(ngModel)]="relativeHomePhone" #homephone="ngModel">
+                <span class="bar"></span>
+                <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': homephone.valid, 'glyphicon-remove' : !homephone.valid}" aria-hidden="true"></span>
+                <div *ngIf="(f2.submitted && !homephone.valid) || (homephone.invalid && (homephone.dirty || homephone.touched))" class="text-danger">
+                    <div *ngIf="homephone.errors.required" class="app-form-validation-error">
+                        Patient home phone required
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ relativeHomePhone }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="cellphone" class="app-ho2-form-label">Cell Phone:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <input type="text" pInputText class="form-control" placeholder="Enter cell phone" name="cellphone" id="cellphone" required [(ngModel)]="relativeCellPhone" #cellphone="ngModel">
+                <span class="bar"></span>
+                <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': cellphone.valid, 'glyphicon-remove' : !cellphone.valid}" aria-hidden="true"></span>
+                <div *ngIf="(f2.submitted && !cellphone.valid) || (cellphone.invalid && (cellphone.dirty || cellphone.touched))" class="text-danger">
+                    <div *ngIf="cellphone.errors.required" class="app-form-validation-error">
+                        Relative cell phone required
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ relativeCellPhone }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="refemail" class="app-ho2-form-label">Email:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <input type="text" pInputText class="form-control" placeholder="Enter email address" name="refemail" id="refemail" [(ngModel)]="relativeEmail" #refemail="ngModel">
+                <span class="bar"></span>               
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ relativeEmail }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="isNewRecord === true" style="padding-top: 15px">
+        <div class="col-md" style="text-align:right">
+            <input class="btn btn-info" type="button" name="Cancel" value="Cancel" (click)="cancel()" />
+            &nbsp;&nbsp;
+            <input class="btn btn-info" type="button" name="Back" value="Back" (click)="goToPrev()" />
+            &nbsp;&nbsp;
+            <input class="btn btn-info" type="submit" name="Submit" value="Next" />
+        </div>
+    </div>
+</form>
+
+

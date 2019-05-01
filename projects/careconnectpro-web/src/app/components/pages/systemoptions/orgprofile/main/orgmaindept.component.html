@@ -1,0 +1,72 @@
+<div class="card">
+    <div [ngClass]="'card-title ' + localstore.getThemeBackground()">
+        <h5>{{ getTitle() }}</h5>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <form novalidate="" #f3="ngForm" (ngSubmit)="f3.form.valid ? saveUpdateDept(): ''" class="m-t-40 tab-wizard wizard-circle wizard clearfix" role="application" id="formcompmain">
+                <div class="row">
+                    <div class="col-md-3 app-ho2-form-label">
+                    </div>
+                    <div *ngIf="isNewDept==false" class="col-md-8 app-ho2-edit-right">
+                        <ho2edithelper activeAction="0" showDelete="true" (actionSelected)="updateAgencyInfo($event)" [saveStatus]="saveStatus2"></ho2edithelper>
+                    </div>
+                    <div *ngIf="isNewDept==true" class="col-md-8 app-ho2-edit-right">
+                        <ho2edithelper activeAction="4" (actionSelected)="updateAgencyInfo($event)" [saveStatus]="saveStatus2"></ho2edithelper>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 app-ho2-form-label">
+                        <label for="deptname" class="app-ho2-form-label">Department Name:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels">
+                        <div *ngIf="isEditMode">
+                            <input type="text" pInputText class="form-control" id="deptname" required [(ngModel)]="department.name" name="deptname" [disabled]="!isNewDept" #deptname="ngModel">
+                            <span class="bar"></span>
+                            <span *ngIf="f3.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': deptname.valid, 'glyphicon-remove' : !deptname.valid}" aria-hidden="true"></span>
+                            <div *ngIf="(f3.submitted && !deptname.valid) || (deptname.invalid && (deptname.dirty || deptname.touched))" class="text-danger">
+                                <div class="app-form-validation-error">
+                                    Department name is required
+                                </div>
+                            </div>
+                            <div *ngIf="(isNewDept && deptname.valid && isDeptNameExist())" class="text-danger">
+                                <div class="app-form-validation-error">
+                                    Department name already exist. Enter a different value.
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="!isEditMode">
+                            <p class="col-md-12 app-ho2-mt-label">{{ department.name }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 app-ho2-form-label">
+                        <label for="description" class="app-ho2-form-label">Description:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels">
+                        <div *ngIf="isEditMode">
+                            <input type="text" pInputText class="form-control" id="deptname" required [(ngModel)]="department.description" name="description" #description="ngModel">
+                            <span class="bar"></span>
+                            <span *ngIf="f3.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': description.valid, 'glyphicon-remove' : !description.valid}" aria-hidden="true"></span>
+                            <div *ngIf="(f3.submitted && !description.valid) || (description.invalid && (description.dirty || description.touched))" class="text-danger">
+                                <div class="app-form-validation-error">
+                                    Description is required
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="!isEditMode">
+                            <p class="col-md-12 app-ho2-mt-label">{{ department.description }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+

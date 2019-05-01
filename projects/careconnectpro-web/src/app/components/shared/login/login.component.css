@@ -1,0 +1,55 @@
+.login-register {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+    padding: 6% 0;
+    position: fixed;
+    background-image: url("/assets/images/background/login-register2.jpg");
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    overflow-y: auto;
+}
+
+.card-1 {
+    margin: 0px;
+    background: #ded7d7;
+}
+
+    .card-1 h2 {
+        margin: 20px 10px 7px 10px;
+        text-align: center;
+        font-weight: 500;
+    }
+
+    .card-1 h5 {
+        text-align: center
+    }
+
+.card-2 {
+    margin: 0px;
+}
+
+    .card-2 .card-body {
+        padding: 40px 30px;
+    }
+
+.image-laptop {
+    width: 200px;
+    height: 180px;
+}
+
+.image-logo {
+    width: 300px;
+    height: 91px;
+}
+
+.login-box {
+    height: 445px;
+}
+
+.elavation-6 {
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+}

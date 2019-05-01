@@ -1,0 +1,350 @@
+﻿<form novalidate="" #f2="ngForm" (ngSubmit)="((f2.form.valid) && (validateDD())) ? submitForm(): ''" class="m-t-40 tab-wizard wizard-circle wizard clearfix"
+    role="application" id="f1">
+    <div class="row" *ngIf="((isNewRecord === false) && (isEditMode === true))">
+        <div class="col-md app-ho2-edit-right">
+            <div *ngIf="employeeService.employee.isActive === true">
+                <input class="btn btn-info btn-sm" type="button" name="deactivate" value="Terminate Employee" (click)="confirmDelete()" />
+                <div *ngIf="confirmDeActivate === true" style="font-size: 14px">
+                    <p class="text-danger">Are you sure you want to deactivate this employee?
+                        <i class="fa fa-check" style="cursor:pointer" (click)="deActivateUser()">
+                        </i>
+                        <i class="fa fa-times-circle" style="cursor:pointer;padding-left:8px;" (click)="cancelAction()"></i>
+                    </p>
+                </div>
+            </div>
+            <div *ngIf="employeeService.employee.isActive === false">
+                <input class="btn btn-info btn-sm" type="button" name="deactivate" value="Activate Employee" (click)="confirmReActivation()"
+                />
+                <div *ngIf="confirmActivate === true" style="font-size: 14px">
+                    <p class="text-danger">Are you sure you want to re-activate this employee?
+                        <i class="fa fa-check" style="cursor:pointer" (click)="activateUser()"></i>&nbsp;
+                        <i class="fa fa-times-circle" style="cursor:pointer;padding-left:8px" (click)="cancelAction()"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="isNewRecord === false">
+        <div class="col-md-3 app-ho2-form-label">
+        </div>
+        <div class="col-md-8 app-ho2-edit-right">
+            <ho2edithelper activeAction="0" showDelete="false" (actionSelected)="editEventSubmit($event)" [saveStatus]="saveStatus"></ho2edithelper>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-3 app-ho2-form-label">
+            <label for="prefix" class="app-ho2-form-label">Prefix:</label>
+        </div>
+        <div class="col-5 floating-labels">
+            <div *ngIf="isEditMode">
+                <select name="prefix" class="form-control" [(ngModel)]="employeeService.employee.prefix">
+                    <option *ngFor="let item of prefixCodesSelect" [value]="item.value">{{item.label}}</option>
+                </select>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.employee.prefix }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-3 app-ho2-form-label">
+            <label for="firstName" class="app-ho2-form-label">First Name:</label>
+        </div>
+        <div class="col-5 floating-labels">
+            <div *ngIf="isEditMode">
+                <input type="text" pInputText class="form-control" placeholder="Enter employee first name" name="firstName" id="firstName"
+                    required [(ngModel)]="employeeService.employee.firstName" #firstName="ngModel">
+                <span class="bar"></span>
+                <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': firstName.valid, 'glyphicon-remove' : !firstName.valid}"
+                    aria-hidden="true"></span>
+                <div *ngIf="(f2.submitted && !firstName.valid) || (firstName.invalid && (firstName.dirty || firstName.touched))" class="text-danger">
+                    <div *ngIf="firstName.errors.required" class="app-form-validation-error">
+                        First Name is required
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.employee.firstName }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-3 app-ho2-form-label">
+            <label for="lastName" class="app-ho2-form-label">Last Name:</label>
+        </div>
+        <div class="col-5 floating-labels">
+            <div *ngIf="isEditMode">
+                <input type="text" pInputText class="form-control" placeholder="Enter employee last name" name="lastName" id="lastName" required
+                    [(ngModel)]="employeeService.employee.lastName" #lastName="ngModel">
+                <span class="bar"></span>
+                <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': lastName.valid, 'glyphicon-remove' : !lastName.valid}"
+                    aria-hidden="true"></span>
+                <div *ngIf="(f2.submitted && !lastName.valid) || (lastName.invalid && (lastName.dirty || lastName.touched))" class="text-danger">
+                    <div *ngIf="lastName.errors.required" class="app-form-validation-error">
+                        First Name is required
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.employee.lastName }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-3 app-ho2-form-label">
+            <label for="suffixCodes" class="app-ho2-form-label">Suffix:</label>
+        </div>
+        <div class="col-5 floating-labels">
+            <div *ngIf="isEditMode">
+                <select name="suffixCodes" class="form-control" [(ngModel)]="employeeService.employee.suffix">
+                    <option *ngFor="let item of suffixCodesSelect" [value]="item.value">{{item.label}}</option>
+                </select>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.employee.suffix }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-3 app-ho2-form-label">
+            <label for="dateofBirth" class="app-ho2-form-label">Date of Birth:</label>
+        </div>
+        <div class="col-5">
+            <div *ngIf="isEditMode">
+                <p-calendar name="dateofBirth" class="form-control app-calender" dateFormat="mm/dd/yy" [monthNavigator]="true" [yearNavigator]="true"
+                    yearRange="1910:2035" showAnim="slideDown" [(ngModel)]="dateOfBirth"></p-calendar>
+                <!--<span class="bar"></span>-->
+                <div *ngIf="(f2.submitted && (employeeService.employee.dateOfBirth === null))" class="text-danger app-form-validation-error">
+                    Date of Birth is required
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.employee.dateOfBirth | date }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-3 app-ho2-form-label">
+            <label for="genderCodes" class="app-ho2-form-label">Gender:</label>
+        </div>
+        <div class="col-5 floating-labels">
+            <div *ngIf="isEditMode">
+                <select name="genderCodes" class="form-control" [(ngModel)]="employeeService.employee.gender">
+                    <option *ngFor="let item of genderCodesSelect" [value]="item.value">{{item.label}}</option>
+                </select>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.employee.gender }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-3 app-ho2-form-label">
+            <label for="evvid" class="app-ho2-form-label">EVV ID:</label>
+        </div>
+        <div class="col-5 floating-labels">
+            <div *ngIf="isEditMode">
+                <input type="text" pInputText class="form-control" placeholder="Enter employee EVV Id" name="evvid" id="evvid" required [(ngModel)]="employeeService.employee.evvId"
+                    #evvid="ngModel">
+                <span class="bar"></span>
+                <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': evvid.valid, 'glyphicon-remove' : !evvid.valid}"
+                    aria-hidden="true"></span>
+                <div *ngIf="(f2.submitted && !evvid.valid) || (evvid.invalid && (evvid.dirty || evvid.touched))" class="text-danger">
+                    <div *ngIf="evvid.errors.required" class="app-form-validation-error">
+                        Employee EVV Id is required
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.employee.evvId }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-3 app-ho2-form-label">
+            <label for="employeessn" class="app-ho2-form-label">SSN:</label>
+        </div>
+        <div class="col-5 floating-labels">
+            <div *ngIf="isEditMode">
+                <input type="text" pInputText class="form-control" placeholder="Enter employee SSN" name="employeessn" id="employeessn" required
+                    [(ngModel)]="employeeService.employee.ssn" #employeessn="ngModel">
+                <span class="bar"></span>
+                <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': employeessn.valid, 'glyphicon-remove' : !employeessn.valid}"
+                    aria-hidden="true"></span>
+                <div *ngIf="(f2.submitted && !employeessn.valid) || (employeessn.invalid && (employeessn.dirty || employeessn.touched))"
+                    class="text-danger">
+                    <div *ngIf="employeessn.errors.required" class="app-form-validation-error">
+                        Employee SSN is required
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.employee.ssn }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-3 app-ho2-form-label">
+            <label for="employeesalary" class="app-ho2-form-label">Salary:</label>
+        </div>
+        <div class="col-5 floating-labels">
+            <div *ngIf="isEditMode">
+                <input type="text" pInputText class="form-control" placeholder="Enter employee salary" name="employeesalary" id="employeessn"
+                    required [(ngModel)]="employeeService.employee.salary" #employeesalary="ngModel">
+                <span class="bar"></span>
+                <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': employeesalary.valid, 'glyphicon-remove' : !employeesalary.valid}"
+                    aria-hidden="true"></span>
+                <div *ngIf="(f2.submitted && !employeesalary.valid) || (employeesalary.invalid && (employeesalary.dirty || employeesalary.touched))"
+                    class="text-danger">
+                    <div *ngIf="employeesalary.errors.required" class="app-form-validation-error">
+                        Employee Salary is required
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.employee.salary | currency:'USD': 'symbol' }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-3 app-ho2-form-label">
+            <label for="salaryCodes" class="app-ho2-form-label">Salary Type:</label>
+        </div>
+        <div class="col-5 floating-labels">
+            <div *ngIf="isEditMode">
+                <select name="salaryCodes" class="form-control" [(ngModel)]="employeeService.employee.salaryType" required #salaryCodes="ngModel">
+                    <option *ngFor="let item of salaryCodesSelect" [value]="item.value">{{item.label}}</option>
+                </select>
+                <div *ngIf="(f2.submitted && !salaryCodes.valid)" class="text-danger">
+                    <div *ngIf="salaryCodes.errors.required" class="app-form-validation-error">
+                        Salary type is required
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.employee.salaryType }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-3 app-ho2-form-label">
+            <label for="jobtitle" class="app-ho2-form-label">Job Title:</label>
+        </div>
+        <div class="col-5 floating-labels">
+            <div *ngIf="isEditMode">
+                <input type="text" pInputText class="form-control" placeholder="Enter employee title" name="jobtitle" id="jobtitle" required
+                    [(ngModel)]="employeeService.employee.jobTitle" #jobtitle="ngModel">
+                <span class="bar"></span>
+                <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': jobtitle.valid, 'glyphicon-remove' : !jobtitle.valid}"
+                    aria-hidden="true"></span>
+                <div *ngIf="(f2.submitted && !jobtitle.valid) || (jobtitle.invalid && (jobtitle.dirty || jobtitle.touched))" class="text-danger">
+                    <div *ngIf="jobtitle.errors.required" class="app-form-validation-error">
+                        Employee Job Title is required
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.employee.jobTitle }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-3 app-ho2-form-label">
+            <label for="departments" class="app-ho2-form-label">Department:</label>
+        </div>
+        <div class="col-5 floating-labels">
+            <div *ngIf="isEditMode">
+                <select name="departments" class="form-control" [(ngModel)]="employeeService.employee.departmentId" required #departments="ngModel">
+                    <option *ngFor="let item of departmentsSelect" [value]="item.value">{{item.label}}</option>
+                </select>
+                <div *ngIf="(f2.submitted && !departments.valid)" class="text-danger">
+                    <div *ngIf="departments.errors.required" class="app-form-validation-error">
+                        Department is required
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.getDepartmentNameById(employeeService.employee.departmentId) }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-3 app-ho2-form-label">
+            <label for="appRoles" class="app-ho2-form-label">Role:</label>
+        </div>
+        <div class="col-5 floating-labels">
+            <div *ngIf="isEditMode">
+                <select name="appRoles" class="form-control" [(ngModel)]="employeeService.employee.roleId" required #appRoles="ngModel">
+                    <option *ngFor="let item of appRolesSelect" [value]="item.value">{{item.label}}</option>
+                </select>
+                <div *ngIf="(f2.submitted && !appRoles.valid)" class="text-danger">
+                    <div *ngIf="appRoles.errors.required" class="app-form-validation-error">
+                        Role is required
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.getRoleNameById(employeeService.employee.roleId) }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-3 app-ho2-form-label">
+            <label for="reportToId" class="app-ho2-form-label">Report To:</label>
+        </div>
+        <div class="col-5 floating-labels">
+            <div *ngIf="isEditMode">
+                <select name="reportToId" class="form-control" [(ngModel)]="employeeService.employee.reportToId" required #reportToId="ngModel">
+                    <option *ngFor="let item of employeesSelect" [value]="item.value">{{item.label}}</option>
+                </select>
+                <div *ngIf="(f2.submitted && !reportToId.valid)" class="text-danger">
+                    <div *ngIf="reportToId.errors.required" class="app-form-validation-error">
+                        Report to is required
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.getEmployeeNameById(employeeService.employee.reportToId) }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-3 app-ho2-form-label">
+            <label for="dateHired" class="app-ho2-form-label">Hired Date:</label>
+        </div>
+        <div class="col-5">
+            <div *ngIf="(isNewRecord === true)">
+                <p-calendar name="dateHired" class="form-control app-calender" dateFormat="mm/dd/yy" [monthNavigator]="true" [yearNavigator]="true"
+                    yearRange="1910:2035" showAnim="slideDown" [(ngModel)]="employeeService.employee.dateHired"></p-calendar>
+                <div *ngIf="(f2.submitted && (employeeService.employee.dateHired == ''))" class="text-danger app-form-validation-error">
+                    Date Hired is required
+                </div>
+            </div>
+            <div *ngIf="(isNewRecord === false)">
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.employee.dateHired | date }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" *ngIf="isNewRecord === false">
+        <div class="col-3 app-ho2-form-label">
+            <label for="dateTerminated" class="app-ho2-form-label">Termination Date:</label>
+        </div>
+        <div class="col-5">
+            <!--<div *ngIf="isEditMode">
+                <p-calendar name="dateTerminated" class="form-control app-calender" dateFormat="mm/dd/yy" [monthNavigator]="true" [yearNavigator]="true" yearRange="1910:2035" showAnim="slideDown" [(ngModel)]="employeeService.dateTerminated"></p-calendar>
+            </div>-->
+            <div>
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.employee.dateTerminated | date }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center" *ngIf="isNewRecord === true">
+        <div class="col-md" style="text-align:right">
+            <input class="btn btn-info" type="button" name="Back" value="Cancel" (click)="cancel()" /> &nbsp;&nbsp;
+            <input class="btn btn-info" type="submit" name="Submit" value="Next" />
+        </div>
+    </div>
+</form>

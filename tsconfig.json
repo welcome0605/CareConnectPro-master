@@ -1,0 +1,54 @@
+{
+  "compileOnSave": false,
+  "angularCompilerOptions": {
+    "enableIvy": true
+  },
+  "compilerOptions": {
+    "baseUrl": ".",
+    "importHelpers": true,
+    "paths": {
+      "@app/*": [
+        "app/*"
+      ],
+      "@assets/*": [
+        "assets/*"
+      ],
+      "model-lib": [
+        "dist/model-lib"
+      ],
+      "model-lib/*": [
+        "dist/model-lib/*"
+      ],
+      "service-lib": [
+        "dist/service-lib"
+      ],
+      "service-lib/*": [
+        "dist/service-lib/*"
+      ],
+      "share-lib": [
+        "dist/share-lib"
+      ],
+      "shared-lib": [
+        "dist/shared-lib"
+      ],
+      "shared-lib/*": [
+        "dist/shared-lib/*"
+      ]
+    },
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ]
+  }
+}

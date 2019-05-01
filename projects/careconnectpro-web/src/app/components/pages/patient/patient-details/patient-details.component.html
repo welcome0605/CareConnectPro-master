@@ -1,0 +1,66 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Demographics Information" [titleClassName]="localStore.getThemeBackground()">
+                <ng-template #body>
+                    <patient-intake-step1 (step1Status)="handleStep1($event)" (goBack)="goBack($event)" [isNewRecord]="false" [updateStatus]="saveStatus1"></patient-intake-step1>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Primary Address" [titleClassName]="localStore.getThemeBackground()">
+                <ng-template #body>
+                    <patient-intake-step2 (step2Status)="handleStep2($event)" (goBack)="goBack($event)" [isNewRecord]="false" [updateStatus]="saveStatus2"></patient-intake-step2>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Closest Relative Information" [titleClassName]="localStore.getThemeBackground()">
+                <ng-template #body>
+                    <patient-intake-step3 (step3Status)="handleStep3($event)" (goBack)="goBack($event)" [isNewRecord]="false" [updateStatus]="saveStatus3"></patient-intake-step3>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Referral Doctor Information" [titleClassName]="localStore.getThemeBackground()">
+                <ng-template #body>
+                    <patient-intake-step4 (step4Status)="handleStep4($event)" (goBack)="goBack($event)" [isNewRecord]="false" [updateStatus]="saveStatus4"></patient-intake-step4>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Employer Information" [titleClassName]="localStore.getThemeBackground()">
+                <ng-template #body>
+                    <patient-intake-step5 (step5Status)="handleStep5($event)" (goBack)="goBack($event)" [isNewRecord]="false" [updateStatus]="saveStatus5"></patient-intake-step5>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Insurance Information" [titleClassName]="localStore.getThemeBackground()">
+                <ng-template #body>
+                    <patient-intake-step6 (step6Status)="handleStep6($event)" (goBack)="goBack($event)" [isNewRecord]="false" [updateStatus]="saveStatus6"></patient-intake-step6>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Doctor Orders and Medication Therapies" [titleClassName]="localStore.getThemeBackground()">
+                <ng-template #body>
+                    <patient-intake-step9 (step7Status)="handleStep7($event)" (goBack)="goBack($event)" [isNewRecord]="false" [updateStatus]="saveStatus7"></patient-intake-step9>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+</div>
+

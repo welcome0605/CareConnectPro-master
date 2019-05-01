@@ -1,0 +1,87 @@
+﻿<form novalidate="" #f2="ngForm" (ngSubmit)="f2.form.valid ? submitForm(): ''" class="m-t-40 tab-wizard wizard-circle wizard clearfix" role="application" id="f1">
+
+    <div class="row justify-content-center" *ngIf="isNewRecord === false">
+        <div class="col-md-3 app-ho2-form-label">
+        </div>
+        <div class="col-md-8 app-ho2-edit-right">
+            <ho2edithelper activeAction="0" showDelete="false" (actionSelected)="editEventSubmit($event)" [saveStatus]="saveStatus"></ho2edithelper>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="deductamt" class="app-ho2-form-label">Deductible Amount:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <input type="text" pInputText class="form-control" required placeholder="Enter deductible amount" name="deductamt" id="deductamt" [(ngModel)]="patientInsurance.deductibleAmount" #deductamt="ngModel">
+                <span class="bar"></span>
+                <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': deductamt.valid, 'glyphicon-remove' : !deductamt.valid}" aria-hidden="true"></span>
+                <div *ngIf="(f2.submitted && !deductamt.valid) || (deductamt.invalid && (deductamt.dirty || deductamt.touched))" class="text-danger">
+                    <div *ngIf="deductamt.errors.required" class="app-form-validation-error">
+                        Deductible amount is required
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ patientInsurance.deductibleAmount }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 20px;">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="isauthreq" class="app-ho2-form-label">Authorization Required?:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <p-toggleButton name="isauthreq" [(ngModel)]="patientInsurance.authorizationRequired"></p-toggleButton>
+                <span class="bar"></span>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p-toggleButton name="isauthreq" [(ngModel)]="patientInsurance.authorizationRequired" [disabled]="true"></p-toggleButton>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="padding-top: 20px;">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="isrefreq" class="app-ho2-form-label">Referral Required?:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <p-toggleButton name="isrefreq" [(ngModel)]="patientInsurance.referralRequired"></p-toggleButton>
+                <span class="bar"></span>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p-toggleButton name="isrefreq" [(ngModel)]="patientInsurance.referralRequired" [disabled]="true"></p-toggleButton>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="networkstatus" class="app-ho2-form-label">Network Status:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <select name="networkstatus" class="form-control" [(ngModel)]="patientInsurance.networkStatus" required>
+                    <option *ngFor="let item of networkStatusSelect" [value]="item.value">{{item.label}}</option>
+                </select>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ patientInsurance.networkStatus }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center" *ngIf="isNewRecord === true" style="padding-top: 15px">
+        <div class="col-md" style="text-align:right">
+            <input class="btn btn-info" type="button" name="Cancel" value="Cancel" (click)="cancel()" />
+            &nbsp;&nbsp;
+            <input class="btn btn-info" type="button" name="Back" value="Back" (click)="goToPrev()" />
+            &nbsp;&nbsp;
+            <input class="btn btn-info" type="submit" name="Submit" value="Next" />
+        </div>
+    </div>
+</form>
+
+

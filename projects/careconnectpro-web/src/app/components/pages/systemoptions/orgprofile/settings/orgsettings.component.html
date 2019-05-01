@@ -1,0 +1,146 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form novalidate="" #f1="ngForm" (ngSubmit)="f1.form.valid ? saveUpdate1(): ''" class="m-t-40 tab-wizard wizard-circle wizard clearfix" role="application" id="f1">
+                <ho2-accordion titleName="Company Logo" [titleClassName]="localstore.getThemeBackground()">
+                    <ng-template #body>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                </div>
+                                <div class="col-md-8 app-ho2-edit-right">
+                                    <ho2edithelper activeAction="0" (actionSelected)="saveChanges1($event)" [saveStatus]="saveStatus1"></ho2edithelper>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 app-ho2-form-label">
+                                    <div *ngIf="!isEditMode1" style="text-align:left">
+                                        <img [src]="getCompanyImg()" alt="Company Logo" width="300" height="200">
+                                    </div>
+                                    <div *ngIf="isEditMode1">
+                                        <p-fileUpload name="CompLogos[]" chooseLabel="Upload Logo" url="{{ mediaurl }}" (onUpload)="onUpload($event)"
+                                                      auto="auto" accept="image/*" maxFileSize="2000000">
+                                            <ng-template pTemplate="content">
+                                                <div *ngIf="tempImgFile !=''" class="col-lg-3 col-md-6" style="width:40%;">
+                                                    <div class="el-card-item">
+                                                        <div class="el-card-avatar el-overlay-1">
+                                                            <img src="{{ tempImgFile }}" alt="Company Logo" width="120" height="100" (click)="op1.toggle($event)">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </p-fileUpload>
+                                    </div>
+                                    <p-overlayPanel #op1 [dismissable]="true" [showCloseIcon]="true" class="settingsLogo">
+                                        <div class="card-body">
+                                            <img src="{{ tempImgFile }}" alt="Company Logo" style="width:600px; height:400px;" />
+                                        </div>
+                                    </p-overlayPanel>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ho2-accordion>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form novalidate="" #f2="ngForm" (ngSubmit)="f2.form.valid ? saveUpdate2(): ''" class="m-t-40 tab-wizard wizard-circle wizard clearfix" role="application" id="f2">
+                <ho2-accordion titleName="Default Theme" [titleClassName]="localstore.getThemeBackground()">
+                    <ng-template #body>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td class="app-ho2-edit-right">
+                                        <ho2edithelper activeAction="0" (actionSelected)="saveChanges2($event)" [saveStatus]="saveStatus2"></ho2edithelper>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left" colspan="4">
+                                        <ul id="themecolors" class="m-t-20">
+                                            <li><b>With Light sidebar</b></li>
+                                            <li><a href="javascript:void(0)" data-theme="default" class="default-theme">1</a></li>
+                                            <li><a href="javascript:void(0)" data-theme="green" class="green-theme">2</a></li>
+                                            <li><a href="javascript:void(0)" data-theme="red" class="red-theme">3</a></li>
+                                            <li><a href="javascript:void(0)" data-theme="blue" class="blue-theme working">4</a></li>
+                                            <li><a href="javascript:void(0)" data-theme="purple" class="purple-theme">5</a></li>
+                                            <li><a href="javascript:void(0)" data-theme="megna" class="megna-theme">6</a></li>
+                                            <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
+                                            <li><a href="javascript:void(0)" data-theme="default-dark" class="default-dark-theme">7</a></li>
+                                            <li><a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a></li>
+                                            <li><a href="javascript:void(0)" data-theme="red-dark" class="red-dark-theme">9</a></li>
+                                            <li><a href="javascript:void(0)" data-theme="blue-dark" class="blue-dark-theme">10</a></li>
+                                            <li><a href="javascript:void(0)" data-theme="purple-dark" class="purple-dark-theme">11</a></li>
+                                            <li><a href="javascript:void(0)" data-theme="megna-dark" class="megna-dark-theme ">12</a></li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+                        <hr>
+                    </ng-template>
+                </ho2-accordion>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form novalidate="" #f3="ngForm" (ngSubmit)="f3.form.valid ? saveUpdate3(): ''" class="m-t-40 tab-wizard wizard-circle wizard clearfix" role="application" id="f3">
+                <ho2-accordion titleName="Advanced Features" [titleClassName]="localstore.getThemeBackground()">
+                    <ng-template #body>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td class="app-ho2-edit-right">
+                                            <ho2edithelper activeAction="0" (actionSelected)="saveChanges3($event)" [saveStatus]="saveStatus3"></ho2edithelper>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:right;width:50%;">
+                                            <label class="col-md-12">Enable Chat:</label>
+                                        </td>
+                                        <td>
+                                            <p-toggleButton [(ngModel)]="companySettings.enableChat" [disabled]="!isEditMode3" name="enableChat"></p-toggleButton>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:right;width:50%;">
+                                            <label class="col-md-12">Enable User Theme:</label>
+                                        </td>
+                                        <td>
+                                            <p-toggleButton [(ngModel)]="companySettings.enableUserTheme" [disabled]="!isEditMode3" name="enableUserTheme"></p-toggleButton>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:right;width:50%;">
+                                            <label class="col-md-12">Enable Messaging Feature:</label>
+                                        </td>
+                                        <td>
+                                            <p-toggleButton [(ngModel)]="companySettings.enableMessages" [disabled]="!isEditMode3" name="enableMessages"></p-toggleButton>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:right;width:50%;">
+                                            <label class="col-md-12">Enable Broadcast Messages:</label>
+                                        </td>
+                                        <td>
+                                            <p-toggleButton [(ngModel)]="companySettings.enableBroadcastMsgs" [disabled]="!isEditMode3" name="enableBroadcast"></p-toggleButton>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr>
+                        </div>
+                    </ng-template>
+                </ho2-accordion>
+            </form>
+        </div>
+    </div>
+</div>

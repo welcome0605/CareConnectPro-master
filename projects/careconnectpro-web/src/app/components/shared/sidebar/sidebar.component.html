@@ -1,0 +1,82 @@
+<!-- ============================================================== -->
+<!-- Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- User profile -->
+        <div id="userprofileid" class="user-profile" [style.background]="compLogo" [style.background-size]="bgSize">
+            <!-- User profile image -->
+            <div class="profile-img">
+                <img [src]="imgSrc" [alt]="imgAltText" />
+            </div>
+            <!-- User profile text-->
+            <div class="profile-text"> <a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">{{currFullName}} <span class="caret"></span></a>
+                <div class="dropdown-menu animated flipInY">
+                    <a class="dropdown-item" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="userprofile"><i class="ti-user"></i> My Profile</a>
+                    <!--<a href="javascript:void(0)" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>-->
+                    <a href="javascript:void(0)" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
+                    <div class="dropdown-divider"></div> <a href="javascript:;" class="dropdown-item" (click)="logout()"><i class="fa fa-power-off"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+        <!-- End User profile text-->
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+          <ul id="sidebarnav">
+            <li class="nav-small-cap">PERSONAL</li>
+            <li>
+              <a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="dashboard"><i class="mdi mdi-gauge"></i><span class="hide-menu"> Dashboard</span></a>
+            </li>
+            <li>
+              <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-gears"></i><span class="hide-menu">System Options</span></a>
+              <ul aria-expanded="false" class="collapse">
+                <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="orgprofile">My Agency</a></li>
+                <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="security">Application Security</a></li>
+                <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="personnel">Personnels</a></li>
+                <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="broadcast">System Broadcast</a></li>
+              </ul>
+            </li>
+            <li>
+              <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-address-book-o"></i><span class="hide-menu"> Patients</span></a>
+              <ul aria-expanded="false" class="collapse">
+                <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="patient">Manage</a></li>
+                <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="patient/intake">Intake</a></li>
+              </ul>
+            </li>
+            <li>
+              <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="fa fa-calendar"></i><span class="hide-menu"> Calendar</span></a>
+              <ul aria-expanded="false" class="collapse">
+                <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="calendar/company">Company Events</a></li>
+                <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="calendar/personal">Personal Events</a></li>
+              </ul>
+            </li>
+            <li>
+              <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-email"></i><span class="hide-menu"> Messages</span></a>
+              <ul aria-expanded="false" class="collapse">
+                <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="message/chat">Chat</a></li>
+                <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="message/mail/inbox">Inbox</a></li>               
+                <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="message/mail/sent">Sent</a></li>
+                <li><a [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="message/mail/trash">Trash</a></li>
+              </ul>
+            </li>
+  
+          </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+    <!-- Bottom points-->
+    <div class="sidebar-footer">
+        <!-- item-->
+        <a href="" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
+        <!-- item-->
+        <a href="" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
+        <!-- item-->
+        <a href="javascript:;" class="link" data-toggle="tooltip" title="Logout" ><i class="mdi mdi-power" (click)="logout()"></i></a>
+    </div>
+    <!-- End Bottom points-->
+</aside>
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->

@@ -1,0 +1,86 @@
+<div *ngIf="calendarOptions">
+  <ng-fullcalendar #ucCalendar [options]="calendarOptions" (eventClick)="getEvent($event.detail)"></ng-fullcalendar>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Event</h4>
+    <button type="button" class="close" aria-label="Close" (click)="dismissModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <form [formGroup]="form" (ngSubmit)="(form.value.id === null || form.value.id === '') ? addEvent():updateEvent()">
+      <div class="form-group hidden">
+        <input type="hidden" class="form-control" formControlName="id">
+      </div>
+      <div class="row">
+        <div class="col-md-2 app-ho2-form-label">
+          <label for="title-event" class="app-ho2-form-label">Title :</label>
+        </div>
+        <div class="col-md-8 floating-labels">
+          <input type="text" class="form-control" placeholder="Enter title" name="title-event"
+                 id="title-event" formControlName="title">
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 app-ho2-form-label">
+          <label for="start_date" class="app-ho2-form-label">Start date :</label>
+        </div>
+        <div class="col-md-4 floating-labels">
+          <input type="date" class="form-control" name="start_date" id="start_date"
+                 formControlName="start_date">
+          <span class="bar"></span>
+        </div>
+        <div class="col-md-2 app-ho2-form-label">
+          <label for="start_time" class="app-ho2-form-label">Time :</label>
+        </div>
+        <div class="col-md-4 floating-labels">
+          <input type="time" class="form-control" name="start_time" id="start_time"
+                 formControlName="start_time">
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 app-ho2-form-label">
+          <label for="title-event" class="app-ho2-form-label">End date :</label>
+        </div>
+        <div class="col-md-4 floating-labels">
+          <input type="date" class="form-control" name="title-event" id="end-date" formControlName="end_date">
+          <span class="bar"></span>
+        </div>
+        <div class="col-md-2 app-ho2-form-label">
+          <label for="end_time" class="app-ho2-form-label">Time :</label>
+        </div>
+        <div class="col-md-4 floating-labels">
+          <input type="time" class="form-control" name="end_time" id="end_time"
+                 formControlName="end_time">
+          <span class="bar"></span>
+        </div>
+      </div>
+      <div class="row m-t-20">
+        <div class="col-md-12 floating-labels">
+          <angular-editor [formControl]="form.controls['description']" [config]="editorConfig"></angular-editor>
+        </div>
+      </div>
+      <div class="row m-t-5">
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-outline-success" [disabled]="!form.valid">Save</button>
+        </div>
+        <div class="col-md-2">
+          <div *ngIf="form.value.id !== null && form.value.id !== ''">
+            <button type="button" class="btn btn-outline-danger" (click)="deleteEvent()">Delete</button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</ng-template>
+<button #btnShowModal class="noDisplay" (click)="openModal(content)">modal</button>
+
+
+
+
+

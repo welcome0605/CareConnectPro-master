@@ -1,0 +1,4 @@
+enum TypeMail {
+  WORK,
+  ELITE
+}

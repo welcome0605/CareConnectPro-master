@@ -1,0 +1,399 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ccp": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "css"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ccp",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ccp:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ccp:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ccp:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "karmaConfig": "src/karma.conf.js",
+            "styles": [],
+            "scripts": [],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ccp-e2e": {
+      "root": "e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "ccp:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ccp:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "careconnectpro-web": {
+      "root": "projects/careconnectpro-web/",
+      "sourceRoot": "projects/careconnectpro-web/src",
+      "projectType": "application",
+      "prefix": "ccp",
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "css"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/careconnectpro-web",
+            "index": "projects/careconnectpro-web/src/index.html",
+            "main": "projects/careconnectpro-web/src/main.ts",
+            "polyfills": "projects/careconnectpro-web/src/polyfills.ts",
+            "tsConfig": "projects/careconnectpro-web/tsconfig.app.json",
+            "assets": [
+              "projects/careconnectpro-web/src/favicon.ico",
+              "projects/careconnectpro-web/src/assets",
+              "projects/careconnectpro-web/src/web.config",
+              "projects/careconnectpro-web/src/assets/svg/*"
+            ],
+            "styles": [
+              "projects/careconnectpro-web/src/styles.css",
+              "projects/careconnectpro-web/src/assets/plugins/bootstrap/css/bootstrap.min.css",
+              "projects/careconnectpro-web/src/assets/plugins/Magnific-Popup-master/dist/magnific-popup.css",
+              "node_modules/fullcalendar/dist/fullcalendar.min.css",
+              "projects/careconnectpro-web/src/assets/plugins/dropify/dist/css/dropify.min.css",
+              "projects/careconnectpro-web/src/assets/plugins/bootstrap-switch/bootstrap-switch.min.css",
+              "projects/careconnectpro-web/src/assets/scss/style.scss",
+              "projects/careconnectpro-web/src/assets/plugins/wizard/steps.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "projects/careconnectpro-web/src/assets/css/icofont/icofont.min.css",
+              "projects/careconnectpro-web/src/assets/css/site.css"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/careconnectpro-web/src/assets/scss/"
+              ]
+            },
+            "scripts": [
+              "projects/careconnectpro-web/src/assets/plugins/jquery/jquery.min.js",
+              "projects/careconnectpro-web/src/assets/plugins/bootstrap/js/popper.min.js",
+              "projects/careconnectpro-web/src/assets/plugins/bootstrap/js/bootstrap.min.js",
+              "projects/careconnectpro-web/src/assets/js/jquery.slimscroll.js",
+              "projects/careconnectpro-web/src/assets/js/waves.js",
+              "projects/careconnectpro-web/src/assets/js/sidebarmenu.js",
+              "projects/careconnectpro-web/src/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js",
+              "projects/careconnectpro-web/src/assets/plugins/sparkline/jquery.sparkline.min.js",
+              "projects/careconnectpro-web/src/assets/js/custom.js",
+              "projects/careconnectpro-web/src/assets/js/validation.js",
+              "projects/careconnectpro-web/src/assets/plugins/d3/d3.min.js",
+              "projects/careconnectpro-web/src/assets/plugins/c3-master/c3.min.js",
+              "node_modules/moment/min/moment.min.js",
+              "projects/careconnectpro-web/src/assets/plugins/sweetalert/sweetalert.min.js",
+              "node_modules/fullcalendar/dist/fullcalendar.min.js",
+              "projects/careconnectpro-web/src/assets/plugins/Magnific-Popup-master/dist/jquery.magnific-popup.min.js",
+              "projects/careconnectpro-web/src/assets/plugins/Magnific-Popup-master/dist/jquery.magnific-popup-init.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/careconnectpro-web/src/environments/environment.ts",
+                  "with": "projects/careconnectpro-web/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "careconnectpro-web:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "careconnectpro-web:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "careconnectpro-web:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/careconnectpro-web/src/test.ts",
+            "polyfills": "projects/careconnectpro-web/src/polyfills.ts",
+            "tsConfig": "projects/careconnectpro-web/tsconfig.spec.json",
+            "karmaConfig": "projects/careconnectpro-web/karma.conf.js",
+            "styles": [
+              "projects/careconnectpro-web/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/careconnectpro-web/src/favicon.ico",
+              "projects/careconnectpro-web/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/careconnectpro-web/tsconfig.app.json",
+              "projects/careconnectpro-web/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "careconnectpro-web-e2e": {
+      "root": "projects/careconnectpro-web-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/careconnectpro-web-e2e/protractor.conf.js",
+            "devServerTarget": "careconnectpro-web:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "careconnectpro-web:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/careconnectpro-web-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },   
+    "model-lib": {
+      "root": "projects/model-lib",
+      "sourceRoot": "projects/model-lib/src",
+      "projectType": "library",
+      "prefix": "cml",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/model-lib/tsconfig.lib.json",
+            "project": "projects/model-lib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/model-lib/src/test.ts",
+            "tsConfig": "projects/model-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/model-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/model-lib/tsconfig.lib.json",
+              "projects/model-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "service-lib": {
+      "root": "projects/service-lib",
+      "sourceRoot": "projects/service-lib/src",
+      "projectType": "library",
+      "prefix": "csl",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/service-lib/tsconfig.lib.json",
+            "project": "projects/service-lib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/service-lib/src/test.ts",
+            "tsConfig": "projects/service-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/service-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/service-lib/tsconfig.lib.json",
+              "projects/service-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+     "shared-lib": {
+      "root": "projects/shared-lib",
+      "sourceRoot": "projects/shared-lib/src",
+      "projectType": "library",
+      "prefix": "cxl",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/shared-lib/tsconfig.lib.json",
+            "project": "projects/shared-lib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/shared-lib/src/test.ts",
+            "tsConfig": "projects/shared-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/shared-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/shared-lib/tsconfig.lib.json",
+              "projects/shared-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "careconnectpro-web"
+}

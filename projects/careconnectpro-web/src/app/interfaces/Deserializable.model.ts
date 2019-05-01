@@ -1,0 +1,5 @@
+namespace interfaces {
+  export interface Deserializable {
+    deserialize(input: any): this;
+  }
+}

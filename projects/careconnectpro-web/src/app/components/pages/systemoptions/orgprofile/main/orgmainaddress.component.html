@@ -1,0 +1,142 @@
+<div class="card">
+    <div [ngClass]="'card-title ' + localstore.getThemeBackground()">
+        <h5>{{ getTitle() }}</h5>
+    </div>
+    <div class="card-body">
+        <div class="container">
+            <form novalidate="" #f2="ngForm" (ngSubmit)="f2.form.valid ? saveUpdateAddress(): ''" class="m-t-40 tab-wizard wizard-circle wizard clearfix" role="application" id="formcompmain">
+                <div class="row">
+                    <div class="col-md-3 app-ho2-form-label">
+                    </div>
+                    <div *ngIf="isNewAddress==false" class="col-md-8 app-ho2-edit-right">
+                        <ho2edithelper activeAction="0" showDelete="true" (actionSelected)="updateAgencyInfo($event)" [saveStatus]="saveStatus2"></ho2edithelper>
+                    </div>
+                    <div *ngIf="isNewAddress==true" class="col-md-8 app-ho2-edit-right">
+                        <ho2edithelper activeAction="4" (actionSelected)="updateAgencyInfo($event)" [saveStatus]="saveStatus2"></ho2edithelper>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="mainlocation" class="app-ho2-form-label">Corporate Office:</label>
+                    </div>
+                    <div class="col-md-1 app-ho2-form-label" style="text-align: left; max-width: 20px;">
+                        <p-radioButton name="corploc" value="0" [(ngModel)]="selectedMainLoc" (click)="setMainLocation(0)"></p-radioButton>
+                    </div>
+                    <div class="col-md-1" style="max-width: 75px;">
+                        <p class="app-ho2-mt-label">No</p>
+                    </div>
+                    <div class="col-md-1 app-ho2-form-label" style="text-align: left; max-width: 20px;">
+                        <p-radioButton name="corploc" value="1" [(ngModel)]="selectedMainLoc" (click)="setMainLocation(1)"></p-radioButton>
+                    </div>
+                    <div class="col-md-2" style="max-width: 75px;">
+                        <p class="app-ho2-mt-label">Yes</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="adddress1" class="app-ho2-form-label">Address 1:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels">
+                        <div *ngIf="isEditMode">
+                            <input type="text" pInputText class="form-control" name="address1" id="address1" required [(ngModel)]="companyAddress.address1" #address1="ngModel">
+                            <span class="bar"></span>
+                            <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': address1.valid, 'glyphicon-remove' : !address1.valid}" aria-hidden="true"></span>
+                            <div *ngIf="(f2.submitted && !address1.valid) || (address1.invalid && (address1.dirty || address1.touched))" class="text-danger">
+                                <div class="app-form-validation-error">
+                                    Address 1 is required
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="!isEditMode">
+                            <p class="col-md-12 app-ho2-mt-label">{{ companyAddress.address1 }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="address2" class="app-ho2-form-label">Address 2:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels">
+                        <div *ngIf="isEditMode">
+                            <input type="text" pInputText class="form-control" name="address2" id="address2" [(ngModel)]="companyAddress.address2" #address2="ngModel">
+                            <span class="bar"></span>
+                            <!--<span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': address2.valid, 'glyphicon-remove' : !address2.valid}" aria-hidden="true"></span>
+                            <div *ngIf="(f2.submitted && !address2.valid) || (address2.invalid && (address2.dirty || address2.touched))" class="text-danger">
+                                <div class="app-form-validation-error">
+                                    Address 2 is required
+                                </div>
+                            </div>-->
+                        </div>
+                        <div *ngIf="!isEditMode">
+                            <p class="col-md-12 app-ho2-mt-label">{{ companyAddress.address2 }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="city" class="app-ho2-form-label">City:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels">
+                        <div *ngIf="isEditMode">
+                            <input type="text" pInputText class="form-control" name="city" id="city" required [(ngModel)]="companyAddress.city" #city="ngModel">
+                            <span class="bar"></span>
+                            <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': city.valid, 'glyphicon-remove' : !city.valid}" aria-hidden="true"></span>
+                            <div *ngIf="(f2.submitted && !city.valid) || (city.invalid && (city.dirty || city.touched))" class="text-danger">
+                                <div class="app-form-validation-error">
+                                    City is required
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="!isEditMode">
+                            <p class="col-md-12 app-ho2-mt-label">{{ companyAddress.city }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="state" class="app-ho2-form-label">State:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels">
+                        <div *ngIf="isEditMode">
+                            <input type="text" pInputText class="form-control" name="state" id="state" required [(ngModel)]="companyAddress.state" #state="ngModel">
+                            <span class="bar"></span>
+                            <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': state.valid, 'glyphicon-remove' : !state.valid}" aria-hidden="true"></span>
+                            <div *ngIf="(f2.submitted && !state.valid) || (state.invalid && (state.dirty || state.touched))" class="text-danger">
+                                <div class="app-form-validation-error">
+                                    State is required
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="!isEditMode">
+                            <p class="col-md-12 app-ho2-mt-label">{{ companyAddress.state }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="zipCode" class="app-ho2-form-label">Zip Code:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels">
+                        <div *ngIf="isEditMode">
+                            <input type="text" pInputText class="form-control" name="zipCode" id="zipCode" required [(ngModel)]="companyAddress.zipCode" #zipCode="ngModel">
+                            <span class="bar"></span>
+                            <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': zipCode.valid, 'glyphicon-remove' : !zipCode.valid}" aria-hidden="true"></span>
+                            <div *ngIf="(f2.submitted && !zipCode.valid) || (zipCode.invalid && (zipCode.dirty || zipCode.touched))" class="text-danger">
+                                <div class="app-form-validation-error">
+                                    Zip Code is required
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="!isEditMode">
+                            <p class="col-md-12 app-ho2-mt-label">{{ companyAddress.zipCode }}</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+
+
+
+

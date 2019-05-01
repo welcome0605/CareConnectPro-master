@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Roles" [titleClassName]="localstore.getThemeBackground()">
+                <ng-template #body>
+                    <roles></roles>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Permissions" [titleClassName]="localstore.getThemeBackground()">
+                <ng-template #body>
+                    <permissions></permissions>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,111 @@
+﻿<div class="card-body">
+        <div class="container">
+            <form class="floating-labels m-t-40">
+                <div class="row">
+                    <div class="col-md-4" style="padding-left:0px;">
+                        <div class="form-group">
+                            <select name="activeRoleId" class="form-control" [(ngModel)]="activeRoleId" (change)="getPermissionsByRole()">
+                                <option value="">Select a role</option>
+                                <option *ngFor="let item of appRoles2" [value]="item.value">{{item.label}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="row">
+                <div class="col-md">
+                    <p-dataTable #dtapproles [value]="appPermissions"  [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
+                                 [sortField]="sortF" [sortOrder]="sortO" (onSort)="changeSortPermissions($event)" selectionMode="single" [(selection)]="selectedPermission" (onRowSelect)="onRowSelectPermission($event)" dataKey="id"
+                                 [responsive]="true" >
+                        <p-column class="text-muted" field="assetId" header="Asset" [sortable]="true" [style]="{'text-align':'left'}">
+                            <ng-template let-asset="rowData" pTemplate="body">
+                                {{ getAssetNameById(asset.assetId) }}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="viewAsset" header="Allow View" [sortable]="true" [style]="{'text-align':'left'}">
+                            <ng-template let-asset="rowData" pTemplate="body">
+                                {{asset.viewAsset? 'Yes': 'No'}}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="createAsset" header="Allow Create" [sortable]="true" [style]="{'text-align':'left'}">
+                            <ng-template let-asset="rowData" pTemplate="body">
+                                {{asset.createAsset? 'Yes': 'No'}}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="updateAsset" header="Allow Update" [sortable]="true" [style]="{'text-align':'left'}">
+                            <ng-template let-asset="rowData" pTemplate="body">
+                                {{asset.updateAsset? 'Yes': 'No'}}
+                            </ng-template>
+                        </p-column>
+                        <p-column field="deleteAsset" header="Allow Delete" [sortable]="true" [style]="{'text-align':'left'}">
+                            <ng-template let-asset="rowData" pTemplate="body">
+                                {{asset.deleteAsset? 'Yes': 'No'}}
+                            </ng-template>
+                        </p-column>
+                        <p-footer>
+                            <div class="ui-helper-clearfix" style="width:100%">
+                                <button class="btn btn-success" type="button" pButton icon="fa-plus" style="float:left" (click)="routeAddPermission()" label="Add Permission" [disabled]="!isRoleActive"></button>
+                            </div>
+                        </p-footer>
+                    </p-dataTable>
+                    <!--<p-dialog [header]="isNewPermission? 'Add Permission': 'Update Permission'" [(visible)]="displayDialogPermission" [responsive]="true" showEffect="fade" [modal]="true">
+                        <div *ngIf="appPermission">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:right">
+                                            <label style="text-align:right;" class="col-md-12" for="rolename">Asset</label>
+                                        </td>
+                                        <td style="text-align:left" colspan="4">
+                                            <p-dropdown [options]="appAssets2" [style]="{'width':'250px'}" placeholder="Select an asset" [filter]="true" [(ngModel)]="appPermission.assetId" [disabled]="!isNewPermission"></p-dropdown>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:right">
+                                            <label style="text-align:right;" class="col-md-12" for="allowview">Allow View</label>
+                                        </td>
+                                        <td style="text-align:left" colspan="4">
+                                            <p-toggleButton [(ngModel)]="appPermission.viewAsset"></p-toggleButton>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:right">
+                                            <label style="text-align:right;" class="col-md-12" for="allowcreate">Allow Create</label>
+                                        </td>
+                                        <td style="text-align:left" colspan="4">
+                                            <p-toggleButton [(ngModel)]="appPermission.createAsset"></p-toggleButton>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:right">
+                                            <label style="text-align:right;" class="col-md-12" for="allowdelete">Allow Update</label>
+                                        </td>
+                                        <td style="text-align:left" colspan="4">
+                                            <p-toggleButton [(ngModel)]="appPermission.updateAsset"></p-toggleButton>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:right">
+                                            <label style="text-align:right;" class="col-md-12" for="allowdelete">Allow Delete</label>
+                                        </td>
+                                        <td style="text-align:left" colspan="4">
+                                            <p-toggleButton [(ngModel)]="appPermission.deleteAsset"></p-toggleButton>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p-footer>
+                            <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                                <button class="btn btn-success" type="button" pButton icon="fa-close" (click)="deletePermission()" label="Delete"></button>
+                                <button class="btn btn-success" type="button" pButton icon="fa-check" (click)="saveAppPermission()" label="Save"></button>
+                            </div>
+                        </p-footer>
+                    </p-dialog>-->
+                </div>
+
+            </div>
+        </div>
+        <br />
+    </div>

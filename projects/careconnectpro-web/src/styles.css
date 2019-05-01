@@ -1,0 +1,4 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+/* @import '~https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.css'; */
+@import '~dropzone/dist/min/dropzone.min.css';

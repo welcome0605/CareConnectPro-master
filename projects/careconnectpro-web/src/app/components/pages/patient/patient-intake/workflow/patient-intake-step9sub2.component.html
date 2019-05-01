@@ -1,0 +1,43 @@
+﻿<div class="card-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-md">
+                <form class="floating-labels m-t-40">
+                    <div class="row">
+                        <div class="col-md-4" style="padding-left:0px;">
+                            <div class="form-group m-b-40">
+                                <input name="txtmedsearch" id="txtmedsearch" style="width:100%;" placeholder="Enter Search Keyword..." class="form-control" #gb type="text" pInputText size="50">
+                                <span class="bar"></span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md">
+                <p-dataTable #dtpatdiag [value]="patientAllegies" [globalFilter]="gb" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
+                              selectionMode="multiple" [(selection)]="selectedAllergies"
+                            dataKey="id"
+                             [responsive]="true">
+                    <p-column class="text-muted" field="type" header="Allergy Type" [sortable]="true">
+                    </p-column>
+                    <p-column class="text-muted" field="description" header="Description" [sortable]="true">
+                    </p-column>
+                </p-dataTable>
+            </div>
+        </div>
+        <div class="row justify-content-center" *ngIf="isNewRecord === true" style="padding-top: 15px">
+            <div class="col-md" style="text-align:right">
+                <input class="btn btn-info" type="button" name="Cancel" value="Cancel" (click)="cancel()" />
+                &nbsp;&nbsp;
+                <input class="btn btn-info" type="button" name="Back" value="Back" (click)="goToPrev()" />
+                &nbsp;&nbsp;
+                <input class="btn btn-info" type="submit" name="Submit" value="Submit" />
+            </div>
+        </div>
+    </div>
+    <br />
+
+
+</div>

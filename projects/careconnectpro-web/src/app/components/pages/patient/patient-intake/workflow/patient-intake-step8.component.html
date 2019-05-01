@@ -1,0 +1,53 @@
+﻿<form novalidate="" #f2="ngForm" (ngSubmit)="f2.form.valid ? submitForm(): ''" class="m-t-40 tab-wizard wizard-circle wizard clearfix" role="application" id="f1">
+
+    <div class="row justify-content-center" *ngIf="isNewRecord === false">
+        <div class="col-md-3 app-ho2-form-label">
+        </div>
+        <div class="col-md-8 app-ho2-edit-right">
+            <ho2edithelper activeAction="0" showDelete="false" (actionSelected)="editEventSubmit($event)" [saveStatus]="saveStatus"></ho2edithelper>
+        </div>
+    </div>
+
+    <div class="row" style="padding-top: 20px;">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="isauthreceived" class="app-ho2-form-label">Authorization Received?:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <p-toggleButton name="isauthreceived" [(ngModel)]="patientInsurance.authorizationReceived"></p-toggleButton>
+                <span class="bar"></span>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p-toggleButton name="isauthreceived" [(ngModel)]="patientInsurance.authorizationReceived" [disabled]="true"></p-toggleButton>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="approvalcode" class="app-ho2-form-label">Authorization Code:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <input type="text" pInputText class="form-control" placeholder="Enter approval code" name="approvalcode" id="approvalcode" [(ngModel)]="patientInsurance.authorizationCode" #approvalcode="ngModel">
+                <span class="bar"></span>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">{{ patientInsurance.authorizationCode }}</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row justify-content-center" *ngIf="isNewRecord === true" style="padding-top: 15px">
+        <div class="col-md" style="text-align:right">
+            <input class="btn btn-info" type="button" name="Cancel" value="Cancel" (click)="cancel()" />
+            &nbsp;&nbsp;
+            <input class="btn btn-info" type="button" name="Back" value="Back" (click)="goToPrev()" />
+            &nbsp;&nbsp;
+            <input class="btn btn-info" type="submit" name="Submit" value="Next" />
+        </div>
+    </div>
+</form>
+
+

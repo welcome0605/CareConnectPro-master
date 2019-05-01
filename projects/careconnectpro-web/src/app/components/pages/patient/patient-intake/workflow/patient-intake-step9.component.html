@@ -1,0 +1,96 @@
+﻿<div class="card-body" [ngSwitch]="step9SubStep">
+    <div *ngSwitchCase="1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md">
+                    <form class="floating-labels m-t-40">
+                        <div class="row">
+                            <div class="col-md-4" style="padding-left:0px;">
+                                <div class="form-group m-b-40">
+                                    <input name="txtcondsearch" id="txtcondsearch" style="width:100%;" placeholder="Enter Search Keyword..." class="form-control" #gb type="text" pInputText size="50">
+                                    <span class="bar"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-md-offset-4" style="text-align:left;padding-left:0px;">
+                                <div class="form-group">
+                                    <select name="conditionType" class="form-control" [(ngModel)]="selectedConditionType" (change)="step9FilterConditions()">
+                                        <option *ngFor="let item of healthConditionsSelect" [value]="item.value">{{item.label}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <p-dataTable #dtpatdiag [value]="step9PatientConditions" [globalFilter]="gb" [rows]="10" [paginator]="true" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
+                                 (onSort)="changeSortCondition($event)" selectionMode="single" [(selection)]="selectedHealthCondition"
+                                 (onRowSelect)="onRowSelectPatient($event)" dataKey="patientId"
+                                 [responsive]="true">
+                        <p-column class="text-muted" header="" [sortable]="true">
+                            <ng-template let-rowCond="rowData" pTemplate="body">
+                                <p-checkbox name="chk0{{rowCond.icdId}}" value="{{rowCond.icdId}}" [(ngModel)]="selectedConditions"></p-checkbox>
+                            </ng-template>
+                        </p-column>
+                        <p-column class="text-muted" field="icdId" header="ICD Code" [sortable]="true">
+                        </p-column>
+                        <p-column class="text-muted" field="notes" header="Condition" [sortable]="true">
+                        </p-column>
+                        <p-column class="text-muted" field="conditionType" header="Type" [sortable]="true">
+                            <ng-template let-rowCond="rowData" pTemplate="body">
+                               {{ intakeService.getConditionTypeByid(rowCond.conditionTypeId) }}
+                            </ng-template> 
+                        </p-column>
+
+                        <p-column class="text-muted" field="diagnosedAt" header="Diagnosed At" [sortable]="true">
+                            <ng-template let-rowCond="rowData" pTemplate="body">
+                                {{ rowCond.companyName }}
+                            </ng-template> 
+                        </p-column>
+                        <p-column class="text-muted" field="diagnosedBy" header="Diagnosed By" [sortable]="true">
+                            <ng-template let-rowCond="rowData" pTemplate="body">
+                                {{ rowCond.lastName }}
+                            </ng-template> 
+                        </p-column>
+                        <p-footer>
+                            <div class="ui-helper-clearfix" style="width:100%">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <button class="btn btn-success" type="button" pButton icon="fa-plus" style="float:left" (click)="addCondition()" label="Add"></button>
+                                    </div>
+                                    <div class="col-md-10" style="text-align: right">
+                                        <div *ngIf="isDeleteBtnClicked === false">
+                                            <button class="btn btn-success" type="button" pButton icon="fa-minus" style="float:left" (click)="confirmDelete()" label="Delete" [disabled]="disableDeleteBtn()"></button>
+                                        </div>
+                                        <div *ngIf="isDeleteBtnClicked === true">
+                                            <p class="text-danger" style="text-align: left;padding-bottom: 0px;"> Are you sure? <i style="cursor:pointer" class="fa fa-check" (click)="deleteCondition()">Yes </i><i style="cursor:pointer; padding-left: 5px;" class="fa fa-times" (click)="cancelDelete()">No </i></p>
+                                        </div>                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </p-footer>
+                    </p-dataTable>
+                </div>
+            </div>
+            <div class="row justify-content-center" *ngIf="isNewRecord === true" style="padding-top: 15px">
+                <div class="col-md" style="text-align:right">
+                    <input class="btn btn-info" type="button" name="Cancel" value="Cancel" (click)="cancel()" />
+                    &nbsp;&nbsp;
+                    <input class="btn btn-info" type="button" name="Back" value="Back" (click)="goToPrev()" />
+                    &nbsp;&nbsp;
+                    <input class="btn btn-info" type="submit" name="Submit" value="Submit" (click)="submitForm()"/>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+    <div *ngSwitchCase="2">
+        <patient-intake-step9sub1 (execStatus)="updateSubStep1($event)" [patientHealthConditions]="patientHealthConditions"></patient-intake-step9sub1>
+    </div>
+    <div *ngSwitchCase="3">
+        <patient-intake-step9sub2></patient-intake-step9sub2>
+    </div>
+</div>
+
+

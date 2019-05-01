@@ -1,0 +1,23 @@
+<div class="container"  style="padding:4px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="padding:0px;">
+                <div class="card-body">
+                    <p-dataTable #dttasklist [value]="taskList" [rows]="20" [paginator]="false" [pageLinks]="3" [rowsPerPageOptions]="[5,10,20]"
+                                 [responsive]="true">
+                        <p-column class="text-muted" field="description" header="Tasks">
+                            <ng-template let-TaskItem="rowData" pTemplate="body">
+                                <i class="{{ getStatusBgColor(TaskItem.isCompleted)  }}">{{ TaskItem.description }}</i>
+                            </ng-template>
+                        </p-column>
+                        <p-column class="text-muted" field="isCompleted" header="Status" [style]="{'width': '70px'}">
+                            <ng-template let-TaskItem="rowData" pTemplate="body">
+                                <i class="{{ getStatusFontStyle(TaskItem.isCompleted)  }}"></i>                                
+                            </ng-template>
+                        </p-column>
+                    </p-dataTable>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

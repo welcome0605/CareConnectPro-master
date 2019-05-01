@@ -1,0 +1,38 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Demographics Information" [titleClassName]="localStore.getThemeBackground()">
+                <ng-template #body>
+                    <vendor-addstep1 (step1Status)="handleStep1($event)" [isNewRecord]="false" [updateStatus]="saveStatus1"></vendor-addstep1>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Contact Information" [titleClassName]="localStore.getThemeBackground()">
+                <ng-template #body>
+                    <vendor-addstep2 (step2Status)="handleStep2($event)" [isNewRecord]="false" [updateStatus]="saveStatus2"></vendor-addstep2>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Services Offered" [titleClassName]="localStore.getThemeBackground()">
+                <ng-template #body>
+                    <vendor-addstep3 (step3Status)="handleStep3($event)" [isNewRecord]="false" [updateStatus]="saveStatus3"></vendor-addstep3>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ho2-accordion titleName="Profile Information" [titleClassName]="localStore.getThemeBackground()">
+                <ng-template #body>
+                    <vendor-addstep4 (step4Status)="handleStep4($event)" [isNewRecord]="false" [updateStatus]="saveStatus4"></vendor-addstep4>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+    </div>
+</div>

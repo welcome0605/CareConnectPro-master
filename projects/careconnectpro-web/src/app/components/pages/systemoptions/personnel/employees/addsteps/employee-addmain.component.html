@@ -1,0 +1,54 @@
+﻿<div class="container">
+    <div class="row">
+        <div [ngClass]="workflowClass1">
+            <ho2-accordion titleName="Workflow Helper" floatPosition="left" [titleClassName]="localStore.getThemeBackground()" (toggleSelected)="redrawTemplate($event)">
+                <ng-template #body>
+                    <workflowmgt [taskList]="workflowTasks"></workflowmgt>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+        <div [ngClass]="workflowClass2" *ngIf="workflowstep === 1">
+            <div class="card">
+                <div [ngClass]="'card-title ' + localStore.getThemeBackground()">
+                    <h5>{{ workflowTasks[0]?.description }}</h5>
+                </div>
+                <div class="card-body">
+                    <employee-addstep1 (step1Status)="handleStep1($event)" (goBack)="goBack($event)" [isNewRecord]="true"></employee-addstep1>
+                </div>
+            </div>
+        </div>
+        <div [ngClass]="workflowClass2" *ngIf="workflowstep === 2">
+            <div class="card">
+                <div [ngClass]="'card-title ' + localStore.getThemeBackground()">
+                    <h5>{{ workflowTasks[1]?.description }}</h5>
+                </div>
+                <div class="card-body">
+                    <employee-addstep2 (step2Status)="handleStep2($event)" (goBack)="goBack($event)" [isNewRecord]="true"></employee-addstep2>
+                </div>
+            </div>
+        </div>
+        <div [ngClass]="workflowClass2" *ngIf="workflowstep === 3">
+            <div class="card">
+                <div [ngClass]="'card-title ' + localStore.getThemeBackground()">
+                    <h5>{{ workflowTasks[2]?.description }}</h5>
+                </div>
+                <div class="card-body">
+                    <employee-addstep3 (step3Status)="handleStep3($event)" (goBack)="goBack($event)" [isNewRecord]="true"></employee-addstep3>
+                </div>
+            </div>
+        </div>
+        <div [ngClass]="workflowClass2" *ngIf="workflowstep === 4">
+            <div class="card">
+                <div [ngClass]="'card-title ' + localStore.getThemeBackground()">
+                    <h5>{{ workflowTasks[3]?.description }}</h5>
+                </div>
+                <div class="card-body">
+                    <employee-addstep4 (step4Status)="handleStep4($event)" (goBack)="goBack($event)" [isNewRecord]="true"></employee-addstep4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

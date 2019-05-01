@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs profile-tab app-tablist" role="tablist">
+                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#contact" role="tab" (click)="getContactsPage()">Agency</a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#subscription" role="tab" (click)="getSubsPage()">Subscription</a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab" (click)="getSettingsPage()">Settings</a> </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="tab-content">
+    <div class="row">
+        <div class="col-12">
+            <div class="tab-pane active" id="contact" role="tabpanel">
+                <div *ngIf="displayContact">
+                    <app-orgmain></app-orgmain>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="tab-pane" id="subscription" role="tabpanel">
+                <div *ngIf="displaySubscription">
+                    <app-subscriptionmain></app-subscriptionmain>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="tab-pane" id="settings" role="tabpanel">
+                <div class="card-body">
+                    <div *ngIf="displaySettings">
+                        <app-orgsettings></app-orgsettings>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

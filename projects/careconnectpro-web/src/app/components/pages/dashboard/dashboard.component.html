@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div [ngClass]="'card-title ' + localstore.getThemeBackground()">
+        <h4>Events</h4></div>
+      <div class="card-body">
+        <ngb-tabset>
+          <ngb-tab title="Company">
+            <ng-template ngbTabContent>
+              <app-event-component [eventType]="companyEvent"></app-event-component>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Personal">
+            <ng-template ngbTabContent>
+              <app-event-component [eventType]="personalEvent"></app-event-component>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>
+</div>

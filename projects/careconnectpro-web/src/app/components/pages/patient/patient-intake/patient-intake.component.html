@@ -1,0 +1,101 @@
+﻿<div class="container">
+    <div class="row">
+        <div [ngClass]="workflowClass1">
+            <ho2-accordion titleName="Workflow Helper" floatPosition="left" [titleClassName]="localstore.getThemeBackground()" (toggleSelected)="redrawTemplate($event)">
+                <ng-template #body>
+                    <workflowmgt [taskList]="workflowTasks"></workflowmgt>
+                </ng-template>
+            </ho2-accordion>
+        </div>
+        <div [ngClass]="workflowClass2" *ngIf="workflowstep === 1">
+            <div class="card">
+                <div [ngClass]="'card-title ' + localstore.getThemeBackground()">
+                    <h5>Patient Demographic</h5>
+                </div>
+                <div class="card-body">
+                    <patient-intake-step1 (step1Status)="handleStep1($event)" (goBack)="goBack($event)" [isNewRecord]="true"></patient-intake-step1>
+                </div>
+            </div>
+        </div>
+        <div [ngClass]="workflowClass2" *ngIf="workflowstep === 2">
+            <div class="card">
+                <div [ngClass]="'card-title ' + localstore.getThemeBackground()">
+                    <h5>Patient Primary Address</h5>
+                </div>
+                <div class="card-body">
+                    <patient-intake-step2 (step2Status)="handleStep2($event)" (goBack)="goBack($event)" [isNewRecord]="true"></patient-intake-step2>
+                </div>
+            </div>
+        </div>
+        <div [ngClass]="workflowClass2" *ngIf="workflowstep === 3">
+            <div class="card">
+                <div [ngClass]="'card-title ' + localstore.getThemeBackground()">
+                    <h5>Patient Closest Relative Information</h5>
+                </div>
+                <div class="card-body">
+                    <patient-intake-step3 (step3Status)="handleStep3($event)" (goBack)="goBack($event)" [isNewRecord]="true"></patient-intake-step3>
+                </div>
+            </div>
+        </div>
+        <div [ngClass]="workflowClass2" *ngIf="workflowstep === 4">
+            <div class="card">
+                <div [ngClass]="'card-title ' + localstore.getThemeBackground()">
+                    <h5>Referral Doctor Information</h5>
+                </div>
+                <div class="card-body">
+                    <patient-intake-step4 (step4Status)="handleStep4($event)" (goBack)="goBack($event)" [isNewRecord]="true"></patient-intake-step4>
+                </div>
+            </div>
+        </div>
+        <div [ngClass]="workflowClass2" *ngIf="workflowstep === 5">
+            <div class="card">
+                <div [ngClass]="'card-title ' + localstore.getThemeBackground()">
+                    <h5>Employer Information</h5>
+                </div>
+                <div class="card-body">
+                    <patient-intake-step5 (step5Status)="handleStep5($event)" (goBack)="goBack($event)" [isNewRecord]="true"></patient-intake-step5>
+                </div>
+            </div>
+        </div>
+        <div [ngClass]="workflowClass2" *ngIf="workflowstep === 6">
+            <div class="card">
+                <div [ngClass]="'card-title ' + localstore.getThemeBackground()">
+                    <h5>Insurance Information</h5>
+                </div>
+                <div class="card-body">
+                    <patient-intake-step6 (step6Status)="handleStep6($event)" (goBack)="goBack($event)" [isNewRecord]="true"></patient-intake-step6>
+                </div>
+            </div>
+        </div>
+        <div [ngClass]="workflowClass2" *ngIf="workflowstep === 7">
+            <div class="card">
+                <div [ngClass]="'card-title ' + localstore.getThemeBackground()">
+                    <h5>Confirm Benefits and Eligibility</h5>
+                </div>
+                <div class="card-body">
+                    <patient-intake-step7 (step7Status)="handleStep7($event)" (goBack)="goBack($event)" [isNewRecord]="true"></patient-intake-step7>
+                </div>
+            </div>
+        </div>
+        <div [ngClass]="workflowClass2" *ngIf="workflowstep === 8">
+            <div class="card">
+                <div [ngClass]="'card-title ' + localstore.getThemeBackground()">
+                    <h5>Get Initial Authorization</h5>
+                </div>
+                <div class="card-body">
+                    <patient-intake-step8 (step8Status)="handleStep8($event)" (goBack)="goBack($event)" [isNewRecord]="true"></patient-intake-step8>
+                </div>
+            </div>
+        </div>
+        <div [ngClass]="workflowClass2" *ngIf="workflowstep === 9">
+            <div class="card">
+                <div [ngClass]="'card-title ' + localstore.getThemeBackground()">
+                    <h5>Doctor Orders and Medication Therapies</h5>
+                </div>
+                <div class="card-body">
+                    <patient-intake-step9 (step9Status)="handleStep9($event)" (goBack)="goBack($event)" [isNewRecord]="true"></patient-intake-step9>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

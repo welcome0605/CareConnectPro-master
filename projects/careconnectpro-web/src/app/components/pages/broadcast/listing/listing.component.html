@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="row">
+        <div class="col-xlg-12 col-md-12">
+          <div class="card-body">
+            <a routerLink="/home/broadcast/new"
+               class="btn btn-danger m-b-10 p-10 m-r-10 waves-effect waves-light">Compose</a>
+          </div>
+          <div class="card-body p-t-0">
+            <div class="card b-all shadow-none">
+              <div class="inbox-center table-responsive">
+                <table class="table table-hover no-wrap">
+                  <tbody>
+
+                  <tr class="unread" *ngFor="let item of broadcasts; let i = index">
+                    <td style="width:40px">
+                      <div class="checkbox">
+                        <input type="checkbox" id="{{'checkbox'+i}}" value="check" (change)="onChangeCheckbox(item.id)">
+                        <label for="{{'checkbox'+i}}"></label>
+                      </div>
+                    </td>
+                    <td class="hidden-xs-down" (click)="viewMessage(item.id)" style="cursor: pointer">
+                        <a [routerLink]="['/home/broadcast/detail/',item.id]">
+                      <img [src]="getEmployeeImage(item.senderId)" alt="user" width="20"
+                           class="img-circle"/>
+                      {{ getEmployeeFullName(item.senderId) }}
+                      </a>
+                    </td>
+                    <td class="max-texts"><a [routerLink]="['/home/broadcast/detail/',item.id]">
+                      <span>{{item.subject}}</span>
+                    </a>
+                    </td>
+                    <td class="text-right"> {{ formatDate(item.dateCreated) }} </td>
+                  </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

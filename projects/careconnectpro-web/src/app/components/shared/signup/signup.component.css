@@ -1,0 +1,23 @@
+.signupPage {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+    padding: 2% 0;
+    font-size: 14px;
+    overflow-y: scroll;
+    background-image: url("/assets/images/background/login-register2.jpg");
+}
+
+.ng-valid[required], .ng-valid.required {
+    border-left: 5px solid #42A948; /* green */
+}
+
+.ng-invalid:not(form) {
+    border-left: 5px solid #a94442; /* red */
+}
+
+/*.errorMessage {
+    color: crimson;
+}*/

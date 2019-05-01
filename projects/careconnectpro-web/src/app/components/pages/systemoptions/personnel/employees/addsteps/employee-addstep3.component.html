@@ -1,0 +1,92 @@
+<form novalidate="" #f2="ngForm" (ngSubmit)="f2.form.valid ? submitForm(): ''" class="m-t-40 tab-wizard wizard-circle wizard clearfix" role="application" id="f1">
+    <div class="row" *ngIf="isNewRecord === false">
+        <div class="col-md-3 app-ho2-form-label">
+        </div>
+        <div class="col-md-8 app-ho2-edit-right">
+            <ho2edithelper activeAction="0" (actionSelected)="editEventSubmit($event)" [saveStatus]="saveStatus"></ho2edithelper>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="username" class="app-ho2-form-label">Username:</label>
+        </div>
+
+        <div class="col-md-7 floating-labels">
+          <div *ngIf="((isEditMode === true) && (isNewRecord === true))">
+            <input type="email" class="form-control" id="username" name="username" disabled="disabled" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z0-9.-]{2,}[.]{1}[a-zA-Z]{2,}"
+                   data-validation-required-message="This field is required" aria-invalid="false"
+                   placeholder="Enter email" required [(ngModel)]="employeeService.employee.userName" #username="ngModel">
+          </div>
+            <div *ngIf="(isNewRecord === false)">
+                <p class="col-md-12 app-ho2-mt-label">{{ employeeService.employee.userName }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="password" class="app-ho2-form-label">Password:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <input name="password" type="password" pPassword [(ngModel)]="employeeService.employee.password" class="form-control" id="password" required #password="ngModel">
+                <span class="bar"></span>
+                <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': password.valid, 'glyphicon-remove' : !password.valid}" aria-hidden="true"></span>
+                <div *ngIf="(f2.submitted && !password.valid) || (password.invalid && (password.dirty || password.touched))" class="text-danger">
+                    <div *ngIf="password.errors.required" class="app-form-validation-error">
+                        Password is required
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">***************</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="txtpassword2" class="app-ho2-form-label">Re-enter Password*:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <input name="txtpassword2" type="password" pPassword [(ngModel)]="employeeService.password2" class="form-control" id="txtpassword2" required #txtpassword2="ngModel">
+                <span class="bar"></span>
+                <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': txtpassword2.valid, 'glyphicon-remove' : !txtpassword2.valid}" aria-hidden="true"></span>
+                <div *ngIf="(f2.submitted && !txtpassword2.valid) || (txtpassword2.invalid && (txtpassword2.dirty || txtpassword2.touched))" class="text-danger">
+                    <div *ngIf="txtpassword2.errors.required" class="app-form-validation-error">
+                        Password is required
+                    </div>
+                </div>
+                <div class="app-form-validation-error text-danger" *ngIf="((employeeService.password2 != '') && (txtpassword2.dirty || txtpassword2.touched) && (employeeService.employee.password != '') && (employeeService.employee.password != employeeService.password2))">
+                    Password doesn't match
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p class="col-md-12 app-ho2-mt-label">***************</p>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 20px;">
+        <div class="col-md-4 app-ho2-form-label">
+            <label for="txtisSysAdmin" class="app-ho2-form-label">System Administrator:</label>
+        </div>
+        <div class="col-md-7 floating-labels">
+            <div *ngIf="isEditMode">
+                <p-toggleButton name="txtisSysAdmin" [(ngModel)]="employeeService.employee.isSysAdmin"></p-toggleButton>
+                <span class="bar"></span>
+                </div>
+                <div *ngIf="!isEditMode">
+                    <p-toggleButton name="txtisSysAdmin" [(ngModel)]="employeeService.employee.isSysAdmin" [disabled]="true"></p-toggleButton>
+                </div>
+            </div>
+    </div>
+    <div class="row" *ngIf="isNewRecord === true">
+        <div class="col-md" style="text-align:right">
+            <input class="btn btn-info" type="button" name="Back" value="Cancel" (click)="cancel()" />
+            &nbsp;&nbsp;
+            <input class="btn btn-info" type="button" name="Back" value="Back" (click)="goToPrev()" />
+            &nbsp;&nbsp;
+            <input class="btn btn-info" type="submit" name="Submit" value="Next" />
+        </div>
+    </div>
+</form>
+

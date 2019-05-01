@@ -1,0 +1,22 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\components",
+    "\\src\\app\\components\\pages",
+    "\\src\\app\\components\\pages\\message",
+    "\\src\\app\\components\\pages\\message\\components",
+    "\\src\\app\\components\\pages\\message\\components\\detail",
+    "\\src\\app\\components\\pages\\message\\components\\new-message",
+    "\\src\\app\\components\\shared",
+    "\\src\\app\\components\\shared\\header-navigation",
+    "\\src\\app\\models",
+    "\\src\\app\\models\\common",
+    "\\src\\app\\models\\constants",
+    "\\src\\app\\models\\message",
+    "\\src\\app\\services"
+  ],
+  "SelectedNode": "\\src\\app\\components\\pages\\message\\components\\new-message\\new-message.component.ts",
+  "PreviewInSolutionExplorer": false
+}

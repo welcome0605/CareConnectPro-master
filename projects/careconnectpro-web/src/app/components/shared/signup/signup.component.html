@@ -1,0 +1,831 @@
+<div class="signupPage">
+<div class="card">
+       <div class="card-body collapse show">
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body wizard-content">     
+                <h4 class="card-title"><img [src]="logolighticon" alt="Care Connect Pro Logo" /> New Client Registration</h4>
+				 <form action="#" class="tab-wizard wizard-circle wizard clearfix" role="application" id="steps-uid-0">
+                    <div class="steps clearfix">
+                    <ul role="tablist">
+                        <li id="liStep1" role="tab" class="first current" aria-disabled="false" aria-selected="true">
+                        <a id="steps-uid-0-t-0" href="javascript:void(0)" aria-controls="steps-uid-0-p-0">
+                        <span class="current-info audible">current step: </span>
+                        <span class="step">1</span> Personal and Company Information</a></li>
+                        <li id="liStep2" role="tab" class="disabled" aria-disabled="true">
+                        <a id="steps-uid-0-t-1" href="javascript:void(0)" aria-controls="steps-uid-0-p-1">
+                            <span class="step">2</span> Subscription</a></li>
+                        <li id="liStep3" role="tab" class="disabled" aria-disabled="true"><a id="steps-uid-0-t-2" href="javascript:void(0)" aria-controls="steps-uid-0-p-2">
+                            <span class="step">3</span> Create Login</a></li>
+                        <li id="liStep4" role="tab" class="disabled last" aria-disabled="true"><a id="steps-uid-0-t-3" href="javascript:void(0)" aria-controls="steps-uid-0-p-3">
+                            <span class="step">4</span> Finish</a>
+                            </li>
+                        </ul>
+                        </div>
+						</form>
+                    <div class="content clearfix">
+                        <!-- Step 1 -->
+                        <div id="stepsDiv1" *ngIf="showPage1">
+                            <section id="steps-uid-0-p-0" role="tabpanel" aria-labelledby="steps-uid-0-h-0" class="body current" aria-hidden="false">
+                                <form novalidate="" #f1="ngForm" (ngSubmit)="f1.form.valid ? ShowPage(2): ''"  class="m-t-40 tab-wizard wizard-circle wizard clearfix" role="application" id="formSignup1">
+                                    <h6 id="steps-uid-0-h-1" tabindex="-1" class="title"></h6>
+                                    <h4 class="card-title" style="text-align: center"></h4>
+                                    <h6 class="card-subtitle" style="text-align: center">We are glad that you are interested in becoming one of our clients. 
+                                    Please enter your personal and company information in the form. <br /></h6>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="text-align:right">
+                                                        <label for="firstname">First Name </label><span class="text-danger">*</span>
+                                                    </td>
+                                                    <td>
+                                                        <div *ngIf="!isSubscribeFinished">
+                                                            <input type="text" class="form-control" placeholder="Enter your first name" name="firstname" id="firstname" required [(ngModel)]="signupmodel.firstname" #firstname="ngModel">
+                                                            <span *ngIf="f1.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': firstname.valid, 'glyphicon-remove' : !firstname.valid}" aria-hidden="true"></span>
+                                                            <div *ngIf="(f1.submitted && !firstname.valid) || (firstname.invalid && (firstname.dirty || firstname.touched))" class="text-danger">
+                                                                <div *ngIf="firstname.errors.required">
+                                                                    First Name is required
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div *ngIf="isSubscribeFinished">
+                                                            <label class="col-sm-10">{{ signupmodel.firstname }}</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:right">
+                                                        <label for="lastname">Last Name </label><span class="text-danger">*</span>                                                    
+                                                    </td>
+                                                    <td>
+                                                        <div *ngIf="!isSubscribeFinished">
+                                                        <input type="text" class="form-control" id="lastname" placeholder="Enter your last name" name="lastname" required [(ngModel)]="signupmodel.lastname" #lastname="ngModel">
+                                                        <span *ngIf="f1.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': lastname.valid, 'glyphicon-remove' : !lastname.valid}" aria-hidden="true"></span>
+                                                        <div *ngIf="(f1.submitted && !lastname.valid) || (lastname.invalid && (lastname.dirty || lastname.touched))" class="text-danger">
+                                                            <div *ngIf="lastname.errors.required">
+                                                                Last Name is required
+                                                            </div>
+                                                        </div>   
+                                                      </div>
+                                                        <div *ngIf="isSubscribeFinished">
+                                                            <label class="col-sm-10">{{ signupmodel.lastname }}</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:right">
+                                                        <label for="useremail">Email Address </label><span class="text-danger">*</span>                                                    
+                                                    </td>
+                                                    <td>
+                                                        <div *ngIf="!isSubscribeFinished">
+                                                            <input type="email" class="form-control" id="useremail" name="useremail" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z0-9.-]{2,}[.]{1}[a-zA-Z]{2,}" data-validation-required-message="This field is required" aria-invalid="false" placeholder="Enter your email address" required [(ngModel)]="signupmodel.useremail" #useremail="ngModel">
+                                                            <span *ngIf="f1.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': useremail.valid, 'glyphicon-remove' : !useremail.valid}" aria-hidden="true"></span>
+                                                            <span class="errorMessage" *ngIf="f1.submitted && !useremail.valid">
+                                                            </span>
+                                                            <div *ngIf="(f1.submitted && !useremail.valid) || (useremail.invalid && (useremail.dirty || useremail.touched))" class="text-danger">
+                                                                <div *ngIf="useremail.errors.required">
+                                                                    Email is required.
+                                                                </div>
+                                                                <div *ngIf="useremail.errors.pattern">
+                                                                    Please enter a valid email address
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <div *ngIf="isSubscribeFinished">
+                                                                <label class="col-sm-10">{{ signupmodel.useremail }}</label>
+                                                            </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:right">
+                                                        <label for="userphone">Phone Number </label><span class="text-danger">*</span>                                                    
+                                                    </td>
+
+                                                    <td>
+                                                        <div *ngIf="!isSubscribeFinished">
+                                                            <input type="text" class="form-control" data-mask="(999) 999-9999" id="userphone" name="userphone" placeholder="Enter your phone number" required [(ngModel)]="signupmodel.userphone" #userphone="ngModel">
+                                                            <span *ngIf="f1.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': userphone.valid, 'glyphicon-remove' : !userphone.valid}" aria-hidden="true"></span>
+                                                            <div *ngIf="(f1.submitted && !userphone.valid) || (userphone.invalid && (userphone.dirty || userphone.touched))" class="text-danger">
+                                                                <div *ngIf="userphone.errors.required">
+                                                                    Phone is required
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <div *ngIf="isSubscribeFinished">
+                                                                <label class="col-sm-10">{{ signupmodel.userphone }}</label>
+                                                            </div>
+                                                </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:right">
+                                                        <label for="company">Company Name </label><span class="text-danger">*</span>
+                                                    </td>
+                                                    <td>
+                                                        <div *ngIf="!isSubscribeFinished">
+                                                            <input type="text" class="form-control" id="company" name="company" placeholder="Enter your company name" required [(ngModel)]="signupmodel.company" #company="ngModel">
+                                                            <span *ngIf="f1.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': company.valid, 'glyphicon-remove' : !company.valid}" aria-hidden="true"></span>
+                                                            <div *ngIf="(f1.submitted && !company.valid) || (company.invalid && (company.dirty || company.touched))" class="text-danger">
+                                                                <div *ngIf="company.errors.required">
+                                                                    Company is required
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                        <div *ngIf="isSubscribeFinished">
+                                                            <label class="col-sm-10">{{ signupmodel.company }}</label>
+                                                        </div>
+                                                </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:right">
+                                                        <label for="jobtitle">Job Title </label><span class="text-danger">*</span>
+                                                    </td>
+                                                    <td>
+                                                        <div *ngIf="!isSubscribeFinished">
+                                                            <input type="text" class="form-control" id="jobtitle" name="jobtitle" placeholder="Enter your job title" required [(ngModel)]="signupmodel.jobtitle" #jobtitle="ngModel">
+                                                            <span *ngIf="f1.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': jobtitle.valid, 'glyphicon-remove' : !jobtitle.valid}" aria-hidden="true"></span>
+                                                            <div *ngIf="(f1.submitted && !jobtitle.valid) || (jobtitle.invalid && (jobtitle.dirty || jobtitle.touched))" class="text-danger">
+                                                                <div *ngIf="jobtitle.errors.required">
+                                                                    Job title is required
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div *ngIf="isSubscribeFinished">
+                                                            <label class="col-sm-10">{{ signupmodel.jobtitle }}</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="actions clearfix">
+                                        <ul role="menu" aria-label="Pagination">
+                                            <li class="disabled" aria-disabled="true"></li>
+                                            <li aria-hidden="false" aria-disabled="false">
+                                                <button class="btn btn-primary btn-small btn-block waves-effect waves-light" type="submit">Next</button>
+                                            </li>
+                                            <li aria-hidden="false" aria-disabled="false">
+                                                <span *ngIf="!isSubscribeFinished"><button class="btn btn-primary btn-small btn-block waves-effect waves-light" type="button" (click)="login()">Cancel</button></span>
+</li>
+                                                                                
+                                        </ul>
+                                    </div>
+                                </form>
+                            </section>
+                        </div>
+                        <!-- Step 2 -->
+                        <div id="stepsDiv2" *ngIf="showPage2">
+                            <section id="steps-uid-0-p-1" role="tabpanel" aria-labelledby="steps-uid-0-h-1" class="body" aria-hidden="false" >
+                                <form novalidate="" #f2="ngForm" (ngSubmit)="f2.form.valid ? ShowPage(3): ''" class="form-horizontal form-bordered tab-wizard wizard-circle wizard clearfix" role="application" id="formSigup2">
+                                    <h6 id="steps-uid-0-h-1" tabindex="-1" class="title"></h6>
+									<h4 class="card-title" style="text-align: center">Subscribe for full access or request for a trial period</h4>
+									 <h6 class="card-subtitle" style="text-align: center">Getting Work Done</h6>
+									 <h6 class="card-subtitle" style="text-align: center">Welcome! You are one step away from your organization's one-stop shop Home Health Care software software</h6>
+                                    <div id="step2Row1" class="row" *ngIf="((!isSubscribeTrial) && (!isSubscribePaid))">
+                                        <div class="col-12 m-t-30">
+                                            <h4 class="m-b-0"></h4>
+                                            <p class="text-muted m-t-0 font-12"></p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h4 class="card-title"></h4>
+                                                    <p class="card-text">See how CareConnectPro can revolutionize your organization's operations. From streamlining processes, clean and useful functionality, and the ability to track all payable activities - maximizing your revenue!</p>
+                                                  
+                                                    <div id="demovideoModal" class="modal fade bs-example-modal-lg show" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" style="display: none;" >
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                <!--<div class="modal-header">
+                                                                    <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">�</button>
+                                                                </div>-->
+                                                                <div class="modal-body" style="height:357px;">
+                                                                    <iframe style="width:100%; height:100%;" src="https://www.youtube.com/embed/SQuaBryScII" frameborder="0" allowfullscreen></iframe>
+                                                                    </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.modal-dialog -->
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#demovideoModal" data-whatever="@mdo">Watch Demo Video</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card text-center">
+                                                <div class="card-body">
+                                                    <h4 class="card-title"></h4>
+                                                    <p class="card-text">Easy access to power at then hands for you and your employees. Come in and kick the tires for a bit..you'll be amazed with the adaptability and ease of use of CareConnectPro. Get ready to take your Home.</p>
+                                                    <a href="javascript:void(0)" class="btn btn-primary" (click)="startTrial()">Start Free Trial</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card text-right">
+                                                <div class="card-body">
+                                                    <h4 class="card-title"></h4>
+                                                    <p class="card-text">You are ready and CareConnect is there! See you at at the next level in your business!</p>
+                                                    <a href="javascript:void(0)" class="btn btn-inverse" (click)="startPaidSub()">Subscribe</a>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="step2trial" class="row" *ngIf="((isSubscribeTrial) && (!isSubscribePaid))">
+                                        <div class="card card-outline-success" style="width:100%">
+                                            <div class="card-header">
+                                                <h4 class="m-b-0 text-white" style="text-align:center">Free Trial</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <h3 class="card-title"></h3>
+                                                <p class="card-text">We are excited that you are interested to try out Care Connect Pro before you are ready to make
+                                                    a decision to purchase a subscription. We completely understand your position and are here to assist you in the process.
+                                                    <br /><br />Please review the information below for the features that are available with the trial subscription.
+                                                    <br />When you are ready, click the next button to create your login information.</p>
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="text-align:right">Subscription Type</td>
+                                                                <td class="text-blue">Free Trial</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align:right">Subscription Term</td>
+                                                                <td class="text-blue">30 Days</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align:right">Start Date</td>
+                                                                <td class="text-blue">{{ currMonth }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align:right">End Date</td>
+                                                                <td class="text-blue">{{ nextMonth }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <a href="javascript:void(0)" class="btn btn-inverse" (click)="showSubscribeMain()">Remove subscription</a>
+                                            </div>
+                                        </div>                                 
+                                    </div>                                    
+                                   
+                                    <div id="step2paid" class="row" *ngIf="((!isSubscribeTrial) && (isSubscribePaid))">
+                                        <div class="card card-outline-success" style="width:100%">
+                                            <div class="card-header" >
+                                                <h4 class="m-b-0 text-white" style="text-align:center">Monthly Subscription</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <h3 class="card-title"></h3>
+                                                <div *ngIf="currentSubStep==1">
+                                                    <p class="card-text">
+                                                        We are excited that you are ready to purchase a paid subscription of Care Connect Pro.
+                                                        <br />Please select a subscription package and enter your payment information.
+                                                    </p>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title" style="text-align: center"><i class="fa fa-edit"></i> {{ step2title }} </h5>
+                                                        <h6 class="card-subtitle"></h6>
+                                                        <!-- Nav tabs -->
+                                                        <div class="vtabs">
+                                                            <ul class="nav nav-tabs tabs-vertical" role="tablist">                                                                
+                                                                <li *ngIf="enableFormSubTab" class="nav-item"> <a id="subtab1" class="nav-link active" data-toggle="tab" href="#paysubscription" role="tab" aria-expanded="true" (click)="dspStep2Title(1)"><span class="hidden-sm-up"><i class="fa fa-shopping-basket"></i></span> <span class="hidden-xs-down">Select Package</span> </a> </li>
+                                                                <li *ngIf="!enableFormSubTab" class="nav-item" style="background-color:#f2f4f8; text-align:center; padding:5px;margin-bottom: 10px;">Select Package <i *ngIf="enableFormBillTab" class="fa fa-check"></i></li>
+                                                                <li *ngIf="enableFormBillTab" class="nav-item" > <a id="subtab2" class="nav-link" data-toggle="tab" href="#paybilling" role="tab" aria-expanded="false" (click)="dspStep2Title(2)"><span class="hidden-sm-up"><i class="fa fa-address-card"></i></span> <span class="hidden-xs-down">Billing Information</span></a> </li>
+                                                                <li *ngIf="!enableFormBillTab" class="nav-item" style="background-color:#f2f4f8; text-align:center; padding:5px;margin-bottom: 10px;">Billing Information</li>
+                                                                <li *ngIf="enableFormPayTab" class="nav-item"> <a id="subtab3" class="nav-link" data-toggle="tab" href="#paycard" role="tab" aria-expanded="false" (click)="dspStep2Title(3)"><span class="hidden-sm-up"><i class="fa fa-credit-card"></i></span> <span class="hidden-xs-down">Payment Method</span></a> </li>
+                                                                <li *ngIf="!enableFormPayTab" class="nav-item" style="background-color:#f2f4f8; text-align:center; padding:5px;margin-bottom: 10px;">Payment Method</li>
+                                                                <li *ngIf="enableFormPayStatus" class="nav-item"> <a id="subtab4" class="nav-link" data-toggle="tab" href="#paystatus" role="tab" aria-expanded="false" (click)="dspStep2Title(4)"><span class="hidden-sm-up"><i class="fa fa-bank"></i></span> <span class="hidden-xs-down">Payment Status</span></a> </li>
+                                                                <li *ngIf="!enableFormPayStatus" class="nav-item" style="background-color:#f2f4f8; text-align:center;">Payment Status</li>
+                                                            </ul>
+                                                            <!-- Tab panes -->
+                                                            <div class="tab-content" style="width:100%">
+                                                                <div class="tab-pane active" id="paysubscription" *ngIf="currentSubStep==1" role="tabpanel" aria-expanded="true">
+                                                                    <div class="p-20">
+                                                                        <div class="demo-radio-button">
+                                                                            <div class="table-responsive">
+                                                                                <table class="table table-bordered">
+                                                                                    <tbody>
+                                                                                        <tr *ngFor="let pkg of subPkgDesc">
+                                                                                            <td style="text-align:right">
+                                                                                                <input name="group1" style="text-align:right" type="radio" [id]="pkg.id"
+                                                                                                       [checked]="idx === 0"
+                                                                                                       [value]="pkg.id"
+                                                                                                       (change)="onPkgSelectionChange(pkg)" [(ngModel)]="selectedSubPkg.id">
+                                                                                                <label [for]="pkg.id"></label>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <label [for]="pkg.id">{{ pkg.description }}</label>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tab-pane active" id="paybilling" *ngIf="currentSubStep==2" role="tabpanel" aria-expanded="true">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-bordered">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td style="text-align:right">
+                                                                                        <label for="billingfirstname">First Name </label><span class="text-danger">*</span>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <input type="text" class="form-control" (change)="validateSubForm()" placeholder="Enter card holder first name" name="billingfirstname" id="billingfirstname" required [(ngModel)]="userBilling.firstname" #billingfirstname="ngModel">
+                                                                                        <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': billingfirstname.valid, 'glyphicon-remove' : !billingfirstname.valid}" aria-hidden="true"></span>
+                                                                                        <div *ngIf="(f2.submitted && !billingfirstname.valid) || (billingfirstname.invalid && (billingfirstname.dirty || billingfirstname.touched))" class="text-danger">
+                                                                                            <div *ngIf="billingfirstname.errors.required">
+                                                                                                First Name is required
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="text-align:right">
+                                                                                        <label for="billinglastname">Last Name </label><span class="text-danger">*</span>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <input type="text" class="form-control" (change)="validateSubForm()" placeholder="Enter card holder last name" name="lastname" id="billinglastname" required [(ngModel)]="userBilling.lastname" #billinglastname="ngModel">
+                                                                                        <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': billinglastname.valid, 'glyphicon-remove' : !billinglastname.valid}" aria-hidden="true"></span>
+                                                                                        <div *ngIf="(f2.submitted && !billinglastname.valid) || (billinglastname.invalid && (billinglastname.dirty || billinglastname.touched))" class="text-danger">
+                                                                                            <div *ngIf="billinglastname.errors.required">
+                                                                                                Last Name is required
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="text-align:right">
+                                                                                        <label for="billingaddress1">Address 1 </label><span class="text-danger">*</span>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <input type="text" class="form-control" (change)="validateSubForm()" placeholder="Enter card holder address 1" name="billingaddress1" id="billingaddress1" required [(ngModel)]="userBilling.address1" #billingaddress1="ngModel">
+                                                                                        <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': billingaddress1.valid, 'glyphicon-remove' : !billingaddress1.valid}" aria-hidden="true"></span>
+                                                                                        <div *ngIf="(f2.submitted && !billingaddress1.valid) || (billingaddress1.invalid && (billingaddress1.dirty || billingaddress1.touched))" class="text-danger">
+                                                                                            <div *ngIf="billingaddress1.errors.required">
+                                                                                                Address 1 is required
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="text-align:right">
+                                                                                        <label for="billingaddress2">Address 2 </label>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <input type="text" class="form-control" placeholder="Enter card holder address 2" name="billingaddress2" id="billingaddress2" [(ngModel)]="userBilling.address2" #billingaddress2="ngModel">
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="text-align:right">
+                                                                                        <label for="billingcity">City </label><span class="text-danger">*</span>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <input type="text" class="form-control" (change)="validateSubForm()" placeholder="Enter billing city" name="billingcity" id="billingcity" required [(ngModel)]="userBilling.city" #billingcity="ngModel">
+                                                                                        <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': billingcity.valid, 'glyphicon-remove' : !billingcity.valid}" aria-hidden="true"></span>
+                                                                                        <div *ngIf="(f2.submitted && !billingcity.valid) || (billingcity.invalid && (billingcity.dirty || billingcity.touched))" class="text-danger">
+                                                                                            <div *ngIf="billingcity.errors.required">
+                                                                                                City is required
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="text-align:right">
+                                                                                        <label for="billingzipcode">Zip Code </label><span class="text-danger">*</span>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <input type="text" class="form-control" (change)="validateSubForm()" placeholder="Enter billing zip or post code" name="billingzipcode" id="billingzipcode" required [(ngModel)]="userBilling.zipCode" #billingzipcode="ngModel">
+                                                                                        <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': billingzipcode.valid, 'glyphicon-remove' : !billingzipcode.valid}" aria-hidden="true"></span>
+                                                                                        <div *ngIf="(f2.submitted && !billingzipcode.valid) || (billingzipcode.invalid && (billingzipcode.dirty || billingzipcode.touched))" class="text-danger">
+                                                                                            <div *ngIf="billingzipcode.errors.required">
+                                                                                                Zip Code is required
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="text-align:right">
+                                                                                        <label for="billingstate">State </label><span class="text-danger">*</span>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <select style="width:125px" class="custom-select col-12" (change)="validateSubForm()" name='billingstate' id='billingstate' [(ngModel)]="userBilling.state">
+                                                                                            <option value=''>Enter State</option>
+                                                                                            <option *ngFor="let state of states" [value]="state.id">{{ state.value }}</option>
+                                                                                        </select>
+        
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>                                                              
+                                                                
+                                                                </div>
+                                                                <div class="tab-pane active" id="paycard" *ngIf="currentSubStep==3" role="tabpanel" aria-expanded="true">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-bordered">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td style="text-align:right">
+                                                                                        <label for="cardtype">Credit Card Type </label><span class="text-danger">*</span>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <select class="custom-select col-12" name='cardtype' id='cardtype' [(ngModel)]="paymodel.cardtype">
+                                                                                            <option value=''>Enter Card Types</option>
+                                                                                            <option *ngFor="let card of ccardTypes" [value]="card.id">{{ card.value }}</option>
+                                                                                        </select> 
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="text-align:right">
+                                                                                        <label for="cardnumber">Credit Card Number </label><span class="text-danger">*</span>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <input type="text" class="form-control" (change)="validateSubForm()" placeholder="" data-mask="9999-9999-9999-9999" name="cardnumber" id="cardnumber" required [(ngModel)]="paymodel.cardnumber" #cardnumber="ngModel">
+                                                                                        <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': cardnumber.valid, 'glyphicon-remove' : !cardnumber.valid}" aria-hidden="true"></span>
+                                                                                        <div *ngIf="(f2.submitted && !cardnumber.valid) || (cardnumber.invalid && (cardnumber.dirty || cardnumber.touched))" class="text-danger">
+                                                                                            <div *ngIf="cardnumber.errors.required">
+                                                                                                Credit Card number is required
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="text-align:right">
+                                                                                        <label for="expdate">Expiration Date </label><span class="text-danger">*</span>
+                                                                                    </td>
+                                                                                    <td>                                                                                        
+                                                                                        <select style="width:125px" class="custom-select col-12" name='expireMM' id='expireMM' [(ngModel)]="paymodel.expmonth">
+                                                                                            <option value=''>Enter Month</option>
+                                                                                            <option value='01'>01</option>
+                                                                                            <option value='02'>02</option>
+                                                                                            <option value='03'>03</option>
+                                                                                            <option value='04'>04</option>
+                                                                                            <option value='05'>05</option>
+                                                                                            <option value='06'>06</option>
+                                                                                            <option value='07'>07</option>
+                                                                                            <option value='08'>08</option>
+                                                                                            <option value='09'>09</option>
+                                                                                            <option value='10'>10</option>
+                                                                                            <option value='11'>11</option>
+                                                                                            <option value='12'>12</option>
+                                                                                        </select>
+                                                                                        <select style="width:125px" class="custom-select col-12" name='expireYY' id='expireYY' [(ngModel)]="paymodel.expyear">
+                                                                                            <option value=''>Enter Year</option>
+                                                                                            <option *ngFor="let ccYear of ccYears" [value]="ccYear.id">{{ ccYear.value }}</option>
+                                                                                        </select> 
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="text-align:right">
+                                                                                        <label for="cardcvv">CVV </label><span class="text-danger">*</span>
+                                                                                    </td>
+                                                                                    <td >
+                                                                                        <input type="text" style="width:125px;" class="form-control" placeholder="Enter credit card CVV" name="cardcvv" id="cardcvv" required [(ngModel)]="paymodel.cardcvv" #cardcvv="ngModel">
+                                                                                        <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': cardcvv.valid, 'glyphicon-remove' : !cardcvv.valid}" aria-hidden="true"></span>
+                                                                                        <div *ngIf="(f2.submitted && !cardcvv.valid) || (cardcvv.invalid && (cardcvv.dirty || cardcvv.touched))" class="text-danger">
+                                                                                            <div *ngIf="cardcvv.errors.required">
+                                                                                                Credit Card CVV is required
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="text-align:right">Do you want us to store your credit card on file for future payment?</td>
+                                                                                    <td>
+                                                                                        <div class="demo-radio-button">
+                                                                                            <input name="group2" type="radio" id="storecc0" (change)="onPaymentStoreCard(true)">
+                                                                                            <label for="storecc0">Yes</label>
+                                                                                            <input name="group2" type="radio" id="storecc1" (change)="onPaymentStoreCard(false)">
+                                                                                            <label for="storecc1">No</label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="text-align:right">
+                                                                                        <label for="totmonths">How many months do you want to pay for? </label><span class="text-danger">*</span>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <input type="text" class="form-control" (change)="calTotalAmount()" placeholder="Enter credit card expiration date" name="totmonths" id="totmonths" required [(ngModel)]="paymodel.totmonths" #totmonths="ngModel">
+                                                                                        <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': totmonths.valid, 'glyphicon-remove' : !totmonths.valid}" aria-hidden="true"></span>
+                                                                                        <div *ngIf="(f2.submitted && !totmonths.valid) || (totmonths.invalid && (totmonths.dirty || totmonths.touched))" class="text-danger">
+                                                                                            <div *ngIf="totmonths.errors.required">
+                                                                                                Total months is required
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="text-align:right">
+                                                                                        <label>Total Amount </label>
+                                                                                    </td>
+                                                                                    <td class="text-blue">
+                                                                                        <h4> <i class="fa fa-dollar"></i> {{ paymodel.totamount }}</h4>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr *ngIf="showProcessPayBtn">
+                                                                                    <td style="text-align:right" colspan="2">
+                                                                                        <a href="javascript:void(0)" class="btn btn-info" (click)="submitCreditPayment()">Submit Payment</a>
+                                                                                    </td>
+                                                                                </tr>
+
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>                                                                
+                                                                </div>
+                                                                <div class="tab-pane active" id="paystatus" *ngIf="currentSubStep==4" role="tabpanel" aria-expanded="true">
+                                                                    <div class="p-20">
+                                                                            <div class="table-responsive">
+                                                                                <p class="card-text">
+                                                                                    You payment have been processed successfully..
+                                                                                    <br /><br />Please review the information below for the subscription information.
+                                                                                    <br />When you are ready, click the next button to create your login information.
+                                                                                </p>
+                                                                                <table class="table table-bordered">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td style="text-align:right">
+                                                                                                <label>Payment Status </label>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <h4> {{ paymodel.paymentstatus }}</h4>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td style="text-align:right">
+                                                                                                <label>Payment Amount </label>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <h4> <i class="fa fa-dollar"></i>{{ paymodel.totamount }}</h4>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td style="text-align:right">
+                                                                                                <label>Approval Code </label>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <h4> {{ paymodel.approvalcode }}</h4>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td style="text-align:right">
+                                                                                                <label>Subscription</label>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <h4> {{ subsmodel.packageId }}</h4>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td style="text-align:right">
+                                                                                                <label>Start Date </label>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <h4> {{ subsmodel.startdate }}</h4>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td style="text-align:right">
+                                                                                                <label>Expiration Date </label>
+                                                                                            </td>
+                                                                                            <td>
+                                                                                                <h4> {{ subsmodel.enddate }}</h4>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                     </div>
+                                                                    
+                                                                </div>
+                                                            
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <span *ngIf="enablesubRemoval"><a href="javascript:void(0)" class="btn btn-inverse" (click)="showSubscribeMain()">Remove subscription</a></span>
+                                               </div>
+                                                                            
+                                            </div>
+                                        </div>                                
+                                    <div class="actions clearfix" *ngIf="enableFormStep" >
+                                        <ul role="menu" aria-label="Pagination">
+                                            <li aria-hidden="false" aria-disabled="false">
+                                                <button class="btn btn-primary btn-small btn-block waves-effect waves-light" type="button" (click)="ShowPage(1)">Previous</button>
+                                            </li>
+                                            <li aria-hidden="false" aria-disabled="false">
+                                                <span *ngIf="((isSubscribeTrial) || (isSubscribePaid))"><button class="btn btn-primary btn-small btn-block waves-effect waves-light" type="submit">Next</button></span>
+                                            </li>
+                                            <li aria-hidden="false" aria-disabled="false" >
+                                                <span *ngIf="!isSubscribeFinished"><button class="btn btn-primary btn-small btn-block waves-effect waves-light" type="button" (click)="login()">Cancel</button></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </form>
+                            </section>
+                            </div>
+                            <!-- Step 3 -->
+                        <div id="stepsDiv3" *ngIf="showPage3">
+                            <section id="steps-uid-0-p-2" role="tabpanel" aria-labelledby="steps-uid-0-h-2" class="body" aria-hidden="false" >
+                                <form #f3="ngForm" (ngSubmit)="f3.form.valid ? ShowPage(4) : ''"  class="tab-wizard wizard-circle wizard clearfix" role="application" id="formSignup3">
+                                    <div class="p-20">
+                                        <div class="table-responsive">
+                                            <p class="card-text">
+                                                Choose an administrator username and password you prefer to use to access your company Care Connect Pro account.
+                                            </p>
+                                            <table class="table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="text-align:right">
+                                                            <label for="username" class="col-sm-10">Administrator Username</label>
+                                                        </td>
+                                                        <td>
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon">
+                                                                        <i class="ti-email"></i>
+                                                                    </div>
+                                                                    <input type="email" class="form-control" id="username" name="username" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z0-9.-]{2,}[.]{1}[a-zA-Z]{2,}" data-validation-required-message="This field is required" aria-invalid="false" placeholder="Enter email" required [(ngModel)]="signupmodel.username" #username="ngModel">
+                                                                </div>
+                                                                <div>
+                                                                    <span *ngIf="f3.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': username.valid, 'glyphicon-remove' : !username.valid}" aria-hidden="true"></span>
+                                                                    <div *ngIf="(f3.submitted && !username.valid) || (username.invalid && (username.dirty || username.touched))" class="text-danger">
+                                                                        <div *ngIf="username.errors.required">
+                                                                            Email is required.
+                                                                        </div>
+                                                                        <div *ngIf="username.errors.pattern">
+                                                                            Please enter a valid email address
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align:right">
+                                                                <label for="password1">Password</label>                                                            
+                                                        </td>
+                                                        <td>
+                                                            <div class="input-group">
+                                                                <div class="input-group-addon">
+                                                                    <i class="ti-lock"></i>
+                                                                </div>
+                                                                <input type="password" class="form-control" id="password1" name="password1" placeholder="Enter password" required [(ngModel)]="signupmodel.password1" #password1="ngModel">
+                                                            </div>
+                                                            <div>
+                                                                <span *ngIf="f3.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': password1.valid, 'glyphicon-remove' : !password1.valid}" aria-hidden="true"></span>
+                                                                <div *ngIf="(f3.submitted && !password1.valid) || (password1.invalid && (password1.dirty || password1.touched))" class="text-danger">
+                                                                    <div *ngIf="password1.errors.required">
+                                                                        Password is required.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align:right">
+                                                            <label for="password2">Confirm Password</label>
+                                                        </td>
+                                                        <td>                                                          
+                                                                <div class="input-group">
+                                                                    <div class="input-group-addon">
+                                                                        <i class="ti-lock"></i>
+                                                                    </div>
+                                                                    <input type="password" class="form-control" id="password2" name="password2" validateEqual="password1" placeholder="ReEnter password" required [(ngModel)]="signupmodel.password2" #password2="ngModel">
+                                                                </div>
+                                                                <div>
+                                                                    <span *ngIf="f3.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': password2.valid, 'glyphicon-remove' : !password2.valid}" aria-hidden="true"></span>
+                                                                    <div *ngIf="(f3.submitted && !password2.valid) || (password2.invalid && (password2.dirty || password2.touched))" class="text-danger">
+                                                                        <div *ngIf="password2.errors.required">
+                                                                            Confirm password is required.
+                                                                        </div>
+                                                                        <div [hidden]="password2.valid || password2.pristine"
+                                                                             class="text-danger">
+                                                                            Passwords did not match
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+ 
+                                    <div class="actions clearfix">
+                                        <ul role="menu" aria-label="Pagination">
+                                            <li aria-hidden="false" aria-disabled="false">
+                                                <button class="btn btn-primary btn-small btn-block waves-effect waves-light" type="button" (click)="ShowPage(2)">Previous</button>
+                                            </li>
+                                            <li aria-hidden="false" aria-disabled="false">
+                                                <button class="btn btn-primary btn-small btn-block waves-effect waves-light" type="submit">Next</button>
+                                            </li>
+                                            <li aria-hidden="false" aria-disabled="false">
+                                                <span *ngIf="!isSubscribeFinished"><button class="btn btn-primary btn-small btn-block waves-effect waves-light" type="button" (click)="login()">Cancel</button></span>
+</li>
+                                        </ul>
+                                    </div>
+                                </form>
+                            </section>
+                            </div>
+                            <!-- Step 4 -->
+                        <div id="stepsDiv4" *ngIf="showPage4">
+                            <section id="steps-uid-0-p-3" role="tabpanel" aria-labelledby="steps-uid-0-h-3" class="body" aria-hidden="false" >
+                                <form (ngSubmit)="ShowPage(99)" class="tab-wizard wizard-circle wizard clearfix" role="application" id="formSigup4">
+                                       <h4 class="card-title" style="text-align: center">Congratulations!! Your account have been created.</h4>
+                                    <h6 class="card-subtitle" style="text-align: center">Click the login button to signin to your account.</h6>
+
+                                        <div class="card text-center" style="width:100%">
+                                            <div class="card-body">
+                                                <div class="card-text">
+                                                    <table class="table table-bordered">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="text-align:right">
+                                                                    <label class="col-sm-10">Company Administrator Username</label>
+                                                                </td>
+                                                                <td style="text-align:left" class="text-blue">
+                                                                    {{ signupmodel.username }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align:right">
+                                                                    <label class="col-sm-10">First Name</label>
+                                                                </td>
+                                                                <td style="text-align:left" class="text-blue">
+                                                                    {{ signupmodel.firstname }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align:right">
+                                                                    <label class="col-sm-10">Last Name</label>
+                                                                </td>
+                                                                <td style="text-align:left" class="text-blue">
+                                                                    {{ signupmodel.lastname }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align:right">
+                                                                    <label class="col-sm-10">Company</label>
+                                                                </td>
+                                                                <td style="text-align:left" class="text-blue">
+                                                                    {{ signupmodel.company }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align:right">
+                                                                    <label class="col-sm-10">Subscription Type</label>
+                                                                </td>
+                                                                <td style="text-align:left" class="text-blue">
+                                                                    {{ selectedSubText }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align:right">
+                                                                    <label class="col-sm-10">Subscription ID</label>
+                                                                </td>
+                                                                <td style="text-align:left" class="text-blue">
+                                                                    {{ subsmodel.id }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align:right">
+                                                                    <label class="col-sm-10">Subscription Start Date</label>
+                                                                </td>
+                                                                <td style="text-align:left" class="text-blue">
+                                                                    {{ subsmodel.startDate }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align:right">
+                                                                    <label class="col-sm-10">Subscription End Date</label>
+                                                                </td>
+                                                                <td style="text-align:left" class="text-blue">
+                                                                    {{ subsmodel.endDate }}
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                               </div>
+                                            </div>
+                                        </div>
+                                    
+                                    <div class="actions clearfix">
+                                        <ul role="menu" aria-label="Pagination">
+                                            <li aria-hidden="false" aria-disabled="false">
+                                                <button class="btn btn-primary btn-small btn-block waves-effect waves-light" type="submit" (click)="login()">Login</button></li>
+                                        </ul>
+                                    </div>
+                                </form>
+                            </section>
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>

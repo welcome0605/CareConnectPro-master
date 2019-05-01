@@ -1,0 +1,9 @@
+﻿.topbar .navbar-header {
+    background-color: transparent;
+}
+
+
+.topbar .top-navbar .navbar-header .navbar-brand .light-logo
+{
+    display: inline-block;
+}

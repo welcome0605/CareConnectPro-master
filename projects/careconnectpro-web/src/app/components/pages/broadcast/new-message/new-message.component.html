@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="row">
+        <div class="col-md-12" *ngIf="messageAlert !== ''">
+          <div class="alert alert-danger"><img [src]="getEmployeeImage(messageDetail.senderId)" width="30" class="img-circle" alt="img">
+            {{messageAlert}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                    (click)="onCloseAlert()"><span aria-hidden="true">×</span></button>
+          </div>
+        </div>
+        <div class="col-xlg-12 col-md-12">
+          <div class="card-body" *ngIf="!isSubmitted">
+            <h3 class="card-title">Compose Broadcast Message</h3>
+            <form [formGroup]="form" (ngSubmit)="onSendMessage()">
+              <div class="form-group">
+                <input class="form-control" placeholder="Message title" formControlName="messageTitle">
+              </div>
+              <div class="form-group">
+                <angular-editor [formControl]="form.controls['content']"
+                                [config]="editorConfig"></angular-editor>
+              </div>
+              <button type="submit" class="btn btn-success m-t-20" [disabled]="!form.valid"><i
+                class="fa fa-envelope-o"></i> Send
+              </button>
+              <button type="reset" class="btn btn-inverse m-t-20 m-r-5"><i class="fa fa-times"></i> Discard
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

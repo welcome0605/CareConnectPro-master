@@ -1,0 +1,381 @@
+﻿<div class="card">
+    <div [ngClass]="'card-title ' + localStore.getActiveTheme()">
+        <h5><i class="fa fa-edit"></i> {{ step2title }}</h5>
+    </div>
+    <div class="card-body card-zero-top-padding">
+        <div class="row">
+            <div class="col-md">
+                <ho2-stepper [steps]="steps"></ho2-stepper>
+            </div>
+        </div>
+
+        <div *ngIf="currentSubStep==1">
+            <form novalidate="" #f1="ngForm" (ngSubmit)="((f1.form.valid) && (selectedSubPkg.id !== undefined))? submitStep1(): ''" class="m-t-40 tab-wizard wizard-circle wizard clearfix" role="application" id="formSigup2">
+                <div class="row" *ngFor="let pkg of subPkgDesc">
+                    <div class="col-md floating-labels" style="padding-left: 30%;">
+                        <div class="demo-radio-button">
+                            <input name="group3" type="radio" [id]="pkg.id" [(ngModel)]="selectedSubPkg.id" [checked]="idx === 0" [value]="pkg.pkgpriceid" >
+                            <label [for]="pkg.id">{{ pkg.description }}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-md" style="padding-left: 30%;">
+                        <div *ngIf="(f1.submitted && selectedSubPkg.id === undefined)" class="text-danger app-form-validation-error">
+                            Select a subscription package
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md" style="text-align:right">
+                        <input class="btn btn-info" type="submit" name="Submit" value="Next" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="currentSubStep==2">
+            <form novalidate="" #f2="ngForm" (ngSubmit)="f2.form.valid ? submitStep2(): ''" class="m-t-40 tab-wizard wizard-circle wizard clearfix" role="application" id="formSigup2">
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="firstname" class="app-ho2-form-label">First Name:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels">
+                        <input type="text" pInputText class="form-control" placeholder="Enter card holder first name" name="firstname" id="firstname" required [(ngModel)]="userBilling.firstname" #firstname="ngModel">
+                        <span class="bar"></span>
+                        <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': firstname.valid, 'glyphicon-remove' : !firstname.valid}" aria-hidden="true"></span>
+                        <div *ngIf="(f2.submitted && !firstname.valid) || (firstname.invalid && (firstname.dirty || firstname.touched))" class="text-danger">
+                            <div *ngIf="firstname.errors.required" class="app-form-validation-error">
+                                First Name is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="lastname" class="app-ho2-form-label">Last Name:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels">
+                        <input type="text" pInputText class="form-control" placeholder="Enter card holder last name" name="lastname" id="lastname" required [(ngModel)]="userBilling.lastname" #lastname="ngModel">
+                        <span class="bar"></span>
+                        <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': lastname.valid, 'glyphicon-remove' : !lastname.valid}" aria-hidden="true"></span>
+                        <div *ngIf="(f2.submitted && !lastname.valid) || (lastname.invalid && (lastname.dirty || lastname.touched))" class="text-danger">
+                            <div *ngIf="lastname.errors.required" class="app-form-validation-error">
+                                Last Name is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="billingaddress1" class="app-ho2-form-label">Address 1:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels">
+                        <input type="text" pInputText class="form-control" placeholder="Enter card holder address 1" name="billingaddress1" id="billingaddress1" required [(ngModel)]="userBilling.address1" #billingaddress1="ngModel">
+                        <span class="bar"></span>
+                        <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': billingaddress1.valid, 'glyphicon-remove' : !billingaddress1.valid}" aria-hidden="true"></span>
+                        <div *ngIf="(f2.submitted && !billingaddress1.valid) || (billingaddress1.invalid && (billingaddress1.dirty || billingaddress1.touched))" class="text-danger">
+                            <div *ngIf="billingaddress1.errors.required" class="app-form-validation-error">
+                                Address 1 is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="billingaddress2" class="app-ho2-form-label">Address 2:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels">
+                        <input type="text" pInputText class="form-control" placeholder="Enter card holder address 2" name="billingaddress2" id="billingaddress2" [(ngModel)]="userBilling.address2" #billingaddress2="ngModel">
+                        <span class="bar"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="billingcity" class="app-ho2-form-label">City:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels">
+                        <input type="text" pInputText class="form-control" placeholder="Enter billing city" name="billingcity" id="billingcity" required [(ngModel)]="userBilling.city" #billingcity="ngModel">
+                        <span class="bar"></span>
+                        <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': billingcity.valid, 'glyphicon-remove' : !billingcity.valid}" aria-hidden="true"></span>
+                        <div *ngIf="(f2.submitted && !billingcity.valid) || (billingcity.invalid && (billingcity.dirty || billingcity.touched))" class="text-danger">
+                            <div *ngIf="billingcity.errors.required" class="app-form-validation-error">
+                                City is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="billingzipcode" class="app-ho2-form-label">Zip Code:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels">
+                        <input type="text" pInputText class="form-control" placeholder="Enter billing zip or post code" name="billingzipcode" id="billingzipcode" required [(ngModel)]="userBilling.zipCode" #billingzipcode="ngModel">
+                        <span class="bar"></span>
+                        <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': billingzipcode.valid, 'glyphicon-remove' : !billingzipcode.valid}" aria-hidden="true"></span>
+                        <div *ngIf="(f2.submitted && !billingzipcode.valid) || (billingzipcode.invalid && (billingzipcode.dirty || billingzipcode.touched))" class="text-danger">
+                            <div *ngIf="billingzipcode.errors.required" class="app-form-validation-error">
+                                Zip Code is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="billingstate" class="app-ho2-form-label">State:</label>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4" style="text-align:left;padding-left:0px;">
+                        <div class="floating-labels" style="padding-left: 15px;">
+                            <select class="form-control" name='billingstate' id='billingstate' [(ngModel)]="userBilling.state" required #billingstate="ngModel">
+                                <option value=''>Enter State</option>
+                                <option *ngFor="let state of states" [value]="state.id">{{ state.value }}</option>
+                            </select>
+                            <span *ngIf="f2.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': billingstate.valid, 'glyphicon-remove' : !billingstate.valid}" aria-hidden="true"></span>
+                            <div *ngIf="(f2.submitted && !billingstate.valid) || (billingstate.invalid && (billingstate.dirty || billingstate.touched))" class="text-danger">
+                                <div *ngIf="billingstate.errors.required" class="app-form-validation-error">
+                                    State is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md" style="text-align:right">
+                        <input class="btn btn-info" type="button" name="Back" value="Back" (click)="goBack()" />
+                        &nbsp;&nbsp;
+                        <input class="btn btn-info" type="submit" name="Submit" value="Next" />
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div *ngIf="currentSubStep==3">
+            <form novalidate="" #f3="ngForm" (ngSubmit)="((f3.form.valid) && (paymodel.storecard !== undefined)) ? submitCreditPayment(): ''" class="m-t-40 tab-wizard wizard-circle wizard clearfix" role="application" id="formSigup2">
+                <div class="row justify-content-center">
+                    <div class="col-md-5 max-width-280">
+                      <img class="img-fluid" [src]="cccardImg1" alt="not found">
+                    </div>
+                    <div class="col-md-5 max-width-280">
+                        <img class="img-fluid" [src]="cccardImg2" alt="not found">
+                      </div>
+                  </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="cardtype" class="app-ho2-form-label">Credit Card Type:</label>
+                    </div>
+                    <div class="col-md-7 col-md-offset-4" style="text-align:left;padding-left:0px;">
+                        <div class="floating-labels" style="padding-left: 15px;">
+                            <select class="form-control" name='cardtype' id='cardtype' [(ngModel)]="paymodel.cardtype" required #cardtype="ngModel">
+                                <option value=''>Enter Card Types</option>
+                                <option *ngFor="let card of ccardTypes" [value]="card.id">{{ card.value }}</option>
+                            </select>
+                            <span *ngIf="f3.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': cardtype.valid, 'glyphicon-remove' : !cardtype.valid}" aria-hidden="true"></span>
+                            <div *ngIf="(f3.submitted && !cardtype.valid) || (cardtype.invalid && (cardtype.dirty || cardtype.touched))" class="text-danger">
+                                <div *ngIf="cardtype.errors.required" class="app-form-validation-error">
+                                    Card Type is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="cardnumber" class="app-ho2-form-label">Credit Card Number:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels">
+                        <input type="text" pInputText class="form-control" placeholder="" data-mask="9999-9999-9999-9999" name="cardnumber" id="cardnumber" required [(ngModel)]="paymodel.cardnumber" #cardnumber="ngModel">
+                        <span class="bar"></span>
+                        <span *ngIf="f3.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': cardnumber.valid, 'glyphicon-remove' : !cardnumber.valid}" aria-hidden="true"></span>
+                        <div *ngIf="(f3.submitted && !cardnumber.valid) || (cardnumber.invalid && (cardnumber.dirty || cardnumber.touched))" class="text-danger">
+                            <div *ngIf="cardnumber.errors.required" class="app-form-validation-error">
+                                Credit Card number is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="expdate" class="app-ho2-form-label">Expiration Date:</label>
+                    </div>
+                    <div class="col-md-4 col-md-offset-4" style="text-align:left;padding-left:0px;max-width:150px">
+                        <div class="floating-labels" style="padding-left: 15px;">
+                            <select class="form-control" name='expireMM' id='expireMM' [(ngModel)]="paymodel.expmonth" required #expireMM="ngModel">
+                                <option value=''>Enter Month</option>
+                                <option value='01'>01</option>
+                                <option value='02'>02</option>
+                                <option value='03'>03</option>
+                                <option value='04'>04</option>
+                                <option value='05'>05</option>
+                                <option value='06'>06</option>
+                                <option value='07'>07</option>
+                                <option value='08'>08</option>
+                                <option value='09'>09</option>
+                                <option value='10'>10</option>
+                                <option value='11'>11</option>
+                                <option value='12'>12</option>
+                            </select>
+                            <span *ngIf="f3.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': expireMM.valid, 'glyphicon-remove' : !expireMM.valid}" aria-hidden="true"></span>
+                            <div *ngIf="(f3.submitted && !expireMM.valid) || (expireMM.invalid && (expireMM.dirty || expireMM.touched))" class="text-danger">
+                                <div *ngIf="expireMM.errors.required" class="app-form-validation-error">
+                                    Credit card expiration month is required
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3 col-md-offset-4" style="text-align:left;padding-left:0px;max-width:150px">
+                        <div class="floating-labels">
+                            <select class="form-control" name='expireYY' id='expireYY' [(ngModel)]="paymodel.expyear" required #expireYY="ngModel">
+                                <option value=''>Enter Year</option>
+                                <option *ngFor="let ccYear of ccYears" [value]="ccYear.id">{{ ccYear.value }}</option>
+                            </select>
+                            <span *ngIf="f3.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': expireYY.valid, 'glyphicon-remove' : !expireYY.valid}" aria-hidden="true"></span>
+                            <div *ngIf="(f3.submitted && !expireYY.valid) || (expireYY.invalid && (expireYY.dirty || expireYY.touched))" class="text-danger">
+                                <div *ngIf="expireYY.errors.required" class="app-form-validation-error">
+                                    Credit card expiration year is required
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="cardcvv" class="app-ho2-form-label">CVV:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels" style="max-height:80px">
+                        <input type="text" pInputText class="form-control" placeholder="Enter credit card CVV" name="cardcvv" id="cardcvv" required [(ngModel)]="paymodel.cardcvv" #cardcvv="ngModel">
+                        <span class="bar"></span>
+                        <span *ngIf="f3.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': cardcvv.valid, 'glyphicon-remove' : !cardcvv.valid}" aria-hidden="true"></span>
+                        <div *ngIf="(f3.submitted && !cardcvv.valid) || (cardcvv.invalid && (cardcvv.dirty || cardcvv.touched))" class="text-danger">
+                            <div *ngIf="cardcvv.errors.required" class="app-form-validation-error">
+                                Credit Card CVV is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label class="app-ho2-form-label">Store credit card on file for future payment?:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels">
+                        <div class="demo-radio-button">
+                            <input name="group2" type="radio" id="storecc0" (change)="onPaymentStoreCard(true)">
+                            <label for="storecc0">Yes</label>
+                            <input name="group2" type="radio" id="storecc1" (change)="onPaymentStoreCard(false)">
+                            <label for="storecc1">No</label>
+                        </div>
+                        <div *ngIf="(f3.submitted && paymodel.storecard === undefined)" class="text-danger app-form-validation-error">
+                            Please select an option
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label for="totmonths" class="app-ho2-form-label">How many months desired?:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels" >
+                        <input type="text" pInputText class="form-control" (change)="calTotalAmount()" placeholder="Enter months" name="totmonths" id="totmonths" required [(ngModel)]="paymodel.totmonths" #totmonths="ngModel">
+                        <span class="bar"></span>
+                        <span *ngIf="f3.submitted" class="glyphicon form-control-feedback" [ngClass]="{'glyphicon-ok ': totmonths.valid, 'glyphicon-remove' : !totmonths.valid}" aria-hidden="true"></span>
+                        <div *ngIf="(f3.submitted && !totmonths.valid) || (totmonths.invalid && (totmonths.dirty || totmonths.touched))" class="text-danger">
+                            <div *ngIf="totmonths.errors.required" class="app-form-validation-error">
+                                Total months is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 app-ho2-form-label">
+                        <label class="app-ho2-form-label">Total Amount:</label>
+                    </div>
+                    <div class="col-md-7 floating-labels" style="padding-top: 10px;">
+                        <h4> <i class="fa fa-dollar text-blue"></i> {{ paymodel.totamount }}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md" style="text-align:right">
+                        <input class="btn btn-info" type="button" name="Back" value="Back" (click)="goBack()" />
+                        &nbsp;&nbsp;
+                        <input class="btn btn-info" type="submit" name="Submit" value="Next" />
+                    </div>
+                </div>
+                <!-- end -->
+            </form>
+        </div>
+
+        <div *ngIf="currentSubStep==4">
+            <div class="row">
+                <div class="col-md">
+                    <p class="card-text">
+                        You payment have been processed successfully.
+                        Please review the information below for the subscription information.
+                        <!--When you are ready, click the next button to create your login information. -->
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 app-ho2-form-label">
+                    <label class="app-ho2-form-label">Payment Status:</label>
+                </div>
+                <div class="col-md-7">
+                    <p class="col-md-12 app-ho2-mt-label">{{ paymodel.paymentstatus }} </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 app-ho2-form-label">
+                    <label class="app-ho2-form-label">Payment Amount:</label>
+                </div>
+                <div class="col-md-7">
+                    <p class="col-md-12 app-ho2-mt-label"><i class="fa fa-dollar"></i>{{ paymodel.totamount }} </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 app-ho2-form-label">
+                    <label class="app-ho2-form-label">Approval Code:</label>
+                </div>
+                <div class="col-md-7">
+                    <p class="col-md-12 app-ho2-mt-label">{{ paymodel.approvalcode }} </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 app-ho2-form-label">
+                    <label class="app-ho2-form-label">Subscription Number:</label>
+                </div>
+                <div class="col-md-7">
+                    <p class="col-md-12 app-ho2-mt-label">{{ companyService.subsmodel.id }} </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 app-ho2-form-label">
+                    <label class="app-ho2-form-label">Start Date:</label>
+                </div>
+                <div class="col-md-7">
+                    <p class="col-md-12 app-ho2-mt-label">{{ companyService.subsmodel.startDate | date }} </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 app-ho2-form-label">
+                    <label class="app-ho2-form-label">Expiration Date:</label>
+                </div>
+                <div class="col-md-7">
+                    <p class="col-md-12 app-ho2-mt-label">{{ companyService.subsmodel.endDate | date }} </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md" style="text-align:right">
+                    <!--<input class="btn btn-info" type="button" name="Back" value="Back" (click)="goBack()" />-->
+                    <!--&nbsp;&nbsp;-->
+                    <input class="btn btn-info" type="button" name="Submit" value="Done" (click)="submitStep4()" />
+                </div>
+            </div>
+            <!-- end -->
+        </div>
+
+    </div>
+</div>
+
+
+
+
+

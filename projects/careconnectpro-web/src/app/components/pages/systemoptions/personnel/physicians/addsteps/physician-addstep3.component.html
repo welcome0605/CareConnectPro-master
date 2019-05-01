@@ -1,0 +1,48 @@
+﻿<form novalidate="" #f2="ngForm" (ngSubmit)="f2.form.valid ? submitForm(): ''" class="m-t-40 tab-wizard wizard-circle wizard clearfix" role="application" id="f1">
+    <div class="row" *ngIf="isNewRecord === false">
+        <div class="col-md-3 app-ho2-form-label">
+        </div>
+        <div class="col-md-8 app-ho2-edit-right">
+            <ho2edithelper activeAction="0" (actionSelected)="editEventSubmit($event)" [saveStatus]="saveStatus"></ho2edithelper>
+        </div>
+    </div>
+       <div class="row">
+        <div class="col-md floating-labels">
+            <div *ngIf="isEditMode">
+                <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+                    <table class="primary-bordered-table">
+                        <tr>
+                            <td colspan="2">
+                                <input style="width:100%;" pInputText class="form-control" name="tempPractice" [(ngModel)]="tempPractice" type="text" size="50" (keyup)="validatePracticeInputText($event)">
+                            </td>
+                            <td>
+                                <button class="btn btn-success" type="button" pButton style="float:left" (click)="savePractice()" [label]="isNewPractice? 'Add':'Update'" [disabled]="disableAddPracticeBtn"></button>
+                            </td>
+                            <td>
+                                <button class="btn btn-success" type="button" pButton style="float:left" (click)="deletePracticeFromDb()" label="Delete" [disabled]="disableDeletePracticeBtn"></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="padding-top:7px">
+                                <p-listbox [options]="physicianService.physicianPracticesSelect" [(ngModel)]="selectedPhysicianPractice" [style]="{'width':'100%','height':'300px','text-align':'left'}" (onChange)="onPracticeSelect()" name="tempServiceList"></p-listbox>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div *ngIf="!isEditMode">
+                <p-listbox [options]="physicianService.physicianPracticesSelect" [style]="{'width':'100%','height':'300px','text-align':'left'}" name="tempServiceList"></p-listbox>
+            </div>
+        </div>
+    </div>  
+    <div class="row" *ngIf="isNewRecord === true">
+        <div class="col-md" style="text-align:right">
+            <input class="btn btn-info" type="button" name="Back" value="Cancel" (click)="cancel()" />
+            &nbsp;&nbsp;
+            <input class="btn btn-info" type="button" name="Back" value="Back" (click)="goToPrev()" />
+            &nbsp;&nbsp;
+            <input class="btn btn-info" type="submit" name="Submit" value="Next" />
+        </div>
+    </div>
+</form>
+

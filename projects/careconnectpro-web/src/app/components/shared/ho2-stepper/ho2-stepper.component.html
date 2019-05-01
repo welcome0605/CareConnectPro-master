@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="container">
+        <div class="row" *ngIf="steps?.length == 4">
+            <div [ngClass]="'col-md-3 ' + getHeaderClass(0)">
+                <h5><i [ngClass]="getStepIconClass(0)"></i> {{ steps[0][0] }}</h5>
+            </div>
+            <div [ngClass]="'col-md-3 ' + getHeaderClass(1)">
+                <h5><i [ngClass]="getStepIconClass(1)"></i> {{ steps[1][0] }}</h5>
+            </div>
+            <div [ngClass]="'col-md-3 ' + getHeaderClass(2)">
+                <h5><i [ngClass]="getStepIconClass(2)"></i> {{ steps[2][0] }}</h5>
+            </div>
+            <div [ngClass]="'col-md-3 ' + getHeaderClass(3)">
+                <h5><i [ngClass]="getStepIconClass(3)"></i> {{ steps[3][0] }}</h5>
+            </div>
+        </div>
+    </div>
+    <!--<div class="card-body" *ngIf="!isCollapse">
+        <ng-container *ngTemplateOutlet="body">
+        </ng-container>
+    </div>-->
+</div>

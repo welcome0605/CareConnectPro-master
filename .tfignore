@@ -1,0 +1,6 @@
+# This rule ignores files with the .txt extension
+*.*
+\node_modules
+\dist
+\tmp
+\out-tsc
