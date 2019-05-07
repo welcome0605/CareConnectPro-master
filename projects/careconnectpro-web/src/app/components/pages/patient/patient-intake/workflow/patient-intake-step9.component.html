@@ -1,4 +1,12 @@
-﻿<div class="card-body" [ngSwitch]="step9SubStep">
+﻿<div class="row justify-content-center" *ngIf="isNewRecord === false">
+    <div class="col-md-3 app-ho2-form-label">
+    </div>
+    <div class="col-md-8 app-ho2-edit-right">
+        <ho2edithelper activeAction="0" showDelete="false" (actionSelected)="editEventSubmit($event)" [saveStatus]="saveStatus"></ho2edithelper>
+    </div>
+</div>
+
+<div class="card-body" [ngSwitch]="step9SubStep">
     <div *ngSwitchCase="1">
         <div class="container">
             <div class="row">

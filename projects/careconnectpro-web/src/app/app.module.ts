@@ -41,7 +41,7 @@ import { SignupModule } from "./components/shared/signup/signup.module";
 import { ModalComponent } from "./common/modal.component";
 
 //services sections
-import { AppMessageService } from "../../../service-lib/src/lib/services/app-message.service";
+import { AuthGuard, AppMessageService } from "service-lib";
 
 //directives
 import { EqualValidator } from "./directives/password.match.directive";

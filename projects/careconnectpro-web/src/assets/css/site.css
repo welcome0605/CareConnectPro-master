@@ -78,7 +78,7 @@
     color: #252627;
 }
 
-.ui-datatable tbody > tr.ui-widget-content.ui-datatable-odd {
+.ui-datatable tbody > tr.ui-widget-content.ui-datatable {
     background-color: #ffffff;
 }
 

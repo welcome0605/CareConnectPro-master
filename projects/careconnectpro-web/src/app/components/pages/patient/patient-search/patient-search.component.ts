@@ -31,7 +31,8 @@ import { takeUntil } from "rxjs/operators";
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: "patient-search",
-  templateUrl: "./patient-search.component.html"
+  templateUrl: "./patient-search.component.html",
+  styleUrls: ["./patient-search.component.css"]
 })
 export class PatientSearchComponent extends BaseComponent
   implements OnInit, AfterViewInit {
@@ -50,7 +51,8 @@ export class PatientSearchComponent extends BaseComponent
   userSession: UserSession = {};
   patients: PatientHeader[] = [];
   imguser1: any;
-
+  tabView: number = 1;
+  tabRef: any;
   /**
    * Method - Default constructor
    * @param dataService
@@ -95,6 +97,12 @@ export class PatientSearchComponent extends BaseComponent
   /**
    * Method - Get logged in user data
    */
+  public Showtile() {
+    this.tabView = 1;
+  }
+  public Showlist() {
+    this.tabView = 2;
+  }
   getLoggedInUserInfo() {
     this.authService.userSessionSubject
       .pipe(takeUntil(this.destroy$))

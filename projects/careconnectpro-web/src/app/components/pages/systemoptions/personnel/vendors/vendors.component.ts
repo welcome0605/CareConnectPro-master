@@ -23,7 +23,8 @@ import { SelectItem } from "primeng/api";
 
 @Component({
   selector: "app-vendor",
-  templateUrl: "./vendors.component.html"
+  templateUrl: "./vendors.component.html",
+  styleUrls: ["./vendors.component.css"]
 })
 export class OrgVendorComponent implements OnInit {
   vendors: Vendor[];
@@ -54,6 +55,8 @@ export class OrgVendorComponent implements OnInit {
   userSession: UserSession = {};
 
   type = "vendor";
+  tabView: number = 1;
+  tabRef: any;
   constructor(
     public authService: AuthService,
     public router: Router,
@@ -74,7 +77,12 @@ export class OrgVendorComponent implements OnInit {
     this.populateViewType();
     this.vendorService.vendor.isActive = true;
   }
-
+  public Showtile() {
+    this.tabView = 1;
+  }
+  public Showlist() {
+    this.tabView = 2;
+  }
   private populateViewType() {
     let x: string[] = ["All", "Active Vendors", "InActive Vendors"];
     this.viewType = [

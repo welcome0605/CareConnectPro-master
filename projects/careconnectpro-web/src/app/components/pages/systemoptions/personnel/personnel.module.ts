@@ -45,6 +45,7 @@ import {
   ListboxModule
 } from "primeng/primeng";
 
+import { DisplayTileModule } from "../../display-tile/display-tile.module";
 import { DisplayListModule } from "../../display-list/display-list.module";
 
 @NgModule({
@@ -68,6 +69,7 @@ import { DisplayListModule } from "../../display-list/display-list.module";
     InputTextareaModule,
     Ho2NgModule,
     AppPrimeNGModule,
+    DisplayTileModule,
     DisplayListModule,
     Ng2SearchPipeModule
   ],

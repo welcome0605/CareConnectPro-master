@@ -33,7 +33,8 @@ import { SelectItem } from "primeng/api";
 
 @Component({
   selector: "app-employee",
-  templateUrl: "./employees.component.html"
+  templateUrl: "./employees.component.html",
+  styleUrls: ["./employees.component.css"]
 })
 export class OrgEmployeesComponent implements OnInit {
   employees: EmployeeSummary[] = [];
@@ -98,7 +99,8 @@ export class OrgEmployeesComponent implements OnInit {
   imguser1: any;
   type = "emp";
   userSession: UserSession = {};
-
+  tabView: number = 1;
+  tabRef: any;
   constructor(
     public authService: AuthService,
     public router: Router,
@@ -123,7 +125,53 @@ export class OrgEmployeesComponent implements OnInit {
     this.populateViewType();
     this.employeeService.employee.isActive = true;
   }
-
+  public Showtile() {
+    this.tabView = 1;
+    // var d = document.getElementById("li2");
+    // d.className += "";
+    
+    var d = document.getElementById("li1");
+    d.style.backgroundColor = '#007ad9';
+    var d = document.getElementById("li2");
+    d.style.backgroundColor = 'darkgrey';
+    // d.className += "active";
+    
+  }
+  public Showlist() {
+    this.tabView = 2;
+    // var d = document.getElementById("li1");
+    // d.className += "";
+    var d = document.getElementById("li2");
+    d.style.backgroundColor = '#007ad9';
+    var d = document.getElementById("li1");
+    d.style.backgroundColor = 'darkgrey';
+    // d.className += "active";
+  }
+  // parseUrlQuery() {
+  //   this.activeRoute.params.subscribe(parms => {
+  //     this.tabRef = parms["ref"];
+  //     if (this.tabRef != null && this.tabRef != undefined) {
+  //       switch (this.tabRef) {
+  //         case "1": {
+  //           this.tabView = 1;
+  //           break;
+  //         }
+  //         case "2": {
+  //           this.tabView = 2;
+  //           break;
+  //         }
+  //         case "3": {
+  //           this.tabView = 3;
+  //           break;
+  //         }
+  //         default: {
+  //           this.tabView = 1;
+  //           break;
+  //         }
+  //       }
+  //     }
+  //   });
+  // }
   populateViewType() {
     let x: string[] = ["All", "Active Employees", "InActive Employees"];
     this.viewType = [

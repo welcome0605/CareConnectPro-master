@@ -37,6 +37,7 @@ import {
   CheckboxModule
 } from "primeng/primeng";
 import { DisplayListModule } from "../display-list/display-list.module";
+import { DisplayTileModule } from "../display-tile/display-tile.module";
 import { Ng2SearchPipeModule } from "ng2-search-filter";
 
 @NgModule({
@@ -61,6 +62,7 @@ import { Ng2SearchPipeModule } from "ng2-search-filter";
     Ho2NgModule,
     PatientMainRoutingModule,
     DisplayListModule,
+    DisplayTileModule,
     Ng2SearchPipeModule
   ],
   declarations: [

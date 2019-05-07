@@ -207,6 +207,7 @@ export class OrgMainComponent extends BaseComponent implements OnInit {
           let x: Department[] = data;
           if (x.length > 0) {
             this.companyDepartments = x;
+            console.log(this.companyDepartments);
           }
         },
         (error: any) => {

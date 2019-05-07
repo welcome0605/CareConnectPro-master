@@ -17,11 +17,32 @@
                                     </select>
                             </div>
                     </div>
+                    <div>
+                        <div class="card">
+                          <!-- Nav tabs -->
+                            <ul class="nav tile_list">
+                                <li class="nav-item_tile"> <a data-toggle="tab" href="#tile" role="tab" (click)="Showtile()">Tile</a> </li>
+                                <li class="nav-item_list"> <a data-toggle="tab" href="#list" role="tab" (click)="Showlist()">List</a> </li>
+                            </ul>
+                        </div>
+                    </div>
             </div>
     </form>
-    <app-display-list [list]="patients|filter:term" [imguser1]="imguser1" [type]="type">
+    <!-- <app-display-tile [list]="patients|filter:term" [imguser1]="imguser1" [type]="type">
 
-    </app-display-list>
+    </app-display-tile> -->
+    <div class="tab-content">
+        <div class="row" *ngIf="tabView==1">
+            <app-display-tile [list] ="patients |filter:term" [imguser1]="imguser1" [type]="type">
+
+            </app-display-tile>
+        </div>
+        <div class="row" *ngIf="tabView==2">
+            <app-display-list [lists] ="patients |filter:term" [imguser1]="imguser1" [type]="type"  style="width:100%">
+
+            </app-display-list>
+        </div>
+    </div>
 
     <button class="btn btn-success ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left"
             (click)="startPatientIntake()" label="Patient InTake" icon="fa-plus" label="Add Employee" pbutton=""

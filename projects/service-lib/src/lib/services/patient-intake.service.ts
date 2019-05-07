@@ -362,7 +362,10 @@ export class PatientInTakeService extends BaseMethod {
       this.patient.contacts.push({
         id: "",
         contactTypeId: _contactType,
-        value: val
+        value: val,
+        dateCreated: this.patient.dateCreated,
+        lastUpdatedDate: this.patient.lastUpdatedDate,
+        lastUpdatedUserId: this.patient.lastUpdatedUserId
       });
     }
   }
@@ -509,7 +512,10 @@ export class PatientInTakeService extends BaseMethod {
         value: val,
         issueAuthority: "",
         issueDate: new Date(),
-        memo: ""
+        memo: "",
+        dateCreated: this.patient.dateCreated,
+        lastUpdatedDate: this.patient.lastUpdatedDate,
+        lastUpdatedUserId: this.patient.lastUpdatedUserId
       });
     }
   }

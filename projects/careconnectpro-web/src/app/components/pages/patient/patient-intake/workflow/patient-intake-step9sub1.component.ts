@@ -6,7 +6,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  ViewChild
+  ViewChild,
+  SimpleChanges
 } from "@angular/core";
 import {
   CareConnectLocalStorage,
@@ -40,6 +41,7 @@ import {
 import { SelectItem } from "primeng/api";
 import { Router } from "@angular/router";
 import { Checkbox } from "primeng/primeng";
+import { Subject } from 'rxjs';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -55,7 +57,7 @@ export class PatientInTakeStep9Sub1Component implements OnInit, AfterViewInit {
   displayUserSetting: boolean = false;
   displayUserAlerts: boolean = false;
   @Input() isNewRecord?: boolean;
-  @Input() updateStatus?: boolean;
+  @Input() updateStatus?: Subject<boolean> = new Subject<boolean>();
   @Input() patientHealthConditions: PatientHealthCondition[];
   @Output() step5Status: EventEmitter<EditHelperUserAction> = new EventEmitter<
     EditHelperUserAction
@@ -111,7 +113,11 @@ export class PatientInTakeStep9Sub1Component implements OnInit, AfterViewInit {
       this.isEditMode = false;
     }
     this.icdSearchTypeSelect = this.codesService.getIcdSearchTypeSelect();
+    this.updateStatus.subscribe(data => {
+      this.isEditMode = false;
+    });
   }
+
 
   ngAfterViewInit() {
     this.spinnerService.hide();

@@ -22,7 +22,7 @@ import {
   styleUrls: ["./display-list.component.css"]
 })
 export class DisplayListComponent implements OnInit {
-  @Input() list;
+  @Input() lists;
   @Input() imguser1;
   @Input() type;
 
@@ -98,14 +98,12 @@ export class DisplayListComponent implements OnInit {
   }
 
   onRowSelectPhysician(l) {
-    console.log("onRowSelectPhysician");
     this.physicianService.isNewPhysician = false;
     this.physicianService.physician = this.clonePhysician(l);
     this.router.navigate(["/home/personnel/physician/detail"]);
   }
 
   private clonePhysician(a: Physician): Physician {
-    console.log("clonePh");
     let physician: Physician = {};
     let y: any = a;
     for (let prop in a) {
@@ -137,5 +135,3 @@ export class DisplayListComponent implements OnInit {
     this.router.navigate(["/home/patient/detail"]);
   }
 }
-
-// 

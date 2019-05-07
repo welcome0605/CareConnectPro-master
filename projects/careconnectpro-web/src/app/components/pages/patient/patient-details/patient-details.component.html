@@ -57,7 +57,7 @@
         <div class="col-md-12">
             <ho2-accordion titleName="Doctor Orders and Medication Therapies" [titleClassName]="localStore.getThemeBackground()">
                 <ng-template #body>
-                    <patient-intake-step9 (step7Status)="handleStep7($event)" (goBack)="goBack($event)" [isNewRecord]="false" [updateStatus]="saveStatus7"></patient-intake-step9>
+                    <patient-intake-step9 (step9Status)="handleStep9($event)" (goBack)="goBack($event)" [isNewRecord]="false" [updateStatus]="saveStatus9"></patient-intake-step9>
                 </ng-template>
             </ho2-accordion>
         </div>

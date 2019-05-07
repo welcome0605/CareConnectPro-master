@@ -6,7 +6,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  ViewChild
+  ViewChild,
+  SimpleChanges
 } from "@angular/core";
 import {
   CareConnectLocalStorage,
@@ -38,6 +39,7 @@ import { SelectItem } from "primeng/api";
 import { Router } from "@angular/router";
 import { BaseComponent } from "../../../../shared/core";
 import { takeUntil } from "rxjs/operators";
+import { Subject } from 'rxjs';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -54,7 +56,7 @@ export class PatientInTakeStep5Component extends BaseComponent
   displayUserSetting: boolean = false;
   displayUserAlerts: boolean = false;
   @Input() isNewRecord?: boolean;
-  @Input() updateStatus?: boolean;
+  @Input() updateStatus?: Subject<boolean> = new Subject<boolean>();
   @Output() step5Status: EventEmitter<EditHelperUserAction> = new EventEmitter<
     EditHelperUserAction
   >();
@@ -112,6 +114,10 @@ export class PatientInTakeStep5Component extends BaseComponent
         this.getPatient();
         this.getPatientCompany();
       });
+
+      this.updateStatus.subscribe(data => {
+        this.isEditMode = false;
+      });
     this.getPatient();
     this.populateStateDropDown();
     this.getPatientCompany();
@@ -137,6 +143,7 @@ export class PatientInTakeStep5Component extends BaseComponent
       this.employerWorkPhone = this.getContact(ContactType.workPhone).value;
     }
   }
+
   /**
    * Method - Get referral employer contact information
    *

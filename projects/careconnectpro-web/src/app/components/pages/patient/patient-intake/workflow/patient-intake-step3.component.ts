@@ -6,7 +6,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  ViewChild
+  ViewChild,
+  SimpleChanges
 } from "@angular/core";
 import {
   ProgressSpinnerService,
@@ -36,6 +37,7 @@ import { SelectItem } from "primeng/api";
 import { Router } from "@angular/router";
 import { BaseComponent } from "../../../../shared/core";
 import { takeUntil } from "rxjs/operators";
+import { Subject } from 'rxjs';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -51,7 +53,7 @@ export class PatientInTakeStep3Component extends BaseComponent
   displayUserSetting: boolean = false;
   displayUserAlerts: boolean = false;
   @Input() isNewRecord?: boolean;
-  @Input() updateStatus?: boolean;
+  @Input() updateStatus?: Subject<boolean> = new Subject<boolean>();
   @Output() step3Status: EventEmitter<EditHelperUserAction> = new EventEmitter<
     EditHelperUserAction
   >();
@@ -113,13 +115,19 @@ export class PatientInTakeStep3Component extends BaseComponent
       .subscribe(data => {
         this.getPatientRelative();
       });
+
+      this.updateStatus.subscribe(data => {
+        this.isEditMode = false;
+      });
+
     this.getPrefixCodes();
     this.getSuffixCodes();
     this.getSupplementaryCodes();
     this.getPatientRelative();
   }
 
-  /**
+
+   /**
    * Method - Retrieve relationship codes and others
    */
   getSupplementaryCodes() {

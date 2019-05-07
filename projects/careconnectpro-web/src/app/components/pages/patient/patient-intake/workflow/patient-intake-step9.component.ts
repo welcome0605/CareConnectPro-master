@@ -6,7 +6,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  ViewChild
+  ViewChild,
+  SimpleChanges
 } from "@angular/core";
 import {
   CareConnectLocalStorage,
@@ -36,6 +37,7 @@ import { SelectItem } from "primeng/api";
 import { Router } from "@angular/router";
 import { BaseComponent } from "../../../../shared/core";
 import { takeUntil } from "rxjs/operators";
+import { Subject } from 'rxjs';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -52,7 +54,7 @@ export class PatientInTakeStep9Component extends BaseComponent
   displayUserSetting: boolean = false;
   displayUserAlerts: boolean = false;
   @Input() isNewRecord?: boolean;
-  @Input() updateStatus?: boolean;
+  @Input() updateStatus?: Subject<boolean> = new Subject<boolean>();
   @Output() step9Status: EventEmitter<EditHelperUserAction> = new EventEmitter<
     EditHelperUserAction
   >();
@@ -106,6 +108,9 @@ export class PatientInTakeStep9Component extends BaseComponent
     } else {
       this.isEditMode = false;
     }
+    this.updateStatus.subscribe(data => {
+      this.isEditMode = false;
+    });
     this.healthConditionsSelect = this.codesService.getHealthConditionsSelect();
   }
 
@@ -194,11 +199,12 @@ export class PatientInTakeStep9Component extends BaseComponent
       }
       case 4: //update and save clicked
       case 2: {
-        this.f2.ngSubmit.emit();
-        if (this.f2.form.valid === false) {
-          this.saveStatus.emit(false);
-          this.isEditMode = true;
-        }
+        this.submitForm();
+        // this.f2.ngSubmit.emit();
+        // if (this.f2.form.valid === false) {
+        //   this.saveStatus.emit(false);
+        //   this.isEditMode = true;
+        // }
         break;
       }
       case 3: {

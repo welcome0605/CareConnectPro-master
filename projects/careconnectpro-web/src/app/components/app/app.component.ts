@@ -7,7 +7,7 @@ import {
   QueryList
 } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { AuthService } from "../../../../../service-lib/src/lib/services/auth.service";
+import { AuthService } from "service-lib";
 import { Router } from "@angular/router";
 
 @Component({

@@ -1,0 +1,81 @@
+<div class="col-lg-12">
+  <section class="box ">
+
+    <div class="content-body">
+
+        <div *ngIf="type === 'emp'">
+          <div class="row" >
+            <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let l of list" >
+              <div class="team-member" >
+                <div class="team-img enable-link" (click)="onRowSelectEmployee(l)">
+                  <img class="img-responsive team-img-size" [src]="getEmployeeImg(l.photoName)" alt="">
+                </div>
+                <div class="team-info enable-link">
+                  <h4><a (click)="onRowSelectEmployee(l)">{{l.firstName}} {{l.lastName}}</a></h4>
+                  <span class='team-member-edit'><a (click)="onRowSelectEmployee(l)"><i
+                        class='fa fa-pencil icon-xs'></i> </a>
+                  </span>
+                  <span>Occupation: {{l.jobTitle}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div  *ngIf="type === 'physician'">
+              <div class="row">
+                <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let l of list">
+                    <div class="team-member enable-link" (click) ="onRowSelectPhysician(l)">
+                      <div class="team-img">
+                        <img class="img-responsive team-img-size" [src]="getPhysicianImg(l.photoName)" alt="">
+                      </div>
+                      <div class="team-info enable-link">
+                        <h4><a (click) ="onRowSelectPhysician(l)">{{l.firstName}} {{l.lastName}}</a></h4>
+                        <span class='team-member-edit'><a (click) ="onRowSelectPhysician(l)"><i
+                              class='fa fa-pencil icon-xs'></i></a></span>
+                        <span>Occupation: {{l.jobTitle}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+
+
+          <div *ngIf="type === 'vendor'">
+            <div class="row" >
+              <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let l of list">
+                  <div class="team-member enable-link" (click)="onRowSelectVendor(l)">
+                    <div class="team-img" >
+                      <img class="img-responsive team-img-size" [src]="getVendorImg(l.photoName)" alt="">
+                      </div>
+                    <div class="team-info enable-link">
+                      <h4><a (click)="onRowSelectVendor(l)">{{l.contactFirstName}} {{l.contactLastName}}</a></h4>
+                      <span class='team-member-edit'><a (click)="onRowSelectVendor(l)"><i
+                            class='fa fa-pencil icon-xs'></i></a></span>
+                      <span>Company: {{l.companyName}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="type === 'patient'">
+              <div class="row" >
+                  <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let l of list">
+                      <div class="team-member " >
+                        <div class="team-img enable-link" (click)="onRowSelectPatient(l)">
+                          <img class="img-responsive team-img-size" [src]="getPatientImg(l.photoName)" alt="">
+                          </div>
+                        <div class="team-info enable-link">
+                          <h4><a (click)="onRowSelectPatient(l)">{{l.firstName}} {{l.lastName}}</a></h4>
+                          <span class='team-member-edit'><a (click)="onRowSelectPatient(l)"><i
+                                class='fa fa-pencil icon-xs'></i></a></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+
+    </div>
+  </section>
+
+</div>

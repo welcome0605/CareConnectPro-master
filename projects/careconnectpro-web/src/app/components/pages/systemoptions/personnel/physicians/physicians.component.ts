@@ -23,7 +23,8 @@ import { SelectItem } from "primeng/api";
 
 @Component({
   selector: "app-physician",
-  templateUrl: "./physicians.component.html"
+  templateUrl: "./physicians.component.html",
+  styleUrls: ["./physicians.component.css"]
 })
 export class OrgPhysicianComponent implements OnInit {
   physicians: Physician[];
@@ -56,7 +57,8 @@ export class OrgPhysicianComponent implements OnInit {
   imguser1: any;
   type = "physician";
   userSession: UserSession = {};
-
+  tabView: number = 1;
+  tabRef: any;
   constructor(
     public authService: AuthService,
     public router: Router,
@@ -77,7 +79,13 @@ export class OrgPhysicianComponent implements OnInit {
     this.populateViewType();
     this.physicianService.physician.isActive = true;
   }
-
+  public Showtile() {
+    this.tabView = 1;
+  }
+  public Showlist() {
+    // alert("sdf")
+    this.tabView = 2;
+  }
   private populateViewType() {
     let x: string[] = ["All", "Active Physicians", "InActive Physicians"];
     this.viewType = [

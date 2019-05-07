@@ -1,5 +1,5 @@
 import { Routes, RouterModule } from "@angular/router";
-import { AuthGuard } from "../../../../../../service-lib/src/lib/services/auth-guard.service";
+import { AuthGuard } from "service-lib";
 import { ListingComponent } from "./listing/listing.component";
 import { NewMessageComponent } from "./new-message/new-message.component";
 import { DetailComponent } from "./detail/detail.component";

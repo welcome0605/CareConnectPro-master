@@ -20,10 +20,12 @@ import {
   Patient,
   APIUrls,
   Message,
-  UserSession
+  UserSession,
+  Address
 } from "model-lib";
 import { BaseComponent } from "../../../shared/core";
 import { takeUntil } from "rxjs/operators";
+import { Subject } from 'rxjs';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -38,13 +40,14 @@ export class PatientDetailsComponent extends BaseComponent
   displayUserSetting: boolean = false;
   displayUserAlerts: boolean = false;
 
-  saveStatus1: boolean = false;
-  saveStatus2: boolean = false;
-  saveStatus3: boolean = false;
-  saveStatus4: boolean = false;
-  saveStatus5: boolean = false;
-  saveStatus6: boolean = false;
-  saveStatus7: boolean = false;
+  //saveStatus1: boolean = false;
+  saveStatus1: Subject<boolean> = new Subject<boolean>();
+  saveStatus2: Subject<boolean> = new Subject<boolean>();
+  saveStatus3: Subject<boolean> = new Subject<boolean>();
+  saveStatus4: Subject<boolean> = new Subject<boolean>();
+  saveStatus5: Subject<boolean> = new Subject<boolean>();
+  saveStatus6: Subject<boolean> = new Subject<boolean>();
+  saveStatus9: Subject<boolean> = new Subject<boolean>();
 
   companySubscriptions = this.companyService.companySubscriptions;
   rootNode: any;
@@ -135,196 +138,25 @@ export class PatientDetailsComponent extends BaseComponent
     this.spinnerService.hide();
   }
 
-  handleStep1(event: EditHelperUserAction) {
-    this.saveStatus1 = false;
+  /**
+   * Method - Handle update to patient record section of the view
+   * @param event 
+   */
+  handleStep1(event: EditHelperUserAction) {    
     switch (event.actionType) {
       case EditHelperActionType.update: {
-        this.saveStatus1 = true;
+        this.saveStatus1.next(true);
         this.updatePatient();
         break;
       }
       case EditHelperActionType.delete: {
-        this.saveStatus1 = true;
+        this.saveStatus1.next(true);
         this.deActivatePatient();
         break;
       }
       case EditHelperActionType.reActivate: {
-        this.saveStatus1 = true;
-        this.activatePatient();
-        break;
-      }
-      default: {
-        this.notifyService.notify(
-          "error",
-          "Invalid Operation",
-          "Invalid operation encountered by the application. EditHelperUserAction"
-        );
-        break;
-      }
-    }
-  }
-
-  handleStep2(event: EditHelperUserAction) {
-    this.saveStatus2 = false;
-    switch (event.actionType) {
-      case EditHelperActionType.update: {
-        this.saveStatus2 = true;
-        this.updatePatient();
-        break;
-      }
-      case EditHelperActionType.delete: {
-        this.saveStatus2 = true;
-        this.deActivatePatient();
-        break;
-      }
-      case EditHelperActionType.reActivate: {
-        this.saveStatus2 = true;
-        this.activatePatient();
-        break;
-      }
-      default: {
-        this.notifyService.notify(
-          "error",
-          "Invalid Operation",
-          "Invalid operation encountered by the application. EditHelperUserAction"
-        );
-        break;
-      }
-    }
-  }
-
-  handleStep3(event: EditHelperUserAction) {
-    this.saveStatus3 = false;
-    switch (event.actionType) {
-      case EditHelperActionType.update: {
-        this.saveStatus3 = true;
-        this.updatePatient();
-        break;
-      }
-      case EditHelperActionType.delete: {
-        this.saveStatus3 = true;
-        this.deActivatePatient();
-        break;
-      }
-      case EditHelperActionType.reActivate: {
-        this.saveStatus3 = true;
-        this.activatePatient();
-        break;
-      }
-      default: {
-        this.notifyService.notify(
-          "error",
-          "Invalid Operation",
-          "Invalid operation encountered by the application. EditHelperUserAction"
-        );
-        break;
-      }
-    }
-  }
-
-  handleStep4(event: EditHelperUserAction) {
-    this.saveStatus4 = false;
-    switch (event.actionType) {
-      case EditHelperActionType.update: {
-        this.saveStatus4 = true;
-        this.updatePatient();
-        break;
-      }
-      case EditHelperActionType.delete: {
-        this.saveStatus4 = true;
-        this.deActivatePatient();
-        break;
-      }
-      case EditHelperActionType.reActivate: {
-        this.saveStatus4 = true;
-        this.activatePatient();
-        break;
-      }
-      default: {
-        this.notifyService.notify(
-          "error",
-          "Invalid Operation",
-          "Invalid operation encountered by the application. EditHelperUserAction"
-        );
-        break;
-      }
-    }
-  }
-
-  handleStep5(event: EditHelperUserAction) {
-    this.saveStatus5 = false;
-    switch (event.actionType) {
-      case EditHelperActionType.update: {
-        this.saveStatus5 = true;
-        this.updatePatient();
-        break;
-      }
-      case EditHelperActionType.delete: {
-        this.saveStatus5 = true;
-        this.deActivatePatient();
-        break;
-      }
-      case EditHelperActionType.reActivate: {
-        this.saveStatus5 = true;
-        this.activatePatient();
-        break;
-      }
-      default: {
-        this.notifyService.notify(
-          "error",
-          "Invalid Operation",
-          "Invalid operation encountered by the application. EditHelperUserAction"
-        );
-        break;
-      }
-    }
-  }
-
-  handleStep6(event: EditHelperUserAction) {
-    this.saveStatus6 = false;
-    switch (event.actionType) {
-      case EditHelperActionType.update: {
-        this.saveStatus6 = true;
-        this.updatePatient();
-        break;
-      }
-      case EditHelperActionType.delete: {
-        this.saveStatus6 = true;
-        this.deActivatePatient();
-        break;
-      }
-      case EditHelperActionType.reActivate: {
-        this.saveStatus6 = true;
-        this.activatePatient();
-        break;
-      }
-      default: {
-        this.notifyService.notify(
-          "error",
-          "Invalid Operation",
-          "Invalid operation encountered by the application. EditHelperUserAction"
-        );
-        break;
-      }
-    }
-  }
-
-  handleStep7(event: EditHelperUserAction) {
-    this.saveStatus7 = false;
-    switch (event.actionType) {
-      case EditHelperActionType.update: {
-        this.saveStatus7 = true;
-        this.updatePatient();
-        break;
-      }
-      case EditHelperActionType.delete: {
-        this.saveStatus7 = true;
-        this.deActivatePatient();
-        break;
-      }
-      case EditHelperActionType.reActivate: {
-        this.saveStatus7 = true;
-        this.activatePatient();
+        this.saveStatus1.next(true);
+        this.updatePatient(); 
         break;
       }
       default: {
@@ -339,20 +171,367 @@ export class PatientDetailsComponent extends BaseComponent
   }
 
   /**
+   *  Method - Handle update to patient address  section of the view
+   * @param event 
+   */
+  handleStep2(event: EditHelperUserAction) {
+    switch (event.actionType) {
+      case EditHelperActionType.update: {
+        this.saveStatus2.next(true);
+        this.updatePatientAddress();
+        break;
+      }
+      case EditHelperActionType.delete: {
+        this.saveStatus2.next(true);
+        this.deletePatientAddress();
+        break;
+      }
+      default: {
+        this.notifyService.notify(
+          "error",
+          "Invalid Operation",
+          "Invalid operation encountered by the application. EditHelperUserAction"
+        );
+        break;
+      }
+    }
+  }
+
+  /**
+   *  Method - Handle update to patient relative section of the view
+   * @param event 
+   */
+  handleStep3(event: EditHelperUserAction) {
+    switch (event.actionType) {
+      case EditHelperActionType.update: {
+        this.saveStatus3.next(true);
+        this.updatePatientRelative();
+        break;
+      }
+      case EditHelperActionType.delete: {
+        this.saveStatus3.next(true);
+        this.deletePatientRelative();
+        break;
+      }
+      default: {
+        this.notifyService.notify(
+          "error",
+          "Invalid Operation",
+          "Invalid operation encountered by the application. EditHelperUserAction"
+        );
+        break;
+      }
+    }
+  }
+
+  /**
+   *  Method - Handle update to patient referral doctor section of the view
+   * @param event 
+   */
+  handleStep4(event: EditHelperUserAction) {
+    switch (event.actionType) {
+      case EditHelperActionType.update: {
+        this.saveStatus4.next(true);
+        break;
+      }
+      case EditHelperActionType.delete: {
+        this.saveStatus4.next(true);
+        break;
+      }
+      default: {
+        this.notifyService.notify(
+          "error",
+          "Invalid Operation",
+          "Invalid operation encountered by the application. EditHelperUserAction"
+        );
+        break;
+      }
+    }
+  }
+
+  /**
+   *  Method - Handle update to patient employer section of the view
+   * @param event 
+   */
+  handleStep5(event: EditHelperUserAction) {
+    switch (event.actionType) {
+      case EditHelperActionType.update: {
+        this.saveStatus5.next(true);
+        this.updatePatientEmployer();
+        break;
+      }
+      case EditHelperActionType.delete: {
+        this.saveStatus5.next(true);
+        this.deletePatientEmployer();
+        break;
+      }
+      default: {
+        this.notifyService.notify(
+          "error",
+          "Invalid Operation",
+          "Invalid operation encountered by the application. EditHelperUserAction"
+        );
+        break;
+      }
+    }
+  }
+
+  /**
+   *  Method - Handle update to patient insurance record section of the view
+   * @param event 
+   */
+  handleStep6(event: EditHelperUserAction) {
+    switch (event.actionType) {
+      case EditHelperActionType.update: {
+        this.saveStatus6.next(true);
+        break;
+      }
+      case EditHelperActionType.delete: {
+        this.saveStatus6.next(true);
+        this.deActivatePatient();
+        break;
+      }
+      default: {
+        this.notifyService.notify(
+          "error",
+          "Invalid Operation",
+          "Invalid operation encountered by the application. EditHelperUserAction"
+        );
+        break;
+      }
+    }
+  }
+
+  /**
+   *  Method - Handle update to patient order and medication section
+   * @param event 
+   */
+  handleStep9(event: EditHelperUserAction) {
+    switch (event.actionType) {
+      case EditHelperActionType.update: {
+        this.saveStatus9.next(true);
+        this.updateDoctorsOrders();
+        break;
+      }
+      case EditHelperActionType.delete: {
+        this.saveStatus9.next(true);
+        this.deleteDoctorsOrders();
+        break;
+      }
+      default: {
+        this.notifyService.notify(
+          "error",
+          "Invalid Operation",
+          "Invalid operation encountered by the application. EditHelperUserAction"
+        );
+        break;
+      }
+    }
+  }
+
+  /**
+   * Method - Display confirmation
+   */
+  displaySuccessConfirmation() {
+    this.notifyService.notify("success", "Update Record", "Successfull");
+  }
+
+  /**
    * Method - Update main patient record in database
    */
   updatePatient() {
-    let patient: Patient = {};
-    this.patient = this.intakeService.getPatient();
+    let patient = this.intakeService.getPatient();
+    //remove non-patient data to be sent to data service 
+    patient = this.removeAllNonPatientData(patient);
+    if (!!patient) {
+      this.updateDbData(patient, APIUrls.Patient);
+    }
+  }
+
+  /**
+   * Method - DeActivate Patient record
+   */
+  deActivatePatient() {
+    const patient = this.intakeService.getPatient();
+    if (!!patient) {
+      this.deleteDbData(patient, APIUrls.Patient);
+    }
+  }
+
+  /**
+   * Method - Update primary patient address only
+   */
+  updatePatientAddress() {
+    const address = this.intakeService.getPatientPrimaryAddress();
+    this.spinnerService.show();
+    if (!!address) {
+      address.lastUpdatedUserId = this.patient.lastUpdatedUserId;
+      address.lastUpdatedDate = this.patient.lastUpdatedDate;
+      this.updateDbData(address, APIUrls.PatientAddress);
+    }
+  }
+
+  /**
+   * Method - DeActivate Patient address
+   */
+  deletePatientAddress() {
+    const address = this.intakeService.getPatientPrimaryAddress();
+    this.spinnerService.show();
+    if (!!address) {
+      this.deleteDbData(address, APIUrls.PatientAddress);
+    }
+  }
+
+  /**
+   * Method - Update patient relative record only
+   */
+  updatePatientRelative() {
+    const relative = this.intakeService.getPatientRelatives();
+    if (!!relative) {
+      this.updateDbData(relative[0], APIUrls.PatientRelative)
+    }
+  }
+
+  /**
+   * Method - DeActivate Patient Relative
+   */
+  deletePatientRelative() {
+    const relative = this.intakeService.getPatientRelatives();
+    if (!!relative) {
+      this.deleteDbData(relative[0], APIUrls.PatientRelative)
+    }
+  }
+
+
+  /**
+   * Method - Update patient employer
+   */
+  updatePatientEmployer() {
+    const employer = this.intakeService.getPatientEmployers();
+    if (!!employer) {
+      this.updateDbData(employer[0], APIUrls.PatientEmployer)
+    }
+  }
+
+  /**
+   * Method - DeActivate Patient Employer
+   */
+  deletePatientEmployer() {
+    const employer = this.intakeService.getPatientEmployers();
+    if (!!employer) {
+      this.deleteDbData(employer[0], APIUrls.PatientEmployer)
+    }
+  }
+  
+  /**
+   * Method - Remove supplemental patient data to reduce api call
+   * @param patient 
+   */
+   removeAllNonPatientData(patient: Patient) {
+    patient.insurance = [];
+    patient.medications = [];
+    patient.paymentTransactions = [];
+    patient.referrals = [];
+    patient.relatives = [];
+    patient.paymentProfile = [];
+    patient.payees = [];
+    patient.employers = [];
+    patient.medPrograms = [];
+    patient.diagnosis = [];
+    return patient;
+   }
+
+  /**
+   * Method - Update patient diagnosis
+   */
+  updatePatientDiagnosis() {
+    let patient = this.intakeService.getPatient();
+    //remove non-patient data except diagnosis to be sent to data service    
+    patient = this.removeAllNonPatientData(patient);
+    patient.diagnosis = this.intakeService.getPatientHealthConditions();
+    if (!!patient) {
+      this.updateDbData(patient, APIUrls.Patient);
+    }
+  }
+
+  /**
+   * Method - DeActivate Patient Diagnosis
+   */
+  deletePatientDiagnosis() {
+    const diagnosis = this.intakeService.getPatientHealthConditions();
+    if (!!diagnosis) {
+      this.deleteDbData(diagnosis[0], APIUrls.PatientDiagnosis)
+    }
+  }  
+
+  /**
+   * Method - Update patient health conditions
+   */
+  updateDoctorsOrders() {
+    let patient = this.intakeService.getPatient();
+    const diagnosis = [...patient.diagnosis];
+    //remove non-patient data except diagnosis to be sent to data service    
+    patient = this.removeAllNonPatientData(patient);
+    patient.diagnosis = [...diagnosis];
+    if (!!patient) {
+      this.updateDbData(patient, APIUrls.Patient);
+    }
+  }
+
+    /**
+   * Method - Delete patient health conditions
+   */
+  deleteDoctorsOrders() {
+    const diagnosis = this.intakeService.getPatientHealthConditions();
+    if (!!diagnosis) {
+      this.deleteDbData(diagnosis[0], APIUrls.PatientDiagnosis)
+    }
+  }
+
+/**
+  * Method to update database record
+  * @param entity 
+  * @param apiUrl 
+  */
+ deleteDbData(entity: any, apiUrl:any) {
+  this.spinnerService.show();
+  let ret = this.dataService
+    .deleteData(entity, apiUrl)
+    .finally(() => {
+      this.spinnerService.hide();
+    })
+    .subscribe(
+      data => {
+        if (ret != undefined) {
+          this.displaySuccessConfirmation();
+        }
+      },
+      error => {
+        this.notifyService.notify(
+          "error",
+          "Message Error",
+          Message.ErrorUpdateDatabaseRecordFailed +
+            " patient id:" +
+            this.patient.id
+        );
+      }
+    );
+}
+
+ /**
+  * Method to update database record
+  * @param entity 
+  * @param apiUrl 
+  */
+  updateDbData(entity: any, apiUrl:any) {
     this.spinnerService.show();
     let ret = this.dataService
-      .updateData(patient, APIUrls.Patient)
+      .updateData(entity, apiUrl)
       .finally(() => {
         this.spinnerService.hide();
       })
       .subscribe(
         data => {
-          const ret: Patient = data;
           if (ret != undefined) {
             this.displaySuccessConfirmation();
           }
@@ -367,44 +546,5 @@ export class PatientDetailsComponent extends BaseComponent
           );
         }
       );
-  }
-
-  /**
-   * Method - Display confirmation
-   */
-  displaySuccessConfirmation() {
-    this.notifyService.notify("success", "Update Record", "Successfull");
-  }
-
-  updatePatientAddress() {
-    //todo
-  }
-
-  updatePatientRelative() {
-    //todo
-  }
-
-  updateReferringDoctor() {
-    //todo
-  }
-
-  updateEmployer() {
-    //todo
-  }
-
-  updateInsurance() {
-    //todo
-  }
-
-  updateDoctorsOrders() {
-    //todo
-  }
-
-  deActivatePatient() {
-    //todo
-  }
-
-  activatePatient() {
-    //todo
   }
 }

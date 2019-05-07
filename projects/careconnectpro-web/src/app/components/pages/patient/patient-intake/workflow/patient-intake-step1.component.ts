@@ -6,7 +6,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  ViewChild
+  ViewChild,
+  SimpleChanges
 } from "@angular/core";
 import {
   CompanyService,
@@ -40,6 +41,7 @@ import { SelectItem } from "primeng/api";
 import { Router } from "@angular/router";
 import { takeUntil } from "rxjs/operators";
 import { BaseComponent } from "../../../../shared/core";
+import { Subject } from 'rxjs';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -56,7 +58,7 @@ export class PatientInTakeStep1Component extends BaseComponent
   displayUserSetting: boolean = false;
   displayUserAlerts: boolean = false;
   @Input() isNewRecord?: boolean;
-  @Input() updateStatus?: boolean;
+  @Input() updateStatus?: Subject<boolean> = new Subject<boolean>();
   @Output() step1Status: EventEmitter<EditHelperUserAction> = new EventEmitter<
     EditHelperUserAction
   >();
@@ -138,8 +140,12 @@ export class PatientInTakeStep1Component extends BaseComponent
     this.getPrefixCodes();
     this.getSuffixCodes();
     this.getSupplementaryCodes();
+    this.updateStatus.subscribe(data => {
+      this.isEditMode = false;
+    })
   }
 
+  
   /**
    * Method - Retrieve race and gender codes
    */
@@ -261,7 +267,7 @@ export class PatientInTakeStep1Component extends BaseComponent
    * Method - Submit the form
    */
   submitForm() {
-    this.updateIdentContacts();
+      this.updateIdentContacts();
     this.intakeService.updatePatient(this.patient);
     let userAction: EditHelperUserAction = {
       actionType: EditHelperActionType.add,
@@ -481,7 +487,12 @@ export class PatientInTakeStep1Component extends BaseComponent
    * @param isSaved
    */
   formatDateFields(isSaved: boolean) {
-    if (isSaved === true) {
+    if (!!this.patient.dateOfBirth) {
+      this.patientDateOfBirth = new Date(
+        Date.parse(this.patient.dateOfBirth.toString())
+      );
+    }
+    if (isSaved === true) {      
       this.patient.dateOfBirth = this.patientDateOfBirth;
     } else {
       if (this.patient.dateOfBirth != undefined) {

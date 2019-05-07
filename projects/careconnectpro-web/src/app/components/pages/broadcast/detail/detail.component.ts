@@ -14,7 +14,7 @@ import {
   MediaService,
   DataService,
   NotificationsService
-} from "../../../../../../../service-lib/src/lib/services";
+} from "service-lib";
 
 @Component({
   selector: "app-broadcast-detail-component",

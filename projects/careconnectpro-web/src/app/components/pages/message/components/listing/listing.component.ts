@@ -73,8 +73,19 @@ export class ListingComponent implements OnInit {
    * @param dateIn
    */
   formatDate(dateIn: Date) {
+    let dayFormat = require('dateformat');
+    let now = new Date();
+    let currentmd = dayFormat(now, "mmmm dS");
+    let currentyear = dayFormat(now, "yyyy");
     let dateFormat = require("dateformat");
-    return dateFormat(dateIn, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+    let messagemd = dateFormat(dateIn, "mmmm dS");
+    let messageyear = dateFormat(dateIn, "yyyy");
+    if (currentmd==messagemd&&currentyear==messageyear) {
+      return dateFormat(dateIn, "h:MM:ss TT");
+    } else {
+      return dateFormat(dateIn, "dddd, mmmm dS, yyyy, h:MM:ss TT");
+    }
+    
   }
 
   /**

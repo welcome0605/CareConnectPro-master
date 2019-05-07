@@ -6,7 +6,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  ViewChild
+  ViewChild,
+  SimpleChanges
 } from "@angular/core";
 import {
   ProgressSpinnerService,
@@ -47,6 +48,7 @@ import {
 } from "projects/model-lib/src/lib/models";
 import { BaseComponent } from "../../../../shared/core";
 import { takeUntil } from "rxjs/operators";
+import { Subject } from 'rxjs';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -63,7 +65,7 @@ export class PatientInTakeStep4Component extends BaseComponent
   displayUserSetting: boolean = false;
   displayUserAlerts: boolean = false;
   @Input() isNewRecord?: boolean;
-  @Input() updateStatus?: boolean;
+  @Input() updateStatus?: Subject<boolean> = new Subject<boolean>();
   @Output() step4Status: EventEmitter<EditHelperUserAction> = new EventEmitter<
     EditHelperUserAction
   >();
@@ -134,6 +136,9 @@ export class PatientInTakeStep4Component extends BaseComponent
         this.getPatient();
         this.getPatientReferrals();
       });
+      this.updateStatus.subscribe(data => {
+        this.isEditMode = false;
+      });
     this.getPatient();
     this.getPrefixCodes();
     this.getSuffixCodes();
@@ -142,7 +147,8 @@ export class PatientInTakeStep4Component extends BaseComponent
     this.getPatientReferrals();
   }
 
-  /**
+
+ /**
    * Method - Retrieve fist patient relative value
    */
   getPatientReferrals() {

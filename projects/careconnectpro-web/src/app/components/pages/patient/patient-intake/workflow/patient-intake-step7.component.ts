@@ -6,7 +6,8 @@ import {
   Input,
   Output,
   EventEmitter,
-  ViewChild
+  ViewChild,
+  SimpleChanges
 } from "@angular/core";
 import {
   ProgressSpinnerService,
@@ -32,6 +33,7 @@ import { SelectItem } from "primeng/api";
 import { Router } from "@angular/router";
 import { BaseComponent } from "../../../../shared/core";
 import { takeUntil } from "rxjs/operators";
+import { Subject } from 'rxjs';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -48,7 +50,7 @@ export class PatientInTakeStep7Component extends BaseComponent
   displayUserSetting: boolean = false;
   displayUserAlerts: boolean = false;
   @Input() isNewRecord?: boolean;
-  @Input() updateStatus?: boolean;
+  @Input() updateStatus?: Subject<boolean> = new Subject<boolean>();
   @Output() step7Status: EventEmitter<EditHelperUserAction> = new EventEmitter<
     EditHelperUserAction
   >();
@@ -93,10 +95,14 @@ export class PatientInTakeStep7Component extends BaseComponent
       .subscribe(data => {
         this.getPatientInsurance();
       });
+      this.updateStatus.subscribe(data => {
+        this.isEditMode = false;
+      });
     this.states = AddressCodes.USStates;
     this.populateStateDropDown();
     this.getPatientInsurance();
   }
+
 
   /**
    * Method - Life cycle hook - After component init
